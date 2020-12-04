@@ -9,6 +9,7 @@
 ## Requirements
 - Motivation
 - Docker
+- WSL 2.0
 
 ## Application ports
 - Backend -> 8001 -> http://localhost:8001
