@@ -1,0 +1,41 @@
+volumes:
+  node_modules:
+services:
+  # Backend containers 
+  webserver:
+      image: nginx:latest
+      ports:
+          - "8001:80"
+      volumes:
+          - ./backend/webserver/webserver.conf:/etc/nginx/conf.d/default.conf
+          - ./backend/code:/code
+      links:
+          - php
+
+  php:
+      image: php:8.0.0-fpm
+      volumes:
+          - ./backend/code:/code
+      links:
+          - database
+
+  database:
+    image: mariadb:latest
+    restart: always
+    environment: 
+      - MYSQL_ROOT_PASSWORD=MrBean!
+
+
+  # Frontend containers
+  app:
+    image: node:latest
+    environment: 
+      - NODE_ENV=dev
+      - CHOKIDAR_USEPOLLING=true
+    working_dir: /code
+    volumes:
+      - ./frontend/code:/code
+      - node_modules:/code/node_modules/
+    command: bash -c "yarn install && yarn start"
+    ports: 
+      - "8080:8080"

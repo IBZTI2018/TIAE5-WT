@@ -28,29 +28,9 @@ git clone git@github.com:cybrox/TIAE5-WT.git
 cd TIAE5-WT
 ```
 
-3. Enter the **Backend** Module
-```
-cd Backend
-```
-
-4. Start the **Backend** Module
+3. Put the keys and start the engines
 ```
 docker-compose up -d
 ```
 
-4. Enter the **Frontend** Module and code
-```
-cd ../Frontend/code
-```
-
-5. Install all dependencies needed for the **Frontend** Module
-```
-yarn install
-```
-
-6. Start the development server with:
-```
-yarn start
-```
-
-7. Have fun :)
+4. Have fun :)

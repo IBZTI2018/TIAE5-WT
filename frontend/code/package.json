@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack -p --progress --mode production --config webpack.config.js",
-    "dev": "cross-env NODE_ENV=dev webpack-dev-server --open --config webpack.config.js",
+    "dev": "cross-env NODE_ENV=dev webpack-dev-server --config webpack.config.js --host 0.0.0.0",
     "lint": "eslint src/js",
     "lint:fix": "yarn run lint -- --fix",
     "purge": "purgecss --config purgecss.config.js --output dist/css",
