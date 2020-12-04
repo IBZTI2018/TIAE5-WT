@@ -9,8 +9,6 @@
 ## Requirements
 - Motivation
 - Docker
-- Node
-- Yarn
 
 ## Application ports
 - Backend -> 8001 -> http://localhost:8001
