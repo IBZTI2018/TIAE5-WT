@@ -1,0 +1,26 @@
+# Backend containers 
+backend_webserver:
+    image: nginx:latest
+    ports:
+        - "8001:80"
+    volumes:
+        - ./backend/webserver/webserver.conf:/etc/nginx/conf.d/default.conf
+        - ./backend/code:/code
+    links:
+        - backend_php
+
+backend_php:
+    image: php:8.0.0-fpm
+    volumes:
+        - ./backend/code:/code
+    links:
+        - backend_database
+
+backend_database:
+  image: mariadb:latest
+  restart: always
+  environment: 
+    MYSQL_ROOT_PASSWORD: MrBean!
+
+
+# Frontend containers
