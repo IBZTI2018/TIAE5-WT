@@ -29,7 +29,19 @@ cd TIAE5-WT
 
 3. Put the keys and start the engines
 ```
-docker-compose up -d
+make start
 ```
 
 4. Have fun :)
+
+## Commands
+
+Watch the logs of the docker containers
+```
+make logs
+```
+
+Run all migrations on database (Sorted ascending)
+```
+make migrate
+```

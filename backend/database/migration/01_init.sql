@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS Hotelreservationssystem;
+CREATE DATABASE Hotelreservationssystem;
