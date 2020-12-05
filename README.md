@@ -55,3 +55,7 @@ To create a new migration, just put your .sql file on the folder `backend/databa
 In order to ensure the order of execution, please do not forget to include the prefix number on the file.  
 
 If you want to add your migration file as the last one, take the last number e.g 15_insert_members.sql and add **16_** as prefix.
+
+## SQL Adminer
+
+Adminer is accessible at `localhost:8888` and can connect to the database using the host `database`.
