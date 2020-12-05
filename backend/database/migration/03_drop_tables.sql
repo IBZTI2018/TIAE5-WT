@@ -17,34 +17,12 @@
 
 --Es soll immmer die Datenbank "Hotelreservationssystem" verwendet werden
 
-<<<<<<< Updated upstream
-USE Hotelreservationssystem;
-=======
 USE Hotelreservationsystem;
->>>>>>> Stashed changes
 
 ----------------------------------------------------------------------------
 -- Löschen der Tabellen                                                   --
 ----------------------------------------------------------------------------
 
-<<<<<<< Updated upstream
-DROP TABLE medien;
-DROP TABLE bewertung;
-DROP TABLE buchung;
-DROP TABLE hotelkunde;
-DROp TABLE angebot;
-DROP TABLE hotel;
-DROP TABLE zimmertyp;
-DROP TABLE preisklasse;
-DROP TABLE ausstattung;
-DROP TABLE benutzer;
-DROP TABLE zahlungsart;
-DROP TABLE adresse;
-DROP TABLE strasse;
-DROP TABLE ort;
-DROP TABLE land;
-DROP TABLE anrede;
-=======
 DROP TABLE media;
 DROP TABLE rating;
 DROP TABLE reservation;
@@ -61,4 +39,3 @@ DROP TABLE street;
 DROP TABLE city;
 DROP TABLE country;
 DROP TABLE title;
->>>>>>> Stashed changes
