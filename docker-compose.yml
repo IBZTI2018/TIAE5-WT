@@ -30,6 +30,12 @@ services:
       - ./backend/database/script/:/script/
       - ./backend/database/migration/:/migration/
 
+  adminer:
+    image: adminer
+    ports:
+      - "8888:8080"
+    links:
+        - database
 
   # Frontend containers
   app:
