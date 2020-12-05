@@ -15,7 +15,7 @@
 ## Application ports
 - Backend -> 8001 -> http://localhost:8001
 - Frontend -> 8080 -> http://localhost:8080
-- Datababase -> 3310
+- Database -> 3310
 
 ## Installation
 
