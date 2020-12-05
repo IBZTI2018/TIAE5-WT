@@ -24,6 +24,11 @@ services:
     restart: always
     environment: 
       - MYSQL_ROOT_PASSWORD=MrBean!
+    ports:
+      - "3310:3306"
+    volumes:
+      - ./backend/database/script/:/script/
+      - ./backend/database/migration/:/migration/
 
 
   # Frontend containers
