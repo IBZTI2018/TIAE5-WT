@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS Hotelreservationssystem;
-CREATE DATABASE Hotelreservationssystem;
+DROP DATABASE IF EXISTS Hotelreservationsystem;
+CREATE DATABASE Hotelreservationsystem;
