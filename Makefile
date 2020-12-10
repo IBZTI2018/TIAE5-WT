@@ -12,8 +12,8 @@ status:
 logs:
 	docker-compose logs -f -t
 
-composer:
-	docker-compose exec php composer
+composer_install:
+	docker-compose exec php composer install
 
 register_namespaces:
 	docker-compose exec php composer dumpautoload -o

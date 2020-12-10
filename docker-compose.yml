@@ -3,7 +3,7 @@ volumes:
 services:
   # Backend containers 
   webserver:
-      image: nginx:latest
+      build: ./backend/webserver
       ports:
           - "8001:80"
       volumes:
@@ -13,7 +13,7 @@ services:
           - php
 
   php:
-      build: ./backend/docker/php
+      build: ./backend/php
       working_dir: /code
       volumes:
           - ./backend/code:/code
@@ -50,4 +50,4 @@ services:
       - node_modules:/code/node_modules/
     command: bash -c "yarn install && yarn start"
     ports: 
-      - "8080:8080"
+      - "8092:8092"

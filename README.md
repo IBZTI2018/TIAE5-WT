@@ -14,7 +14,7 @@
 
 ## Application ports
 - Backend -> 8001 -> http://localhost:8001
-- Frontend -> 8080 -> http://localhost:8080
+- Frontend -> 8092 -> http://localhost:8092
 - Database -> 3310
 
 ## Installation
@@ -29,12 +29,17 @@ git clone git@github.com:cybrox/TIAE5-WT.git
 cd TIAE5-WT
 ```
 
-3. Put the keys and start the engines
+3. Install the backend packages
+```
+make composer install
+```
+
+4. Put the keys and start the engines
 ```
 make start
 ```
 
-4. Have fun :)
+5. Have fun :)
 
 ## Commands
 
