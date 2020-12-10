@@ -31,7 +31,7 @@ cd TIAE5-WT
 
 3. Install the backend packages
 ```
-make composer install
+make composer_install
 ```
 
 4. Put the keys and start the engines
