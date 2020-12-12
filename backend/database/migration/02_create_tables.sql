@@ -36,7 +36,7 @@ CREATE TABLE title (
 
 CREATE TABLE country (
     isocode VARCHAR(4),
-    designation VARCHAR(255) NOT NULL,
+    countryname VARCHAR(255) NOT NULL,
     PRIMARY KEY (isocode)
 );
 
@@ -55,10 +55,9 @@ CREATE TABLE city (
 
 CREATE TABLE street (
     id INT AUTO_INCREMENT,
-    city_id INT NOT NULL,
     streetname VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (city_id) REFERENCES city(id)
+    PRIMARY KEY (id)
+
 );
 
 -- Tabelle adresse erstellen
@@ -66,10 +65,12 @@ CREATE TABLE street (
 CREATE TABLE address (
     id INT AUTO_INCREMENT,
     street_id INT NOT NULL,
-    housenumber INT NOT NULL,
-    deleted BIT DEFAULT 0,
+    city_id INT NOT NULL,
+    housenumber VARCHAR(10) NOT NULL,
+    inactive_address BIT DEFAULT 0,
     PRIMARY KEY (id),
-    FOREIGN KEY (street_id) REFERENCES street(id)
+    FOREIGN KEY (street_id) REFERENCES street(id),
+    FOREIGN KEY (city_id) REFERENCES city(id)
 );
 
 -- Tabelle benutzer erstellen
@@ -82,7 +83,8 @@ CREATE TABLE user (
     lastname VARCHAR(255) NOT NULL,
     firstname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    password NVARCHAR(255) NOT NULL,
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (title_id) REFERENCES title(id),
 	FOREIGN KEY (contact_address_id) REFERENCES address(id),
@@ -132,12 +134,10 @@ CREATE TABLE room (
 CREATE TABLE hotel (
     id INT AUTO_INCREMENT,
     address_id INT NOT NULL,
-    room_id INT NOT NULL,
-    designation VARCHAR(255) NOT NULL,
+    toelname VARCHAR(255) NOT NULL,
     star INT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (address_id) REFERENCES address(id),
-    FOREIGN KEY (room_id) REFERENCES room(id)
+    FOREIGN KEY (address_id) REFERENCES address(id)
 );
 
 -- Tabelle angebot erstellen
@@ -146,12 +146,14 @@ CREATE TABLE offer (
     id INT AUTO_INCREMENT,
     room_id INT NOT NULL,
     hotel_id INT NOT NULL,
+    payment_id INT NOT NULL,
     validitystart DATE NOT NULL,
     validityend DATE NOT NULL,
-    price FLOAT NOT NULL,
+    price DECIMAL(5,2) NOT NULL,
     PRIMARY KEY (id),
 	FOREIGN KEY (room_id) REFERENCES room(id),
-    FOREIGN KEY (hotel_id) REFERENCES hotel(id)
+    FOREIGN KEY (hotel_id) REFERENCES hotel(id),
+    FOREIGN KEY (payment_id) REFERENCES payment(id)
 );
 
 -- Tabelle hotelkunde erstellen
@@ -159,10 +161,8 @@ CREATE TABLE offer (
 CREATE TABLE hotelcustomer (
     id INT AUTO_INCREMENT,
     user_id INT NOT NULL,
-    payment_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES user(id),
-    FOREIGN KEY (payment_id) REFERENCES payment(id)
+    FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 -- Tabelle buchung erstellen
@@ -170,15 +170,18 @@ CREATE TABLE hotelcustomer (
 CREATE TABLE reservation (
     id INT AUTO_INCREMENT,
     offer_id INT  NOT NULL,
-    address_id INT NOT NULL,
+    hotelcustomer_address_id INT NOT NULL,
     hotelcustomer_id INT  NOT NULL,
+    payment_id INT NOT NULL,
     reservation_nr INT NOT NULL,
     check_in_date DATE NOT NULL,
     check_out_date DATE NOT NULL,
+    paid BIT DEFAULT 0,
     PRIMARY KEY (id),
     FOREIGN KEY (offer_id) REFERENCES offer(id),
-    FOREIGN KEY (address_id) REFERENCES address(id),
-    FOREIGN KEY (hotelcustomer_id) REFERENCES hotelcustomer(id)
+    FOREIGN KEY (hotelcustomer_address_id) REFERENCES address(id),
+    FOREIGN KEY (hotelcustomer_id) REFERENCES hotelcustomer(id),
+    FOREIGN KEY (payment_id) REFERENCES payment(id)
 );
 
 -- Tabelle bewertung erstellen
@@ -186,7 +189,7 @@ CREATE TABLE reservation (
 CREATE TABLE rating (
     id INT AUTO_INCREMENT,
     reservation_id INT  NOT NULL,
-    designation VARCHAR(255) NOT NULL,
+    comment VARCHAR(255) NOT NULL,
     score INT NULL,
     publish BIT DEFAULT 0,
     PRIMARY KEY (id),
@@ -204,4 +207,16 @@ CREATE TABLE rating (
 	 FOREIGN KEY (reservation_id) REFERENCES reservation(id),
      FOREIGN KEY  (offer_id) REFERENCES offer(id)
  );
+
+-- Tabelle mitarbeiter erstellen
+
+CREATE TABLE staff (
+	id INT AUTO_INCREMENT,
+	user_id INT NOT NULL,
+	hotel_id INT NOT NULL,
+	designaton VARCHAR(255), 
+	PRIMARY KEY (id),
+	FOREIGN KEY (user_id) REFERENCES user(id), 
+	FOREIGN KEY (hotel_id) REFERENCES hotel(id)
+);
 
