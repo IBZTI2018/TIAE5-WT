@@ -134,7 +134,7 @@ CREATE TABLE room (
 CREATE TABLE hotel (
     id INT AUTO_INCREMENT,
     address_id INT NOT NULL,
-    toelname VARCHAR(255) NOT NULL,
+    hotelname VARCHAR(255) NOT NULL,
     star INT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (address_id) REFERENCES address(id)
