@@ -35,7 +35,7 @@ CREATE TABLE title (
 -- Tabelle Land erstellen mit Isocode als PK und Name
 
 CREATE TABLE country (
-    isocode VARCHAR(4),
+    isocode VARCHAR(255),
     countryname VARCHAR(255) NOT NULL,
     PRIMARY KEY (isocode)
 );
@@ -103,7 +103,7 @@ CREATE TABLE payment (
 
 -- Tabelle ausstattung erstellen
 
-CREATE TABLE equipment (
+CREATE TABLE roomequipment (
     id INT AUTO_INCREMENT,
     designation VARCHAR(255),
     PRIMARY KEY (id)
@@ -121,7 +121,7 @@ CREATE TABLE pricerange (
 
 CREATE TABLE room (
     id INT AUTO_INCREMENT,
-    equipment_id INT NOT NULL,
+    roomequipment_id INT NOT NULL,
     pricerange_id INT NOT NULL,
     roomnumbers INT NULL,
     PRIMARY KEY (id),
@@ -129,15 +129,25 @@ CREATE TABLE room (
     FOREIGN KEY (pricerange_id) REFERENCES pricerange(id)
 );
 
+--Tabelle Hotelausstattung erstellen
+
+CREATE TABLE hotelequipment (
+	id INT AUTO_INCREMENT,
+    designation VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
 -- Tabelle hotel erstellen
 
 CREATE TABLE hotel (
     id INT AUTO_INCREMENT,
     address_id INT NOT NULL,
+    hotelequipment_id INT NOT NULL,
     hotelname VARCHAR(255) NOT NULL,
     star INT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (address_id) REFERENCES address(id)
+    FOREIGN KEY (address_id) REFERENCES address(id),
+    FOREIGN KEY (hotelequipment_id) REFERENCES hotelequipment(id)
 );
 
 -- Tabelle angebot erstellen
@@ -219,4 +229,6 @@ CREATE TABLE staff (
 	FOREIGN KEY (user_id) REFERENCES user(id), 
 	FOREIGN KEY (hotel_id) REFERENCES hotel(id)
 );
+
+
 
