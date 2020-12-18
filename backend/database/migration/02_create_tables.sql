@@ -124,6 +124,7 @@ CREATE TABLE room (
     roomequipment_id INT NOT NULL,
     pricerange_id INT NOT NULL,
     roomnumbers INT NULL,
+    roomname VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (roomequipment_id) REFERENCES roomequipment(id),
     FOREIGN KEY (pricerange_id) REFERENCES pricerange(id)
