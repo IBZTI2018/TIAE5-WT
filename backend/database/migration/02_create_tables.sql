@@ -225,7 +225,7 @@ CREATE TABLE staff (
 	id INT AUTO_INCREMENT,
 	user_id INT NOT NULL,
 	hotel_id INT NOT NULL,
-	designaton VARCHAR(255), 
+	designation VARCHAR(255), 
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_id) REFERENCES user(id), 
 	FOREIGN KEY (hotel_id) REFERENCES hotel(id)
