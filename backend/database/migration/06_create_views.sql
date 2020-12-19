@@ -23,6 +23,7 @@ USE Hotelreservationsystem;
 -- View erstellen für einfachere Bedienung                                --
 ----------------------------------------------------------------------------
 
+
 -- View erstellung für die Übersicht einer Reservation
 
 Create View reservation_overview AS
@@ -124,5 +125,6 @@ CREATE VIEW equipment_overview AS
             ON equipment.designation
         INNER JOIN hoteleuipment
             ON hotelequipment.designation;
+
 
 
