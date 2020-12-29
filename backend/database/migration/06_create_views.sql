@@ -112,6 +112,15 @@ Create View reservation_overview AS
         INNER JOIN address
             ON address.id = address.housenumber;
 
+--- View erstellen für die Üebrsicht der Ausstattung
 
-
-
+CREATE VIEW equipment_overview AS
+    SELECT
+        hotel.toelname,
+        hotelequipment.designation AS hotelequipment,
+        equipment.designation AS roomequipment
+    FROM hotel
+        INNER JOIN equipment
+            ON equipment.designation
+        INNER JOIN hoteleuipment
+            ON hotelequipment.designation;
