@@ -8,7 +8,6 @@ return function (App $app) {
     // HomeController
     $app->get('/', 'App\Controller\HomeController:index')->setName('home');
 
-    // AuthController
-    $app->post('/auth/register', 'App\Controller\AuthController:register')->setName('register');
-    $app->post('/auth/login', 'App\Controller\AuthController:login')->setName('login');
+    // CountryController
+    $app->get('/countries', 'App\Controller\CountryController:countries')->setName('countries');
 };
