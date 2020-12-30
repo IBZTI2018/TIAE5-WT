@@ -116,7 +116,7 @@ INSERT INTO country (isocode, countryname) VALUES
 ('CHI','Chile'),
 ('CHN','China'),
 ('CRC','Costa Rica'),
-('DK','Dänemark'),
+('DEN','Dänemark'),
 ('GER','Deutschland'),
 ('DOM','Dominikanische Republik'),
 ('FRA','Frankreich'),
