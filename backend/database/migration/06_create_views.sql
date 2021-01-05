@@ -116,11 +116,11 @@ Create View reservation_overview AS
 
 CREATE VIEW equipment_overview AS
     SELECT
-        hotel.toelname,
+        hotel.hotelname,
         hotelequipment.designation AS hotelequipment,
-        equipment.designation AS roomequipment
+        roomequipment.designation AS roomequipment
     FROM hotel
-        INNER JOIN equipment
-            ON equipment.designation
-        INNER JOIN hoteleuipment
+        INNER JOIN roomequipment
+            ON roomequipment.designation
+        INNER JOIN hotelequipment
             ON hotelequipment.designation;
