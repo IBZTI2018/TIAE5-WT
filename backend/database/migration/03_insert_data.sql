@@ -191,8 +191,30 @@ INSERT INTO country (isocode, countryname) VALUES
 ('VIE','Vietnam'),
 ('CYP','Zypern');
 
+-- Beispieldaten für Städte
+
+INSERT INTO city (isocode, postcode, cityname) VALUES
+('SUI',8000, 'Zürich'),
+('SUI',7000, 'Chur');
+
+-- Beispieldaten für Adressen
+
+INSERT INTO street (streetname) VALUES
+('Bahnhofstrasse'),
+('Dorfstrasse');
+
+INSERT INTO address (street_id, city_id, housenumber) VALUES
+(1, 1, 1),
+(1, 1, 2),
+(2, 1, 1),
+(2, 2, 2);
 
 
-
-
-
+-- Beispieldaten für Benutzer
+INSERT INTO user (title_id, contact_address_id, billing_address_id, lastname, firstname, email, password, reg_date)
+VALUES
+    (1, 1, 1, 'Mentner', 'Jennifer', 'jennifer.mentner@student.ibz.ch', PASSWORD('password123'), NOW()),
+    (2, 3, 3, 'Glatzl', 'André', 'andre.glatzl@student.ibz.ch', PASSWORD('password123'), NOW()),
+    (2, 1, 1, 'Gehring', 'Sven', 'sven.gehring@student.ibz.ch', PASSWORD('password123'), NOW()),
+    (2, 1, 1, 'Ahmeti', 'Dardan', 'dardan.ahmeti@student.ibz.ch', PASSWORD('password123'), NOW())
+;
