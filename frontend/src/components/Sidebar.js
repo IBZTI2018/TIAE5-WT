@@ -67,7 +67,7 @@ function SidebarOverlay() {
                     <h4 className="d-inline-block text-light mb-0 float-right">Konto</h4>
                 </header>
                 <div className="bs-canvas-content px-3 py-5">
-                    ...
+                    <a href="/user_settings" >Benutzereinstellungen</a>
                 </div>
             </div>
         </div>

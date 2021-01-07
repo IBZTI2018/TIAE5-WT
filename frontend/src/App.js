@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 // Pages
 import HomePage from './pages/HomePage';
 import ResultPage from './pages/ResultPage';
+import UserSettingsPage from './pages/UserSettingsPage';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route path="/results" component={ResultPage} />
+                        <Route path="/user_settings" component={UserSettingsPage} />
                     </Switch>
                 </Router>
             </main>
