@@ -26,6 +26,9 @@ class OffersPage extends Component {
                 },
             ]
         }
+        console.log("banane");
+        console.log(this.props.location.data);
+        console.log("apfel");
     }
 
     render() {

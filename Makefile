@@ -20,3 +20,6 @@ register_namespaces:
 
 migrate:
 	docker-compose exec database bash /script/migrate.sh
+
+enter_frontend:
+	docker-compose exec app /bin/bash
