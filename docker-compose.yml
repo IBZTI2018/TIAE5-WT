@@ -46,8 +46,8 @@ services:
       - CHOKIDAR_USEPOLLING=true
     working_dir: /code
     volumes:
-      - ./frontend/code:/code
+      - ./frontend:/code
       - node_modules:/code/node_modules/
     command: bash -c "yarn install && yarn start"
     ports: 
-      - "8092:8092"
+      - "8092:3000"
