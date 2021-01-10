@@ -28,6 +28,7 @@ class Datepicker extends Component {
                 endDatePlaceholderText="Bis"
                 endDate={this.state.endDate}
                 endDateId="endDate"
+                minDate = {new Date()}
                 displayFormat="DD/MM/yyyy"
                 focusedInput={this.state.focus}
                 onFocusChange={focus => this.setState({ focus })}
