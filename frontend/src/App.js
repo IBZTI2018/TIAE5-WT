@@ -8,6 +8,7 @@ import Breadcrumbs from './components/Breadcrumbs';
 // Pages
 import HomePage from './pages/HomePage';
 import OffersPage from './pages/OffersPage';
+import HotelsPage from './pages/HotelsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route path="/offers" component={OffersPage} />
+                        <Route path="/hotels" component={HotelsPage} />
                         <Route path="/user_settings" component={UserSettingsPage} />
                     </Switch>
                 </main>

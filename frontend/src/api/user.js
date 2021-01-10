@@ -4,16 +4,12 @@ import React, { Component } from "react";
 class User extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            user: props.user
-        }
     }
 
     render() {
-        console.log(this.state.user);
         return (
             <section class="mt-5">
-                <h3>Benutzerprofil von <b>{ this.state.user.attributes.firstname } { this.state.user.attributes.lastname } </b></h3>
+                <h3>Benutzerprofil von <b>{ this.props.data.attributes.firstname } { this.props.data.attributes.lastname } </b></h3>
                 <hr />
                 <table>
                     <tr>
@@ -23,10 +19,10 @@ class User extends Component {
                         <td>Lieferadresse</td>
                     </tr>
                     <tr>
-                        <td>{ this.state.user.attributes.reg_date }</td>
-                        <td>{ this.state.user.links.title_id }</td>
-                        <td>{ this.state.user.links.billing_address_id }</td>
-                        <td>{ this.state.user.links.contact_address_id }</td>
+                        <td>{ this.props.data.attributes.reg_date }</td>
+                        <td>{ this.props.data.links.title_id }</td>
+                        <td>{ this.props.data.links.billing_address_id }</td>
+                        <td>{ this.props.data.links.contact_address_id }</td>
                     </tr>
                 </table>
             </section>
@@ -62,7 +58,7 @@ class Users extends Component {
             <div>
                 {
                     this.state.users.map(user => (
-                        <User key={user.id} user={user} />
+                        <User data={user} />
                     ))
                 }
             </div>

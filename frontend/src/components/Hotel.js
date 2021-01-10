@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Offer extends Component {
+class Hotel extends Component {
     render() {
         return (
             <div className="card mb-3 p-3">
@@ -13,7 +13,7 @@ class Offer extends Component {
                             <h5 className="card-title">{this.props.data.title}</h5>
                             <p className="card-text">{this.props.data.description}</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                            <a href="#" class="btn btn-primary">Buchen</a>
+                            <a href="#" class="btn btn-primary">Hotel aufrufen</a>
                         </div>
                     </div>
                 </div>
@@ -22,4 +22,4 @@ class Offer extends Component {
     }
 }
 
-export default Offer;
+export default Hotel;
