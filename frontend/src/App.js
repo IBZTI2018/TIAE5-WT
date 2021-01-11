@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { SidebarOverlay, SidebarPanel } from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Breadcrumbs from './components/Breadcrumbs';
+import CoronaWarning from './components/CoronaWarning';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -17,6 +18,7 @@ function App() {
             <Router>
                 <SidebarOverlay />
                 <Navbar />
+                <CoronaWarning />
                 <Breadcrumbs />
                 <main role="main" className="container">
                     <SidebarPanel />
