@@ -199,15 +199,15 @@ INSERT INTO city (isocode, postcode, cityname) VALUES
 
 -- Beispieldaten für Adressen
 
-INSERT INTO street (streetname) VALUES
-('Bahnhofstrasse'),
-('Dorfstrasse');
+INSERT INTO street (streetname, city_id) VALUES
+('Bahnhofstrasse', 1),
+('Dorfstrasse', 2);
 
-INSERT INTO address (street_id, city_id, housenumber) VALUES
-(1, 1, 1),
-(1, 1, 2),
-(2, 1, 1),
-(2, 2, 2);
+INSERT INTO address (street_id, housenumber) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2);
 
 
 -- Beispieldaten für Benutzer

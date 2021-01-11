@@ -56,7 +56,9 @@ CREATE TABLE city (
 CREATE TABLE street (
     id INT AUTO_INCREMENT,
     streetname VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
+    city_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (city_id) REFERENCES city(id)
 
 );
 
@@ -65,12 +67,10 @@ CREATE TABLE street (
 CREATE TABLE address (
     id INT AUTO_INCREMENT,
     street_id INT NOT NULL,
-    city_id INT NOT NULL,
     housenumber VARCHAR(10) NOT NULL,
     inactive_address BIT DEFAULT 0,
     PRIMARY KEY (id),
-    FOREIGN KEY (street_id) REFERENCES street(id),
-    FOREIGN KEY (city_id) REFERENCES city(id)
+    FOREIGN KEY (street_id) REFERENCES street(id)
 );
 
 -- Tabelle benutzer erstellen
