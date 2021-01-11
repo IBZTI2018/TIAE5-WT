@@ -2,15 +2,14 @@
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use App\Helper\RouterHelper;
 use Slim\App;
 
+//
+
 return function (App $app) {
-    // UserController
-    $app->get('/users', 'App\Controller\UserController:index')->setName('user:index');
-    $app->get('/users/{user_id}', 'App\Controller\UserController:show')->setName('user:show');
-    $app->post('/users', 'App\Controller\UserController:create')->setName('user:create');
-    $app->put('/users/{user_id}', 'App\Controller\UserController:update')->setName('user:update');
-    $app->delete('/users/{user_id}', 'App\Controller\UserController:delete')->setName('user:delete');
+    
+    RouterHelper::restResource($app, 'UserController', 'user', 'users');
 
     // HomeController
     $app->get('/', 'App\Controller\HomeController:index')->setName('home');
