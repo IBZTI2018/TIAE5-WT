@@ -218,3 +218,17 @@ VALUES
     (2, 1, 1, 'Gehring', 'Sven', 'sven.gehring@student.ibz.ch', PASSWORD('password123'), NOW()),
     (2, 1, 1, 'Ahmeti', 'Dardan', 'dardan.ahmeti@student.ibz.ch', PASSWORD('password123'), NOW())
 ;
+
+-- Beispieldaten für Hotel
+INSERT INTO `hotel` (`id`, `address_id`, `hotelname`, `star`) VALUES
+(1,	1,	'Sunstar Hotel Lenzerheide',	4);
+
+-- Beispieldaten für Zimmer
+INSERT INTO `room` (`id`, `hotel_id`, `pricerange_id`, `roomnumbers`, `roomname`) VALUES
+(1,	1,	1,	1,	'Portier'),
+(2,	1,	2,	2,	'Portier Luxus');
+
+-- Beispieldaten für Angebot
+INSERT INTO `offer` (`id`, `room_id`, `validitystart`, `validityend`, `price`) VALUES
+(1,	1,	'2021-01-11',	'2021-02-11',	100.00),
+(2,	2,	'2021-01-11',	'2021-02-11',	400.00);

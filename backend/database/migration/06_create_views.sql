@@ -31,7 +31,6 @@ Create View reservation_overview AS
         title.designation AS title,
         user.firstname,
         user.lastname,
-        reservation.hotelcustomer_address_id,
         reservation.reservation_nr,
         reservation.check_in_date,
         reservation.check_out_date,
