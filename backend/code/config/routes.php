@@ -8,12 +8,10 @@ use Slim\App;
 //
 
 return function (App $app) {
+  $app->get('/', 'App\Controller\HomeController:index')->setName('home');
+
+  RouterHelper::restResource($app, 'CityController', 'city', 'cities');
+  RouterHelper::restResource($app, 'UserController', 'user');
     
-    RouterHelper::restResource($app, 'UserController', 'user', 'users');
-
-    // HomeController
-    $app->get('/', 'App\Controller\HomeController:index')->setName('home');
-
-    // CountryController
-    $app->get('/countries', 'App\Controller\CountryController:countries')->setName('countries');
+  $app->get('/countries', 'App\Controller\CountryController:countries')->setName('countries');
 };
