@@ -68,7 +68,7 @@ CREATE TABLE address (
     id INT AUTO_INCREMENT,
     street_id INT NOT NULL,
     housenumber VARCHAR(10) NOT NULL,
-    inactive_address BIT DEFAULT 0,
+    inactive_address BIT DEFAULT 0 NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (street_id) REFERENCES street(id)
 );
