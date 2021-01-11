@@ -223,10 +223,12 @@ CREATE TABLE rating (
 
 CREATE TABLE media (
     id INT AUTO_INCREMENT,
-    reservation_id INT  NULL,
+    reservation_id INT NULL,
+    offer_id INT NULL,
     designation VARCHAR(255) NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (reservation_id) REFERENCES reservation(id)
+    FOREIGN KEY (reservation_id) REFERENCES reservation(id),
+    FOREIGN KEY (offer_id) REFERENCES offer(id)
 );
 
 -- Tabelle mitarbeiter erstellen
