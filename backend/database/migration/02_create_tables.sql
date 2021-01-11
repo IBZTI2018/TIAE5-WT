@@ -101,17 +101,28 @@ CREATE TABLE payment (
     PRIMARY KEY (id)
 );
 
--- Tabelle ausstattung erstellen
+-- Tabelle preisklasse erstellen
 
-CREATE TABLE roomequipment (
+CREATE TABLE pricerange (
     id INT AUTO_INCREMENT,
     designation VARCHAR(255),
     PRIMARY KEY (id)
 );
 
--- Tabelle preisklasse erstellen
+-- Tabelle hotel erstellen
 
-CREATE TABLE pricerange (
+CREATE TABLE hotel (
+    id INT AUTO_INCREMENT,
+    address_id INT NOT NULL,
+    hotelname VARCHAR(255) NOT NULL,
+    star INT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (address_id) REFERENCES address(id)
+);
+
+-- Tabelle ausstattung erstellen
+
+CREATE TABLE roomequipment (
     id INT AUTO_INCREMENT,
     designation VARCHAR(255),
     PRIMARY KEY (id)
@@ -121,13 +132,23 @@ CREATE TABLE pricerange (
 
 CREATE TABLE room (
     id INT AUTO_INCREMENT,
-    roomequipment_id INT NOT NULL,
+    hotel_id INT NOT NULL,
     pricerange_id INT NOT NULL,
     roomnumbers INT NULL,
     roomname VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (roomequipment_id) REFERENCES roomequipment(id),
+    FOREIGN KEY (hotel_id) REFERENCES hotel(id),
     FOREIGN KEY (pricerange_id) REFERENCES pricerange(id)
+);
+
+-- Relationstabelle zwischen Zimmeraustattungen (roomequipment) und Zimmerntypen (room)
+
+CREATE TABLE rel_roomequipment_room (
+    roomequipment_id INT NOT NULL,
+    room_id INT NOT NULL,
+    PRIMARY KEY (roomequipment_id, room_id),
+    FOREIGN KEY (roomequipment_id) REFERENCES roomequipment(id),
+    FOREIGN KEY (room_id) REFERENCES room(id)
 );
 
 --Tabelle Hotelausstattung erstellen
@@ -138,17 +159,14 @@ CREATE TABLE hotelequipment (
     PRIMARY KEY (id)
 );
 
--- Tabelle hotel erstellen
+-- Relationstabelle zwischen Hotelaustattungen (hotelequipment) und Hotels (hotel)
 
-CREATE TABLE hotel (
-    id INT AUTO_INCREMENT,
-    address_id INT NOT NULL,
+CREATE TABLE rel_hotelequipment_hotel (
     hotelequipment_id INT NOT NULL,
-    hotelname VARCHAR(255) NOT NULL,
-    star INT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (address_id) REFERENCES address(id),
-    FOREIGN KEY (hotelequipment_id) REFERENCES hotelequipment(id)
+    hotel_id INT NOT NULL,
+    PRIMARY KEY (hotelequipment_id, hotel_id),
+    FOREIGN KEY (hotelequipment_id) REFERENCES hotelequipment(id),
+    FOREIGN KEY (hotel_id) REFERENCES hotel(id)
 );
 
 -- Tabelle angebot erstellen
@@ -156,14 +174,11 @@ CREATE TABLE hotel (
 CREATE TABLE offer (
     id INT AUTO_INCREMENT,
     room_id INT NOT NULL,
-    hotel_id INT NOT NULL,
-    payment_id INT NOT NULL,
     validitystart DATE NOT NULL,
     validityend DATE NOT NULL,
     price DECIMAL(5,2) NOT NULL,
     PRIMARY KEY (id),
-	FOREIGN KEY (room_id) REFERENCES room(id),
-    FOREIGN KEY (hotel_id) REFERENCES hotel(id)
+	FOREIGN KEY (room_id) REFERENCES room(id)
 );
 
 -- Tabelle hotelkunde erstellen
@@ -209,11 +224,9 @@ CREATE TABLE rating (
 CREATE TABLE media (
     id INT AUTO_INCREMENT,
     reservation_id INT  NULL,
-    offer_id INT  NULL,
     designation VARCHAR(255) NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (reservation_id) REFERENCES reservation(id),
-    FOREIGN KEY (offer_id) REFERENCES offer(id)
+    FOREIGN KEY (reservation_id) REFERENCES reservation(id)
 );
 
 -- Tabelle mitarbeiter erstellen
