@@ -163,8 +163,7 @@ CREATE TABLE offer (
     price DECIMAL(5,2) NOT NULL,
     PRIMARY KEY (id),
 	FOREIGN KEY (room_id) REFERENCES room(id),
-    FOREIGN KEY (hotel_id) REFERENCES hotel(id),
-    FOREIGN KEY (payment_id) REFERENCES payment(id)
+    FOREIGN KEY (hotel_id) REFERENCES hotel(id)
 );
 
 -- Tabelle hotelkunde erstellen
@@ -181,7 +180,6 @@ CREATE TABLE hotelcustomer (
 CREATE TABLE reservation (
     id INT AUTO_INCREMENT,
     offer_id INT  NOT NULL,
-    hotelcustomer_address_id INT NOT NULL,
     hotelcustomer_id INT  NOT NULL,
     payment_id INT NOT NULL,
     reservation_nr INT NOT NULL,
@@ -190,7 +188,6 @@ CREATE TABLE reservation (
     paid BIT DEFAULT 0,
     PRIMARY KEY (id),
     FOREIGN KEY (offer_id) REFERENCES offer(id),
-    FOREIGN KEY (hotelcustomer_address_id) REFERENCES address(id),
     FOREIGN KEY (hotelcustomer_id) REFERENCES hotelcustomer(id),
     FOREIGN KEY (payment_id) REFERENCES payment(id)
 );
@@ -209,15 +206,15 @@ CREATE TABLE rating (
 
 -- Tabelle medien erstellen
 
- CREATE TABLE media (
-     id INT AUTO_INCREMENT,
-     reservation_id INT  NULL,
-     offer_id INT  NULL,
-     designation VARCHAR(255) NULL,
-     PRIMARY KEY (id),
-	 FOREIGN KEY (reservation_id) REFERENCES reservation(id),
-     FOREIGN KEY  (offer_id) REFERENCES offer(id)
- );
+CREATE TABLE media (
+    id INT AUTO_INCREMENT,
+    reservation_id INT  NULL,
+    offer_id INT  NULL,
+    designation VARCHAR(255) NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (reservation_id) REFERENCES reservation(id),
+    FOREIGN KEY (offer_id) REFERENCES offer(id)
+);
 
 -- Tabelle mitarbeiter erstellen
 
