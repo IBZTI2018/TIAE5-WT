@@ -151,7 +151,7 @@ CREATE TABLE rel_roomequipment_room (
     FOREIGN KEY (room_id) REFERENCES room(id)
 );
 
---Tabelle Hotelausstattung erstellen
+-- Tabelle Hotelausstattung erstellen
 
 CREATE TABLE hotelequipment (
 	id INT AUTO_INCREMENT,

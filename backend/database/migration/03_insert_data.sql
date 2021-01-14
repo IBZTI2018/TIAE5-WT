@@ -74,7 +74,7 @@ INSERT INTO roomequipment (id, designation) VALUES
 (22, 'Kostenlose Pflegeprodukte'),
 (23, 'Bergblick');
 
---Beispieldaten in Tabelle Hotelausstattung einfügen
+-- Beispieldaten in Tabelle Hotelausstattung einfügen
 
 INSERT INTO hotelequipment VALUES 
 (1, 'WLAN inklusive'),
