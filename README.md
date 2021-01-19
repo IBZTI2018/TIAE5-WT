@@ -54,6 +54,11 @@ Run all migrations on database (this will currently recreate the database)
 make migrate
 ```
 
+List all available REST ressource routes on the API
+```
+make routes
+```
+
 ## SQL Adminer
 
 Adminer is accessible at `localhost:8888` and can connect to the database using the host `mysql`, username `root`, password `supersecret`.

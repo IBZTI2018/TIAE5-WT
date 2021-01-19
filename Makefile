@@ -12,6 +12,9 @@ status:
 logs:
 	docker-compose logs -f -t
 
+routes:
+	docker-compose run backend mix phx.routes
+
 migrate:
 	docker-compose up -d mysql
 	docker-compose run backend mix do ecto.drop, ecto.setup
