@@ -9,3 +9,27 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+Backend.Repo.insert!(%Backend.Schema.Title{
+  description: "Herr"
+})
+
+Backend.Repo.insert!(%Backend.Schema.Title{
+  description: "Frau"
+})
+
+Backend.Repo.insert!(%Backend.Schema.Title{
+  description: "Kampfhubschrauber"
+})
+
+country =
+  Backend.Repo.insert!(%Backend.Schema.Country{
+    isocode: "SUI",
+    countryname: "Switzerland"
+  })
+
+Backend.Repo.insert!(%Backend.Schema.City{
+  postcode: 8000,
+  cityname: "Zürich",
+  country: country
+})

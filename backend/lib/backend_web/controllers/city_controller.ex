@@ -13,7 +13,7 @@ defmodule BackendWeb.CityController do
   )
 
   def index(conn, opts) do
-    IO.inspect(opts)
+    IO.inspect(conn.assigns)
 
     render(conn, "index.json", %{data: Database.list_cities()})
   end
