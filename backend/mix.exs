@@ -42,7 +42,11 @@ defmodule Backend.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:jsonapi, "~> 1.3"}
+      {:jsonapi, "~> 1.3"},
+      {:pbkdf2_elixir, "~> 1.3"},
+      {:bamboo, "~> 1.6"},
+      {:bodyguard, "~> 2.4"},
+      {:quantum, "~> 3.3"}
     ]
   end
 
