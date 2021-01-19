@@ -2,7 +2,6 @@ defmodule Backend.Database do
   alias Backend.Repo
 
   import Ecto.Query, warn: false
-  import Ecto.Changeset
 
   @default_params %JSONAPI.Config{}
 
@@ -29,6 +28,17 @@ defmodule Backend.Database do
   end
 
   @doc """
+  Create a generic item using JSON-API format JSON body payload
+  """
+  def generic_create(schema, body) do
+    attrs = get_attributes_from(body)
+
+    struct(schema)
+    |> schema.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
   Delete a generic single entry from the database by id.
   """
   def generic_delete(schema, id) do
@@ -45,4 +55,31 @@ defmodule Backend.Database do
 
   defp apply_preloads(query, []), do: query
   defp apply_preloads(query, includes), do: query |> preload(^includes)
+
+  defp get_attributes_from(body) do
+    data = Map.get(body, "data", %{})
+    attrs = Map.get(data, "attributes", %{})
+    rels = Map.get(data, "relationships", %{})
+
+    full_attrs =
+      rels
+      |> Enum.filter(&relationship_has_data/1)
+      |> Enum.into(attrs, &relationship_data_id/1)
+
+    full_attrs
+  end
+
+  defp relationship_has_data({_k, v}), do: Map.get(v, "data") != nil
+
+  defp relationship_data_id({k, v}) do
+    case Map.fetch(v, "data") do
+      {:ok, content} ->
+        fetched_id = Map.get(content, "id")
+        {parsed_id, _overflow} = Integer.parse(fetched_id)
+        {"#{k}_id", parsed_id}
+
+      _ ->
+        nil
+    end
+  end
 end

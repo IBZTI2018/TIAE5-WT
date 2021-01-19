@@ -25,7 +25,11 @@ defmodule BackendWeb.TitleController do
   end
 
   def create(conn, args) do
-    send_resp(conn, 200, "OK")
+    with {:ok, data} <- Database.generic_create(Title, args) do
+      conn
+      |> put_status(:created)
+      |> render("show.json", %{data: data})
+    end
   end
 
   def delete(conn, args) do

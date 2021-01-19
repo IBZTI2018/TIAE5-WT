@@ -12,6 +12,8 @@ defmodule BackendWeb.CountryController do
     view: CountyView
   )
 
+  action_fallback(BackendWeb.FallbackController)
+
   def index(conn, args) do
     data = Database.generic_list(Country, conn.assigns.jsonapi_query)
     render(conn, "index.json", %{data: data})
@@ -20,6 +22,14 @@ defmodule BackendWeb.CountryController do
   def show(conn, args) do
     data = Database.generic_item(Country, args["id"], conn.assigns.jsonapi_query)
     render(conn, "show.json", %{data: data})
+  end
+
+  def create(conn, args) do
+    with {:ok, data} <- Database.generic_create(Country, args) do
+      conn
+      |> put_status(:created)
+      |> render("show.json", %{data: data})
+    end
   end
 
   def delete(conn, args) do
