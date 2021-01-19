@@ -1,22 +1,22 @@
 # IBZ Case Study 5. Semester
 
 ## Group members
-- [Jennifer Mentner](https://github.com/JenniferSusann)
-- [Dardan Ahmeti](https://github.com/dardii)
-- [Sven Gehring](https://github.com/cybrox)
-- [André Glatzl](https://github.com/glaand)
+* [Jennifer Mentner](https://github.com/JenniferSusann)
+* [Dardan Ahmeti](https://github.com/dardii)
+* [Sven Gehring](https://github.com/cybrox)
+* [André Glatzl](https://github.com/glaand)
 
 ## Requirements
-- Motivation
-- Docker
-- WSL 2.0
-- MySQL Workbench
+* Motivation
+* Docker
+* WSL 2.0
+* MySQL Workbench
 
 ## Application ports
-- Webserver -> 8080 -> http://localhost:8080
-- Backend -> 4000
-- Frontend -> 8092
-- Database -> 3310
+* Webserver -> 8080
+  * Frontend http://localhost:8080
+  * Backend http://localhost:8080/api/
+* Database -> 3310
 
 ## Installation
 
