@@ -2,7 +2,7 @@ defmodule BackendWeb.CityController do
   use BackendWeb, :controller
 
   alias Backend.Database
-  alias Backend.Schema
+  alias Backend.Schema.City
 
   alias BackendWeb.CityView
 
@@ -12,9 +12,7 @@ defmodule BackendWeb.CityController do
     view: CityView
   )
 
-  def index(conn, opts) do
-    IO.inspect(conn.assigns)
-
-    render(conn, "index.json", %{data: Database.list_cities()})
+  def index(conn, args) do
+    render(conn, "index.json", %{data: Database.generic_list(City, conn.assigns.jsonapi_query)})
   end
 end

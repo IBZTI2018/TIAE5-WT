@@ -33,3 +33,9 @@ Backend.Repo.insert!(%Backend.Schema.City{
   cityname: "Zürich",
   country: country
 })
+
+Backend.Repo.insert!(%Backend.Schema.City{
+  postcode: 8804,
+  cityname: "Au ZH",
+  country: country
+})
