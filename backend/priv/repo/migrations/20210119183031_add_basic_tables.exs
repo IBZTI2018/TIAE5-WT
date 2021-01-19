@@ -3,20 +3,109 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
 
   def change do
     create table("titles") do
-      add(:description, :string)
+      add(:description, :string, null: false)
     end
 
     create table("countries") do
-      add(:isocode, :string)
-      add(:countryname, :string)
+      add(:isocode, :string, null: false)
+      add(:countryname, :string, null: false)
     end
 
     create table("cities") do
-      add(:postcode, :integer)
-      add(:cityname, :string)
+      add(:postcode, :integer, null: false)
+      add(:cityname, :string, null: false)
       add(:country_id, references("countries"))
     end
 
-    # ...
+    create table("streets") do
+      add(:streetname, :string, null: false)
+      add(:city_id, references("cities"), null: false)
+    end
+
+    create table("addresses") do
+      add(:housenumber, :integer, null: false)
+      add(:active, :boolean, null: false, default: true)
+      add(:street_id, references("streets"), null: false)
+    end
+
+    create table("users") do
+      add(:firstname, :string, null: false)
+      add(:lastname, :string, null: false)
+      add(:email, :string, null: false, size: 50)
+      add(:password, :string, null: false)
+      add(:contact_address_id, references("addresses"), null: false)
+      add(:billing_address_id, references("addresses"), null: false)
+      add(:title_id, references("titles"), null: false)
+    end
+
+    create(unique_index("users", [:email]))
+
+    create table("priceranges") do
+      add(:description, :string, null: false)
+    end
+
+    create table("hotelequipments") do
+      add(:description, :string, null: false)
+    end
+
+    create table("roomequipments") do
+      add(:description, :string, null: false)
+    end
+
+    create table("hotels") do
+      add(:hotelname, :string, null: false)
+      add(:address_id, references("addresses"), null: false)
+    end
+
+    create table("hotelrooms") do
+      add(:roomname, :string, null: true)
+      add(:roomnumber, :integer, null: false)
+      add(:pricerange_id, references("priceranges"), null: false)
+      add(:hotel_id, references("hotels"), null: false)
+    end
+
+    create table("hotel_staffusers") do
+      add(:hotel_id, references("hotels"), null: false, primary_key: true)
+      add(:user_id, references("users"), null: false, primary_key: true)
+    end
+
+    create table("hotel_hotelequipments") do
+      add(:hotel_id, references("hotels"), null: false, primary_key: true)
+      add(:hotelequipments_id, references("hotelequipments"), null: false, primary_key: true)
+    end
+
+    create table("hotelroom_roomequipments") do
+      add(:hotelroom_id, references("hotelrooms"), null: false, primary_key: true)
+      add(:roomequipments_id, references("roomequipments"), null: false, primary_key: true)
+    end
+
+    create table("offers") do
+      add(:validitystart, :date, null: false)
+      add(:validityend, :date, null: false)
+      add(:hotelroom_id, references("hotelrooms"), null: false)
+    end
+
+    create table("reservations") do
+      add(:checkin, :date, null: true)
+      add(:checkout, :date, null: true)
+      add(:paid, :boolean, null: false, default: false)
+      add(:hotelroom_id, references("hotelrooms"), null: false)
+      add(:offer_id, references("offers"), null: false)
+      add(:user_id, references("users"), null: false)
+    end
+
+    create table("rating") do
+      add(:score, :float, null: false)
+      add(:comment, :string, null: true)
+      add(:anonymous, :boolean, null: false, default: false)
+      add(:published, :boolean, null: false, default: false)
+      add(:reservation_id, references("reservations"), null: false)
+    end
+
+    create table("medias") do
+      add(:contents, :text, null: false)
+      add(:reservation_id, references("reservations"), null: true)
+      add(:offer_id, references("offers"), null: true)
+    end
   end
 end
