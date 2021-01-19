@@ -46,7 +46,9 @@ defmodule Backend.MixProject do
       {:pbkdf2_elixir, "~> 1.3"},
       {:bamboo, "~> 1.6"},
       {:bodyguard, "~> 2.4"},
-      {:quantum, "~> 3.3"}
+      {:quantum, "~> 3.3"},
+      {:kaffy, git: "https://github.com/cybrox/kaffy.git", branch: "mysql-like-test"}
+      # {:kaffy, "~> 0.9.0"}
     ]
   end
 

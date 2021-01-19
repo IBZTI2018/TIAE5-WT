@@ -28,4 +28,7 @@ defmodule BackendWeb.Router do
       live_dashboard("/dashboard", metrics: BackendWeb.Telemetry)
     end
   end
+
+  # Kaffy Dashboard for easy manipulation of data
+  use Kaffy.Routes, scope: "/admin"
 end
