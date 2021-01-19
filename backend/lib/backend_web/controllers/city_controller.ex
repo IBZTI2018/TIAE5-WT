@@ -32,6 +32,12 @@ defmodule BackendWeb.CityController do
     end
   end
 
+  def update(conn, args) do
+    with {:ok, data} <- Database.generic_update(City, args["id"], args) do
+      render(conn, "show.json", %{data: data})
+    end
+  end
+
   def delete(conn, args) do
     with {:ok, _} <- Database.generic_delete(City, args["id"]) do
       send_resp(conn, 200, "")

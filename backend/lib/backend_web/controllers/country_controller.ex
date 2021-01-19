@@ -32,6 +32,12 @@ defmodule BackendWeb.CountryController do
     end
   end
 
+  def update(conn, args) do
+    with {:ok, data} <- Database.generic_update(Country, args["id"], args) do
+      render(conn, "show.json", %{data: data})
+    end
+  end
+
   def delete(conn, args) do
     with {:ok, _} <- Database.generic_delete(Country, args["id"]) do
       send_resp(conn, 200, "")

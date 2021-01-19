@@ -28,7 +28,7 @@ defmodule Backend.Database do
   end
 
   @doc """
-  Create a generic item using JSON-API format JSON body payload
+  Create a generic item using JSON-API formatted JSON body payload
   """
   def generic_create(schema, body) do
     attrs = get_attributes_from(body)
@@ -36,6 +36,18 @@ defmodule Backend.Database do
     struct(schema)
     |> schema.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Update a generic item using JSON-API formatted JSON body payload
+  """
+  def generic_update(schema, id, body) do
+    attrs = get_attributes_from(body)
+
+    schema
+    |> generic_item(id, @default_params)
+    |> schema.changeset(attrs)
+    |> Repo.update()
   end
 
   @doc """
