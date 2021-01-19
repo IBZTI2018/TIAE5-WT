@@ -12,6 +12,9 @@ status:
 logs:
 	docker-compose logs -f -t
 
+deps:
+	docker-compose run backend mix do deps.get, deps.compile
+
 routes:
 	docker-compose run backend mix phx.routes
 

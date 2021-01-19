@@ -59,6 +59,11 @@ List all available REST ressource routes on the API
 make routes
 ```
 
+(Re-) fetch and compile backend dependencies
+```
+make deps
+```
+
 ## SQL Adminer
 
 Adminer is accessible at `localhost:8888` and can connect to the database using the host `mysql`, username `root`, password `supersecret`.
