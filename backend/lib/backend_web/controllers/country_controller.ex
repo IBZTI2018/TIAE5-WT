@@ -13,6 +13,12 @@ defmodule BackendWeb.CountryController do
   )
 
   def index(conn, args) do
-    render(conn, "index.json", %{data: Database.generic_list(Country, conn.assigns.jsonapi_query)})
+    data = Database.generic_list(Country, conn.assigns.jsonapi_query)
+    render(conn, "index.json", %{data: data})
+  end
+
+  def show(conn, args) do
+    data = Database.generic_item(Country, args["id"], conn.assigns.jsonapi_query)
+    render(conn, "show.json", %{data: data})
   end
 end

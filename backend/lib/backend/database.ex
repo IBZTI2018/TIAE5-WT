@@ -16,6 +16,16 @@ defmodule Backend.Database do
     |> Repo.all()
   end
 
+  @doc """
+  Get a generic single entry from the database by id.
+  """
+  def generic_item(schema, id, params) do
+    schema
+    |> where(id: ^id)
+    |> apply_preloads(params.include)
+    |> Repo.one!()
+  end
+
   defp apply_filter(query, []), do: query
   defp apply_filter(query, filter), do: query |> where(^filter)
 

@@ -13,6 +13,12 @@ defmodule BackendWeb.CityController do
   )
 
   def index(conn, args) do
-    render(conn, "index.json", %{data: Database.generic_list(City, conn.assigns.jsonapi_query)})
+    data = Database.generic_list(City, conn.assigns.jsonapi_query)
+    render(conn, "index.json", %{data: data})
+  end
+
+  def show(conn, args) do
+    data = Database.generic_item(City, args["id"], conn.assigns.jsonapi_query)
+    render(conn, "show.json", %{data: data})
   end
 end
