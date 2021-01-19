@@ -21,4 +21,10 @@ defmodule BackendWeb.CityController do
     data = Database.generic_item(City, args["id"], conn.assigns.jsonapi_query)
     render(conn, "show.json", %{data: data})
   end
+
+  def delete(conn, args) do
+    with {:ok, _} <- Database.generic_delete(City, args["id"]) do
+      send_resp(conn, 200, "")
+    end
+  end
 end

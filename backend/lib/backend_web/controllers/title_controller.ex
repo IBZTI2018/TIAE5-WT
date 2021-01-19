@@ -27,4 +27,10 @@ defmodule BackendWeb.TitleController do
   def create(conn, args) do
     send_resp(conn, 200, "OK")
   end
+
+  def delete(conn, args) do
+    with {:ok, _} <- Database.generic_delete(Title, args["id"]) do
+      send_resp(conn, 200, "")
+    end
+  end
 end

@@ -4,6 +4,8 @@ defmodule Backend.Database do
   import Ecto.Query, warn: false
   import Ecto.Changeset
 
+  @default_params %JSONAPI.Config{}
+
   @doc """
   Get a generic list of a ressource and apply all common JSON-API query params.
   This does not currently support pagination due to the scope of the project.
@@ -24,6 +26,15 @@ defmodule Backend.Database do
     |> where(id: ^id)
     |> apply_preloads(params.include)
     |> Repo.one!()
+  end
+
+  @doc """
+  Delete a generic single entry from the database by id.
+  """
+  def generic_delete(schema, id) do
+    schema
+    |> generic_item(id, @default_params)
+    |> Repo.delete()
   end
 
   defp apply_filter(query, []), do: query
