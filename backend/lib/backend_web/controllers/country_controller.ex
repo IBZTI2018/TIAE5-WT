@@ -14,7 +14,7 @@ defmodule BackendWeb.CountryController do
 
   action_fallback(BackendWeb.FallbackController)
 
-  def index(conn, args) do
+  def index(conn, _args) do
     data = Database.generic_list(Country, conn.assigns.jsonapi_query)
     render(conn, "index.json", %{data: data})
   end
