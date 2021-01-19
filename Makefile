@@ -12,14 +12,15 @@ status:
 logs:
 	docker-compose logs -f -t
 
-composer_install:
-	docker-compose exec php composer install
-
-register_namespaces:
-	docker-compose exec php composer dumpautoload -o
-
 migrate:
-	docker-compose exec database bash /script/migrate.sh
+	docker-compose up -d mysql
+	docker-compose run backend mix do ecto.drop, ecto.setup
 
 enter_frontend:
-	docker-compose exec app /bin/bash
+	docker-compose exec frontend /bin/bash
+
+enter_backend:
+	docker-compose exec backend /bin/bash
+
+nuke:
+	docker-compose build --no-cache

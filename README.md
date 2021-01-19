@@ -13,8 +13,9 @@
 - MySQL Workbench
 
 ## Application ports
-- Backend -> 8001 -> http://localhost:8001
-- Frontend -> 8092 -> http://localhost:8092
+- Webserver -> 8080 -> http://localhost:8080
+- Backend -> 4000
+- Frontend -> 8092
 - Database -> 3310
 
 ## Installation
@@ -29,9 +30,9 @@ git clone git@github.com:cybrox/TIAE5-WT.git
 cd TIAE5-WT
 ```
 
-3. Install the backend packages
+3. Create and migrate the database
 ```
-make composer_install
+make migrate
 ```
 
 4. Put the keys and start the engines
@@ -48,19 +49,11 @@ Watch the logs of the docker containers
 make logs
 ```
 
-Run all migrations on database (Sorted ascending)
+Run all migrations on database (this will currently recreate the database)
 ```
 make migrate
 ```
 
-## SQL Migration
-
-To create a new migration, just put your .sql file on the folder `backend/database/migration`.      
-
-In order to ensure the order of execution, please do not forget to include the prefix number on the file.  
-
-If you want to add your migration file as the last one, take the last number e.g 15_insert_members.sql and add **16_** as prefix.
-
 ## SQL Adminer
 
-Adminer is accessible at `localhost:8888` and can connect to the database using the host `database`.
+Adminer is accessible at `localhost:8888` and can connect to the database using the host `mysql`, username `root`, password `supersecret`.
