@@ -1,0 +1,12 @@
+# Backend Files
+backend/_build
+backend/cover
+backend/deps
+backend/doc
+backend/.fetch
+#backend/config/*.secret.exs
+
+erl_crash.dump
+*.ez
+*.beam
+.elixir_ls/

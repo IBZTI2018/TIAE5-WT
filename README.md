@@ -1,45 +1,34 @@
 # IBZ Case Study 5. Semester
 
 ## Group members
-- [Jennifer Mentner](https://github.com/JenniferSusann)
-- [Dardan Ahmeti](https://github.com/dardii)
-- [Sven Gehring](https://github.com/cybrox)
-- [André Glatzl](https://github.com/glaand)
+* [Jennifer Mentner](https://github.com/JenniferSusann)
+* [Dardan Ahmeti](https://github.com/dardii)
+* [Sven Gehring](https://github.com/cybrox)
+* [André Glatzl](https://github.com/glaand)
 
 ## Requirements
-- Motivation
-- Docker
-- WSL 2.0
-- MySQL Workbench
+* Motivation
+* Docker
+* WSL 2.0
+* MySQL Workbench
 
 ## Application ports
-- Backend -> 8001 -> http://localhost:8001
-- Frontend -> 8092 -> http://localhost:8092
-- Database -> 3310
+* Webserver -> 8080
+  * Frontend http://localhost:8080
+  * Backend http://localhost:8080/api/
+* Database -> 3310
 
 ## Installation
+It is recommended that you use Bash or a similar shell.
 
-1. Clone this repository to your computer (Recommended: Bash environment)
-```
-git clone git@github.com:cybrox/TIAE5-WT.git
-```
-
-2. Enter the project
-```
-cd TIAE5-WT
-```
-
-3. Install the backend packages
-```
-make composer_install
-```
-
-4. Put the keys and start the engines
-```
-make start
-```
-
-5. Have fun :)
+Nr | Step | Commands
+--- | --- | ---
+1 | Clone this repository to your computer | `git clone git@github.com:cybrox/TIAE5-WT.git`
+2 | Enter the project | `cd TIAE5-WT`
+3 | Clean-build and start all containers | `make stop && make nuke && make start`
+4 | Install all dependencies | `make deps`
+5 | Create and migrate database | `make migrate`
+6 | Have fun :) | (`make logs`)
 
 ## Commands
 
@@ -48,19 +37,22 @@ Watch the logs of the docker containers
 make logs
 ```
 
-Run all migrations on database (Sorted ascending)
+Run all migrations on database (this will currently recreate the database)
 ```
 make migrate
 ```
 
-## SQL Migration
+List all available REST ressource routes on the API
+```
+make routes
+```
 
-To create a new migration, just put your .sql file on the folder `backend/database/migration`.      
+(Re-) fetch and compile backend dependencies
+```
+make deps
+```
 
-In order to ensure the order of execution, please do not forget to include the prefix number on the file.  
-
-If you want to add your migration file as the last one, take the last number e.g 15_insert_members.sql and add **16_** as prefix.
-
-## SQL Adminer
-
-Adminer is accessible at `localhost:8888` and can connect to the database using the host `database`.
+## Data manipulation SQL Adminer
+* The MariaDB container exposes MySQL on port `3310` for use with MySQL workbench or similar
+* The Web Adminer is accessible at `localhost:8888` and can connect to the database using the host `mysql`, username `root`, password `supersecret`.
+* The backend devleopment dasboard (kaffy) is accessible at `http://localhost:8080/kaffydash
