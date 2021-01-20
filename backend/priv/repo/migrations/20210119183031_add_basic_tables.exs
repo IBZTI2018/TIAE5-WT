@@ -64,19 +64,22 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:hotel_id, references("hotels"), null: false)
     end
 
+    # Omit primary_key: false in create table for kaffy
     create table("hotel_staffusers") do
       add(:hotel_id, references("hotels"), null: false, primary_key: true)
       add(:user_id, references("users"), null: false, primary_key: true)
     end
 
+    # Omit primary_key: false in create table for kaffy
     create table("hotel_hotelequipments") do
       add(:hotel_id, references("hotels"), null: false, primary_key: true)
-      add(:hotelequipments_id, references("hotelequipments"), null: false, primary_key: true)
+      add(:hotelequipment_id, references("hotelequipments"), null: false, primary_key: true)
     end
 
+    # Omit primary_key: false in create table for kaffy
     create table("hotelroom_roomequipments") do
       add(:hotelroom_id, references("hotelrooms"), null: false, primary_key: true)
-      add(:roomequipments_id, references("roomequipments"), null: false, primary_key: true)
+      add(:roomequipment_id, references("roomequipments"), null: false, primary_key: true)
     end
 
     create table("offers") do
