@@ -1,11 +1,11 @@
 .input-counter {
     display: flex;
     flex-direction: row;
-    height: 100%; 
 
     input[type=number] {
         max-width: 50px;
-        height: 100%;
+        height: inherit;
+        display: inline-block;
         border-radius: 0;
         text-align: center;
         -moz-appearance: textfield;
@@ -20,5 +20,11 @@
     .btn {
         border-radius: 0;
         border-color: #ced4da;
+    }
+}
+
+.BookingSearchInput {
+    .input-counter {
+        height: 100%;
     }
 }

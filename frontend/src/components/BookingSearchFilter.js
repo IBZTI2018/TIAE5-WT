@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import Datepicker from './Datepicker';
+import GuestCounter from './GuestCounter';
 
 class BookingSearchFilter extends Component {
 
@@ -32,17 +33,29 @@ class BookingSearchFilter extends Component {
         this.setState({ startDate, endDate })
     }
 
+    handleGuestChange = (guestCounter) => {
+        this.setState({ guestCounter })
+    }
+
     render() {
         return (
             <div class="bg-warning p-3">
                 <form onSubmit={this.handleSubmit}>
-                    <div className="input-group input-group-lg">
+                    <div className="form-group">
+                        <label>Destination</label>
                         <input type="text" className="form-control" placeholder="Nach Hotel / Gebiet / Angebot suchen" value={this.state.searchInput} onChange={this.handleChange} />
-                        <div className="input-group-append">
-                            <Datepicker onDatesChange={this.handleDatesChange}/>
-                            <button className="btn btn-outline-secondary" type="button">Gäste</button>
-                            <button className="btn btn-primary" type="submit">Suchen</button>
-                        </div>
+                        <small id="emailHelp" class="form-text text-muted">Bsp: Lenzerheide</small>
+                    </div>
+                    <div className="form-group">
+                        <label>Check-in & Check-out date</label>
+                        <Datepicker onDatesChange={this.handleDatesChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label>Anzahl Gäste</label>
+                        <GuestCounter onGuestChange={this.handleGuestChange} />
+                    </div>
+                    <div className="form-group">
+                        <button className="btn btn-block btn-primary" type="submit">Suchen</button>
                     </div>
                 </form>
             </div>

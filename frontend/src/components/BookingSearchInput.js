@@ -40,7 +40,7 @@ class BookingSearchInput extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="BookingSearchInput">
                 <div className="input-group input-group-lg mt-5">
                     <input type="text" className="form-control" placeholder="Nach Hotel / Gebiet / Angebot suchen" value={this.state.searchInput} onChange={this.handleChange} />
                     <div className="input-group-append">

@@ -34,10 +34,10 @@ class OffersPage extends Component {
             <div>
                 <h2>Angebotsliste: </h2>
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-4">
                         <BookingSearchFilter />
                     </div>
-                    <div className="col-md-9">
+                    <div className="col-md-8">
                         {
                             this.state.offers.map(offer => (
                                 <Offer data={offer} />

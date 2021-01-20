@@ -43,11 +43,11 @@ class GuestCounter extends Component {
         return (
             <div>
                 <div class="input-counter">
-                    <button type="button" class="btn btn-outline-secondary btn-number" data-type="minus" data-field="quant[1]" onClick={this.handleMinus}>
+                    <button type="button" class="btn btn-light btn-number" data-type="minus" data-field="quant[1]" onClick={this.handleMinus}>
                         <span class="fa fa-minus"></span>
                     </button>
                     <input type="number" name="quant[1]" class="form-control input-number" value={this.state.counter} onChange={this.handleChange} />
-                    <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus" data-field="quant[1]" onClick={this.handlePlus}>
+                    <button type="button" class="btn btn-light btn-number" data-type="plus" data-field="quant[1]" onClick={this.handlePlus}>
                         <span class="fa fa-plus"></span>
                     </button>
                 </div>
