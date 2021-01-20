@@ -14,8 +14,8 @@ defmodule Backend.Schema.Media do
     belongs_to(:reservation, Reservation)
   end
 
-  def changeset(%Media{} = offer, attrs) do
-    offer
+  def changeset(%Media{} = media, attrs) do
+    media
     |> cast(attrs, [:contents])
     |> cast_assoc(:offer)
     |> cast_assoc(:reservation)

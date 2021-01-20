@@ -8,7 +8,7 @@ defmodule Backend.Schema.Hotelroom do
   alias Backend.Schema.Pricerange
   alias Backend.Schema.Roomequipment
 
-  schema "hoteles" do
+  schema "hotelrooms" do
     field(:roomname, :string)
     field(:roomnumber, :integer)
 

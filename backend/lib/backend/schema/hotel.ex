@@ -8,7 +8,7 @@ defmodule Backend.Schema.Hotel do
   alias Backend.Schema.User
   alias Backend.Schema.Hotelequipment
 
-  schema "hoteles" do
+  schema "hotels" do
     field(:hotelname, :integer)
 
     belongs_to(:address, Address)

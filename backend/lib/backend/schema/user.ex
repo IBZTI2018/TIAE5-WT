@@ -21,8 +21,8 @@ defmodule Backend.Schema.User do
     many_to_many(:hotels, Hotel, join_through: "hotel_staffusers")
   end
 
-  def changeset(%Address{} = address, attrs) do
-    address
+  def changeset(%Address{} = user, attrs) do
+    user
     |> cast(attrs, [:firstname, :lastname, :email, :password])
     |> cast_assoc(:title)
     |> cast_assoc(:contact_address)

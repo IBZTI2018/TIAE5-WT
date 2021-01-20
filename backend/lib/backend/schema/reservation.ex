@@ -16,8 +16,8 @@ defmodule Backend.Schema.Reservation do
     belongs_to(:user, User)
   end
 
-  def changeset(%Offer{} = offer, attrs) do
-    offer
+  def changeset(%Reservation{} = reservation, attrs) do
+    reservation
     |> cast(attrs, [:checkin, :checkout, :paid])
     |> cast_assoc(:offer)
     |> cast_assoc(:user)

@@ -12,8 +12,8 @@ defmodule Backend.Schema.JoinHotelroomRoomequipment do
     belongs_to(:roomequipment, Roomequipment)
   end
 
-  def changeset(%JoinHotelroomRoomequipment{} = staff, attrs) do
-    staff
+  def changeset(%JoinHotelroomRoomequipment{} = relation, attrs) do
+    relation
     |> cast_assoc(:hotelroom)
     |> cast_assoc(:roomequipment)
     |> validate_required([:hotelroom, :roomequipment])

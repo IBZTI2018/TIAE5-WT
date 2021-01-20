@@ -15,8 +15,8 @@ defmodule Backend.Schema.Rating do
     belongs_to(:reservation, Reservation)
   end
 
-  def changeset(%Rating{} = offer, attrs) do
-    offer
+  def changeset(%Rating{} = rating, attrs) do
+    rating
     |> cast(attrs, [:score, :comment, :anonymous, :published])
     |> cast_assoc(:reservation)
     |> validate_required([:score, :anonymous, :published, :reservation])
