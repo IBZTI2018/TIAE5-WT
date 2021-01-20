@@ -28,14 +28,37 @@ country =
     countryname: "Switzerland"
   })
 
-Backend.Repo.insert!(%Backend.Schema.City{
-  postcode: 8000,
-  cityname: "Zürich",
-  country: country
-})
+city =
+  Backend.Repo.insert!(%Backend.Schema.City{
+    postcode: 8000,
+    cityname: "Zürich",
+    country: country
+  })
 
 Backend.Repo.insert!(%Backend.Schema.City{
   postcode: 8804,
   cityname: "Au ZH",
   country: country
 })
+
+street =
+  Backend.Repo.insert!(%Backend.Schema.Street{
+    streetname: "Bahnhofstrasse",
+    city: city
+  })
+
+address =
+  Backend.Repo.insert!(%Backend.Schema.Address{
+    housenumber: 7,
+    street: street
+  })
+
+pricerange_one =
+  Backend.Repo.insert!(%Backend.Schema.Pricerange{
+    description: "Günstig"
+  })
+
+pricerange_two =
+  Backend.Repo.insert!(%Backend.Schema.Pricerange{
+    description: "Teuer"
+  })
