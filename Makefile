@@ -6,6 +6,9 @@ start:
 stop:
 	docker-compose down
 
+restart:
+	make stop && make start
+
 status:
 	docker-compose ps
 
