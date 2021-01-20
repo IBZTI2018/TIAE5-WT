@@ -15,9 +15,8 @@ defmodule Backend.Schema.City do
 
   def changeset(%City{} = city, attrs) do
     city
-    |> cast(attrs, [:postcode, :cityname])
-    |> cast_assoc(:country)
-    |> validate_required([:postcode, :cityname, :country])
+    |> cast(attrs, [:postcode, :cityname, :country_id])
+    |> validate_required([:postcode, :cityname, :country_id])
     |> validate_length(:cityname, min: 3, max: 255)
   end
 end

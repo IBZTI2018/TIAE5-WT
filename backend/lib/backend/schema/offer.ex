@@ -15,8 +15,7 @@ defmodule Backend.Schema.Offer do
 
   def changeset(%Offer{} = offer, attrs) do
     offer
-    |> cast(attrs, [:validitystart, :validityend])
-    |> cast_assoc(:hotelroom)
-    |> validate_required([:validitystart, :validityend, :hotelroom])
+    |> cast(attrs, [:validitystart, :validityend, :hotelroom_id])
+    |> validate_required([:validitystart, :validityend, :hotelroom_id])
   end
 end

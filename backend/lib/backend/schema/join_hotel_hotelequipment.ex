@@ -14,8 +14,7 @@ defmodule Backend.Schema.JoinHotelHotelequipment do
 
   def changeset(%JoinHotelHotelequipment{} = relation, attrs) do
     relation
-    |> cast_assoc(:hotel)
-    |> cast_assoc(:hotelequipment)
-    |> validate_required([:hotel, :hotelequipment])
+    |> cast(attrs, [:hotel_id, :hotelequipment_id])
+    |> validate_required([:hotel_id, :hotelequipment_id])
   end
 end

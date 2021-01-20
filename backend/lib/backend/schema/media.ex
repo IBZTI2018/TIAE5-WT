@@ -16,9 +16,7 @@ defmodule Backend.Schema.Media do
 
   def changeset(%Media{} = media, attrs) do
     media
-    |> cast(attrs, [:contents])
-    |> cast_assoc(:offer)
-    |> cast_assoc(:reservation)
+    |> cast(attrs, [:contents, :offer_id, :reservation_id])
     |> validate_required([:contents])
   end
 end

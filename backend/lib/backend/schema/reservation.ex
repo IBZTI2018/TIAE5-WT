@@ -18,9 +18,7 @@ defmodule Backend.Schema.Reservation do
 
   def changeset(%Reservation{} = reservation, attrs) do
     reservation
-    |> cast(attrs, [:checkin, :checkout, :paid])
-    |> cast_assoc(:offer)
-    |> cast_assoc(:user)
-    |> validate_required([:paid, :offer, :user])
+    |> cast(attrs, [:checkin, :checkout, :paid, :offer_id, :user_id])
+    |> validate_required([:paid, :offer_id, :user_id])
   end
 end

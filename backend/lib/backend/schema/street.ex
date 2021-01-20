@@ -14,9 +14,8 @@ defmodule Backend.Schema.Street do
 
   def changeset(%Street{} = street, attrs) do
     street
-    |> cast(attrs, [:streetname])
-    |> cast_assoc(:city)
-    |> validate_required([:streetname, :city])
+    |> cast(attrs, [:streetname, :city_id])
+    |> validate_required([:streetname, :city_id])
     |> validate_length(:streetname, min: 3, max: 255)
   end
 end

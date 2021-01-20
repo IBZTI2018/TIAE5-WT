@@ -19,8 +19,7 @@ defmodule Backend.Schema.Hotel do
 
   def changeset(%Hotel{} = hotel, attrs) do
     hotel
-    |> cast(attrs, [:hotelname])
-    |> cast_assoc(:address)
-    |> validate_required([:hotelname, :address])
+    |> cast(attrs, [:hotelname, :address_id])
+    |> validate_required([:hotelname, :address_id])
   end
 end

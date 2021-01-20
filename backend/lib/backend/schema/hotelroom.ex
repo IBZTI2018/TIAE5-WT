@@ -20,9 +20,7 @@ defmodule Backend.Schema.Hotelroom do
 
   def changeset(%Hotelroom{} = hotelroom, attrs) do
     hotelroom
-    |> cast(attrs, [:roomname, :roomnumber])
-    |> cast_assoc(:hotel)
-    |> cast_assoc(:pricerange)
-    |> validate_required([:roomnumber, :hotel, :pricerange])
+    |> cast(attrs, [:roomname, :roomnumber, :hotel_id, :pricerange_id])
+    |> validate_required([:roomnumber, :hotel_id, :pricerange_id])
   end
 end

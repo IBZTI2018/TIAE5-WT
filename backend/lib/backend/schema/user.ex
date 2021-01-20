@@ -23,11 +23,23 @@ defmodule Backend.Schema.User do
 
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:firstname, :lastname, :email, :password])
-    |> cast_assoc(:title)
-    |> cast_assoc(:contact_address)
-    |> cast_assoc(:billing_address)
-    |> validate_required([:firstname, :lastname, :email, :password, :title, :contact_address])
+    |> cast(attrs, [
+      :firstname,
+      :lastname,
+      :email,
+      :password,
+      :title_id,
+      :contact_address_id,
+      :billing_address_id
+    ])
+    |> validate_required([
+      :firstname,
+      :lastname,
+      :email,
+      :password,
+      :title_id,
+      :contact_address_id
+    ])
     |> validate_length(:firstname, min: 3, max: 255)
     |> validate_length(:lastname, min: 3, max: 255)
     |> validate_length(:email, min: 3, max: 50)

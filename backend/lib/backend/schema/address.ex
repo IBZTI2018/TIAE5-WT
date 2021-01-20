@@ -15,8 +15,7 @@ defmodule Backend.Schema.Address do
 
   def changeset(%Address{} = address, attrs) do
     address
-    |> cast(attrs, [:housenumber, :active])
-    |> cast_assoc(:street)
-    |> validate_required([:housenumber, :active, :street])
+    |> cast(attrs, [:housenumber, :active, :street_id])
+    |> validate_required([:housenumber, :active, :street_id])
   end
 end
