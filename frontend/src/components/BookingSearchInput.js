@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import Datepicker from './Datepicker';
+import GuestCounter from './GuestCounter';
 
 class BookingSearchInput extends Component {
 
-    constructor(props) {
+    constructor(props) { 
         super(props);
-        this.state = { 
+        this.state = {
             searchInput: '',
             startDate: null,
-            endDate: null
+            endDate: null,
+            guestCounter: null
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -32,14 +34,18 @@ class BookingSearchInput extends Component {
         this.setState({ startDate, endDate })
     }
 
+    handleGuestChange = (guestCounter) => {
+        this.setState({ guestCounter })
+    }
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="input-group input-group-lg mt-5">
                     <input type="text" className="form-control" placeholder="Nach Hotel / Gebiet / Angebot suchen" value={this.state.searchInput} onChange={this.handleChange} />
                     <div className="input-group-append">
-                        <Datepicker onDatesChange={this.handleDatesChange}/>
-                        <button className="btn btn-outline-secondary" type="button">Gäste</button>
+                        <Datepicker onDatesChange={this.handleDatesChange} />
+                        <GuestCounter onGuestChange={this.handleGuestChange} />
                         <button className="btn btn-primary" type="submit">Suchen</button>
                     </div>
                 </div>

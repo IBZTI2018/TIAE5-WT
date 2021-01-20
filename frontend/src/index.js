@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from "moment";
+import 'font-awesome/css/font-awesome.min.css';
 
 import './styles/index.scss';
 import App from './App';
