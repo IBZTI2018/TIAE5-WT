@@ -35,7 +35,7 @@ class GuestCounter extends Component {
     }
 
     handleChange(event) {
-        let newCounter = parseInt(event.target.value);
+        let newCounter = parseInt(event.target.value || 1);
         this.counterHandler(newCounter);
     }
 
