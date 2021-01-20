@@ -14,9 +14,9 @@ defmodule Backend.Schema.User do
     field(:email, :string)
     field(:password, :string)
 
-    has_one(:title, Title)
-    has_one(:contact_address, Address)
-    has_one(:billing_address, Address)
+    belongs_to(:title, Title)
+    belongs_to(:contact_address, Address)
+    belongs_to(:billing_address, Address)
 
     many_to_many(:hotels, Hotel, join_through: "hotel_staffusers")
   end
