@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Offer from '../components/Offer';
+import BookingSearchFilter from '../components/BookingSearchFilter';
 
 class OffersPage extends Component {
     constructor(props) {
@@ -26,9 +27,6 @@ class OffersPage extends Component {
                 },
             ]
         }
-        console.log("banane");
-        console.log(this.props.location.data);
-        console.log("apfel");
     }
 
     render() {
@@ -37,9 +35,7 @@ class OffersPage extends Component {
                 <h2>Angebotsliste: </h2>
                 <div className="row">
                     <div className="col-md-3">
-                        Filter Knöpüfe für Angebote<br />
-                        Und Einstellungen wie Anzsahl Sterne<br />
-                        Orte, usw.  
+                        <BookingSearchFilter />
                     </div>
                     <div className="col-md-9">
                         {
