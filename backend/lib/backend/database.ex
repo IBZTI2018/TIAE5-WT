@@ -83,7 +83,7 @@ defmodule Backend.Database do
 
   defp relationship_has_data({_k, v}), do: Map.get(v, "data") != nil
 
-  defp relationship_with_data(s, {k, v}), do: {k, parse_associated_entry(s, k, v)}
+  defp relationship_with_data(s, {k, v}), do: {"#{k}_id", parse_associated_entry(s, k, v)}
 
   defp parse_associated_entry(s, k, %{"data" => %{"id" => id}}),
     do: get_associated_entry(s, k, id)
@@ -110,7 +110,7 @@ defmodule Backend.Database do
 
     case entry do
       nil -> nil
-      any -> Map.from_struct(any)
+      any -> entry.id
     end
   end
 
