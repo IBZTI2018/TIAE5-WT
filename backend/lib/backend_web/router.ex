@@ -13,7 +13,7 @@ defmodule BackendWeb.Router do
     resources("/cities", CityController, except: [:edit, :new])
   end
 
-  # Enables LiveDashboard only for development
+  # Enables LiveDashboard and Kaffy dashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
   # it behind authentication and allow only admins to access it.
@@ -27,8 +27,7 @@ defmodule BackendWeb.Router do
       pipe_through([:fetch_session, :protect_from_forgery])
       live_dashboard("/dashboard", metrics: BackendWeb.Telemetry)
     end
-  end
 
-  # Kaffy Dashboard for easy manipulation of data
-  use Kaffy.Routes, scope: "/admin"
+    use Kaffy.Routes, scope: "/admin"
+  end
 end
