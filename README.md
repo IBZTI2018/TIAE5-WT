@@ -30,9 +30,9 @@ git clone git@github.com:cybrox/TIAE5-WT.git
 cd TIAE5-WT
 ```
 
-3. Create and migrate the database
+3. Install all dependencies
 ```
-make migrate
+make deps
 ```
 
 4. Put the keys and start the engines
@@ -40,7 +40,12 @@ make migrate
 make start
 ```
 
-5. Have fun :)
+5. Create and migrate the database
+```
+make migrate
+```
+
+6. Have fun :)
 
 ## Commands
 
