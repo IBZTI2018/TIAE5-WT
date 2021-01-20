@@ -3,6 +3,7 @@ defmodule BackendWeb.HotelroomView do
 
   alias BackendWeb.HotelView
   alias BackendWeb.PricerangeView
+  alias BackendWeb.RoomequipmentView
 
   def fields do
     [:roomname, :roomnumber]
@@ -11,7 +12,8 @@ defmodule BackendWeb.HotelroomView do
   def relationships do
     [
       hotel: {HotelView, :include},
-      pricerange: {PricerangeView, :include}
+      pricerange: {PricerangeView, :include},
+      roomequipments: {RoomequipmentView, :include}
     ]
   end
 end
