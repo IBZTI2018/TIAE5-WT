@@ -67,4 +67,4 @@ make deps
 ## Data manipulation SQL Adminer
 * The MariaDB container exposes MySQL on port `3310` for use with MySQL workbench or similar
 * The Web Adminer is accessible at `localhost:8888` and can connect to the database using the host `mysql`, username `root`, password `supersecret`.
-* The backend devleopment dasboard (kaffy) is accessible at `http://localhost:8080/admin/
+* The backend devleopment dasboard (kaffy) is accessible at `http://localhost:8080/kaffydash

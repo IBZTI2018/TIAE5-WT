@@ -36,9 +36,9 @@ defmodule BackendWeb.Router do
 
     scope "/" do
       pipe_through([:fetch_session, :protect_from_forgery])
-      live_dashboard("/dashboard", metrics: BackendWeb.Telemetry)
+      live_dashboard("/livedash", metrics: BackendWeb.Telemetry)
     end
 
-    use Kaffy.Routes, scope: "/admin"
+    use Kaffy.Routes, scope: "/kaffydash"
   end
 end
