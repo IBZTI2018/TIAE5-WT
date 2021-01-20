@@ -8,8 +8,8 @@ defmodule Backend.Schema.JoinHotelStaff do
   alias Backend.Schema.User
 
   schema "hotel_staffusers" do
-    belongs_to(:hotel, Hotel)
-    belongs_to(:user, User)
+    belongs_to(:hotel, Hotel, primary_key: true)
+    belongs_to(:user, User, primary_key: true)
   end
 
   def changeset(%JoinHotelStaff{} = relation, attrs) do
