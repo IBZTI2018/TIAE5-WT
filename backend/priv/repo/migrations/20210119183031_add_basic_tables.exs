@@ -89,7 +89,6 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:checkin, :date, null: true)
       add(:checkout, :date, null: true)
       add(:paid, :boolean, null: false, default: false)
-      add(:hotelroom_id, references("hotelrooms"), null: false)
       add(:offer_id, references("offers"), null: false)
       add(:user_id, references("users"), null: false)
     end
