@@ -1,8 +1,8 @@
-import BookingSearchInput from '../components/BookingSearchInput';
+import SearchInputGroup from '../components/search/SearchInputGroup';
 
 function HomePage() {
     return (
-        <BookingSearchInput />
+        <SearchInputGroup />
     );
 }
 

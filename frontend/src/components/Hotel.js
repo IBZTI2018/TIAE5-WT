@@ -13,7 +13,7 @@ class Hotel extends Component {
                             <h5 className="card-title">{this.props.data.title}</h5>
                             <p className="card-text">{this.props.data.description}</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                            <a href="#" class="btn btn-primary">Hotel aufrufen</a>
+                            <a href="#" className="btn btn-primary">Hotel aufrufen</a>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { DateRangePicker } from 'react-dates';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import * as selectors from '../../redux/selectors';
+import * as actions from '../../redux/actions';
+
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
@@ -7,28 +12,31 @@ class Datepicker extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            startDate: null,
-            endDate: null,
             focus: null
         }
     }
 
     handleOnDatesChange = ({ startDate, endDate }) => {
-        this.setState({ startDate, endDate });
-        this.props.onDatesChange(startDate, endDate);
+        // Actions
+        const { setStartDate, setEndDate } = this.props;
+        setStartDate(startDate);
+        setEndDate(endDate);
     }
 
     render() {
+        // Selectors
+        const { startDate, endDate } = this.props;
+
         return (
             <DateRangePicker 
                 startDatePlaceholderText="Von"
-                startDate={this.state.startDate}
+                startDate={startDate}
                 startDateId="startDate"
                 onDatesChange={this.handleOnDatesChange}
                 endDatePlaceholderText="Bis"
-                endDate={this.state.endDate}
+                endDate={endDate}
                 endDateId="endDate"
-                minDate = {new Date()}
+                minDate = {moment()}
                 displayFormat="DD/MM/yyyy"
                 focusedInput={this.state.focus}
                 onFocusChange={focus => this.setState({ focus })}
@@ -37,4 +45,11 @@ class Datepicker extends Component {
     }
 }
 
-export default Datepicker;
+const mapSelectors = store => ({
+    startDate: selectors.getStartDate(store),
+    endDate: selectors.getEndDate(store)
+});
+
+const mapActions = {  ...actions };
+
+export default connect(mapSelectors, mapActions)(Datepicker);

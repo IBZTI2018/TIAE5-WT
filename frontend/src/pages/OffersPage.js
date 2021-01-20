@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Offer from '../components/Offer';
-import BookingSearchFilter from '../components/BookingSearchFilter';
+import SearchFilter from '../components/search/SearchFilter';
 
 class OffersPage extends Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class OffersPage extends Component {
                 <h2>Angebotsliste: </h2>
                 <div className="row">
                     <div className="col-md-4">
-                        <BookingSearchFilter />
+                        <SearchFilter />
                     </div>
                     <div className="col-md-8">
                         {

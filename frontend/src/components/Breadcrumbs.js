@@ -16,7 +16,7 @@ class Breadcrumbs extends Component {
 
     render() {
         return (
-            <div class="container py-5">
+            <div className="container py-2">
                 <BrowserRouter>
                     {
                         this.props.location.pathname != '/' && (

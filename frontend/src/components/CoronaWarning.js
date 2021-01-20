@@ -16,13 +16,13 @@ class CoronaWarning extends Component {
         return (
             <div>
                 { this.state.dismiss == false && (
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <div class="container">
+                    <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div className="container">
                             <h6>Coronavirus (COVID-19) Support</h6>
                             <p>
                                 Bitte überprüfen Sie die Reisebeschränkungen. Reisen sind möglicherweise nur für bestimmte Zwecke gestattet, insbesondere touristische Reisen sind möglicherweise nicht gestattet.
                                 </p>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={this.handleClick}>
+                            <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={this.handleClick}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>

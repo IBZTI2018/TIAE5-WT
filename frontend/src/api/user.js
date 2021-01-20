@@ -8,7 +8,7 @@ class User extends Component {
 
     render() {
         return (
-            <section class="mt-5">
+            <section className="mt-5">
                 <h3>Benutzerprofil von <b>{ this.props.data.attributes.firstname } { this.props.data.attributes.lastname } </b></h3>
                 <hr />
                 <table>
