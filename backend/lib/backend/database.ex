@@ -31,7 +31,7 @@ defmodule Backend.Database do
   Create a generic item using JSON-API formatted JSON body payload
   """
   def generic_create(schema, body) do
-    attrs = get_attributes_from(body)
+    attrs = get_attributes_from(schema, body)
 
     struct(schema)
     |> schema.changeset(attrs)
@@ -42,7 +42,7 @@ defmodule Backend.Database do
   Update a generic item using JSON-API formatted JSON body payload
   """
   def generic_update(schema, id, body) do
-    attrs = get_attributes_from(body)
+    attrs = get_attributes_from(schema, body)
 
     schema
     |> generic_item(id, @default_params)
@@ -68,7 +68,7 @@ defmodule Backend.Database do
   defp apply_preloads(query, []), do: query
   defp apply_preloads(query, includes), do: query |> preload(^includes)
 
-  defp get_attributes_from(body) do
+  defp get_attributes_from(schema, body) do
     data = Map.get(body, "data", %{})
     attrs = Map.get(data, "attributes", %{})
     rels = Map.get(data, "relationships", %{})
@@ -76,22 +76,44 @@ defmodule Backend.Database do
     full_attrs =
       rels
       |> Enum.filter(&relationship_has_data/1)
-      |> Enum.into(attrs, &relationship_data_id/1)
+      |> Enum.into(attrs, &relationship_with_data(schema, &1))
 
     full_attrs
   end
 
   defp relationship_has_data({_k, v}), do: Map.get(v, "data") != nil
 
-  defp relationship_data_id({k, v}) do
-    case Map.fetch(v, "data") do
-      {:ok, content} ->
-        fetched_id = Map.get(content, "id")
-        {parsed_id, _overflow} = Integer.parse(fetched_id)
-        {"#{k}_id", parsed_id}
+  defp relationship_with_data(s, {k, v}), do: {k, parse_associated_entry(s, k, v)}
 
-      _ ->
-        nil
+  defp parse_associated_entry(s, k, %{"data" => %{"id" => id}}),
+    do: get_associated_entry(s, k, id)
+
+  defp parse_associated_entry(_, _, _), do: nil
+
+  defp get_associated_entry(_, _, nil), do: nil
+
+  defp get_associated_entry(s, k, id) do
+    with true <- k in schema_allowed_assocs(s),
+         info <- schema_get_assoc(s, k),
+         {:ok, rs} <- Map.fetch(info, :related) do
+      fetch_associated_entry(rs, id)
+    else
+      _ -> nil
     end
   end
+
+  defp fetch_associated_entry(rs, id) do
+    entry =
+      rs
+      |> where(id: ^id)
+      |> Repo.one()
+
+    case entry do
+      nil -> nil
+      any -> Map.from_struct(any)
+    end
+  end
+
+  defp schema_allowed_assocs(s), do: s.__schema__(:associations) |> Enum.map(&"#{&1}")
+  defp schema_get_assoc(s, k), do: s.__schema__(:association, :"#{k}")
 end

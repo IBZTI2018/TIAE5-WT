@@ -14,7 +14,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
     create table("cities") do
       add(:postcode, :integer, null: false)
       add(:cityname, :string, null: false)
-      add(:country_id, references("countries"))
+      add(:country_id, references("countries"), null: false)
     end
 
     create table("streets") do
