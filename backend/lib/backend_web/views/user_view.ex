@@ -1,9 +1,8 @@
 defmodule BackendWeb.UserView do
   use JSONAPI.View, type: "users"
 
-  alias BackendWeb.UserView
   alias BackendWeb.TitleView
-  alias BackendWeb.StreetView
+  alias BackendWeb.AddressView
 
   def fields do
     [:firstname, :lastname, :email]
@@ -12,8 +11,8 @@ defmodule BackendWeb.UserView do
   def relationships do
     [
       title: {TitleView, :include},
-      contact_address: {StreetView, :include},
-      billing_address: {StreetView, :include}
+      contact_address: {AddressView, :include},
+      billing_address: {AddressView, :include}
     ]
   end
 end
