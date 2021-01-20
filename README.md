@@ -19,33 +19,16 @@
 * Database -> 3310
 
 ## Installation
+It is recommended that you use Bash or a similar shell.
 
-1. Clone this repository to your computer (Recommended: Bash environment)
-```
-git clone git@github.com:cybrox/TIAE5-WT.git
-```
-
-2. Enter the project
-```
-cd TIAE5-WT
-```
-
-3. Put the keys and start the engines
-```
-make start
-```
-
-4. Install all dependencies
-```
-make deps
-```
-
-5. Create and migrate the database
-```
-make migrate
-```
-
-6. Have fun :)
+Nr | Step | Commands
+--- | --- | ---
+1 | Clone this repository to your computer | `git clone git@github.com:cybrox/TIAE5-WT.git`
+2 | Enter the project | `cd TIAE5-WT`
+3 | Clean-build and start all containers | `make stop && make nuke && make start`
+4 | Install all dependencies | `make deps`
+5 | Create and migrate database | `make migrate`
+6 | Have fun :) | (`make logs`)
 
 ## Commands
 
