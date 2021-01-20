@@ -11,6 +11,14 @@ defmodule BackendWeb.Router do
     resources("/titles", TitleController, except: [:edit, :new])
     resources("/countries", CountryController, except: [:edit, :new])
     resources("/cities", CityController, except: [:edit, :new])
+    resources("/streets", StreetController, except: [:edit, :new])
+    resources("/addresses", AddressController, except: [:edit, :new])
+    resources("/users", UserController, except: [:edit, :new])
+    resources("/hotels", HotelController, except: [:edit, :new])
+    resources("/hotelrooms", HotelroomController, except: [:edit, :new])
+    resources("/priceranges", PricerangeController, except: [:edit, :new])
+    resources("/hotelequipments", HotelequipmentController, except: [:edit, :new])
+    resources("/roomequipments", RoomequipmentController, except: [:edit, :new])
   end
 
   # Enables LiveDashboard and Kaffy dashboard only for development
