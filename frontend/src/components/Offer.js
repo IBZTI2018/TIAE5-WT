@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import StarRating from './offer/StarRating';
+
+import moment from 'moment';
 
 class Offer extends Component {
     render() {
@@ -10,10 +13,19 @@ class Offer extends Component {
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
-                            <h5 className="card-title">{this.props.data.title}</h5>
-                            <p className="card-text">{this.props.data.description}</p>
-                            <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                            <a href="#" className="btn btn-primary">Buchen</a>
+                            <h5 className="card-title">
+                                {this.props.data.title}
+                                <StarRating stars={this.props.data.stars} />
+                            </h5>
+                            <p className="card-text small">{this.props.data.description}</p>
+                            <p className="card-text">
+                                <small className="text-muted">
+                                    Angebot gültig bis: <b>{moment.unix(this.props.data.validityend).format("DD.MM.YYYY")}</b>
+                                </small>
+                            </p>
+                            <a href="#" className="btn btn-primary">
+                                <b>CHF {this.props.data.price}</b>
+                            </a>
                         </div>
                     </div>
                 </div>
