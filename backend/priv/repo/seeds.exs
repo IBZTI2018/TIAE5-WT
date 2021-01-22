@@ -10,55 +10,67 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-Backend.Repo.insert!(%Backend.Schema.Title{
-  description: "Herr"
-})
+now = Date.utc_today()
 
-Backend.Repo.insert!(%Backend.Schema.Title{
-  description: "Frau"
-})
+# We insert some common titles
+for desc <- ["Herr", "Frau", "Kampfhubschrauber"] do
+  Backend.Repo.insert!(%Backend.Schema.Title{
+    description: desc
+  })
+end
 
-Backend.Repo.insert!(%Backend.Schema.Title{
-  description: "Kampfhubschrauber"
-})
+# We insert some common hotel room price ranges
+priceranges =
+  for desc <- ["Günstig", "Mittelklasse", "Luxus"] do
+    Backend.Repo.insert!(%Backend.Schema.Pricerange{
+      description: desc
+    })
+  end
 
-country =
+switzerland =
   Backend.Repo.insert!(%Backend.Schema.Country{
     isocode: "SUI",
     countryname: "Switzerland"
   })
 
-city =
-  Backend.Repo.insert!(%Backend.Schema.City{
-    postcode: 8000,
-    cityname: "Zürich",
-    country: country
-  })
+# We generate 10 hotels with each having 3 rooms on offer
+for i <- 1..10 do
+  city =
+    Backend.Repo.insert!(%Backend.Schema.City{
+      postcode: Faker.Address.zip() |> String.to_integer(),
+      cityname: Faker.Address.city(),
+      country: switzerland
+    })
 
-Backend.Repo.insert!(%Backend.Schema.City{
-  postcode: 8804,
-  cityname: "Au ZH",
-  country: country
-})
+  street =
+    Backend.Repo.insert!(%Backend.Schema.Street{
+      streetname: Faker.Address.street_name(),
+      city: city
+    })
 
-street =
-  Backend.Repo.insert!(%Backend.Schema.Street{
-    streetname: "Bahnhofstrasse",
-    city: city
-  })
+  address =
+    Backend.Repo.insert!(%Backend.Schema.Address{
+      housenumber: Enum.random(0..100),
+      street: street
+    })
 
-address =
-  Backend.Repo.insert!(%Backend.Schema.Address{
-    housenumber: 7,
-    street: street
-  })
+  hotel =
+    Backend.Repo.insert!(%Backend.Schema.Hotel{
+      hotelname: Faker.Beer.name(),
+      address: address
+    })
 
-pricerange_one =
-  Backend.Repo.insert!(%Backend.Schema.Pricerange{
-    description: "Günstig"
-  })
+  hotelroom =
+    Backend.Repo.insert!(%Backend.Schema.Hotelroom{
+      roomname: Faker.Pokemon.name(),
+      roomnumber: Enum.random(0..100) + i,
+      hotel: hotel,
+      pricerange: Enum.random(priceranges)
+    })
 
-pricerange_two =
-  Backend.Repo.insert!(%Backend.Schema.Pricerange{
-    description: "Teuer"
+  Backend.Repo.insert!(%Backend.Schema.Offer{
+    hotelroom: hotelroom,
+    validitystart: now,
+    validityend: Date.add(now, Enum.random(0..100))
   })
+end

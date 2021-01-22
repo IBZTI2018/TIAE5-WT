@@ -4,7 +4,7 @@ defmodule BackendWeb.AddressView do
   alias BackendWeb.StreetView
 
   def fields do
-    [:streetname, :active]
+    [:housenumber, :active]
   end
 
   def relationships do

@@ -47,6 +47,7 @@ defmodule Backend.MixProject do
       {:bamboo, "~> 1.6"},
       {:bodyguard, "~> 2.4"},
       {:quantum, "~> 3.3"},
+      {:faker, "~> 0.16.0"},
       {:kaffy, git: "https://github.com/cybrox/kaffy.git", branch: "mysql-like-test"}
       # {:kaffy, "~> 0.9.0"}
     ]
