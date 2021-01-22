@@ -60,17 +60,19 @@ for i <- 1..10 do
       address: address
     })
 
-  hotelroom =
-    Backend.Repo.insert!(%Backend.Schema.Hotelroom{
-      roomname: Faker.Pokemon.name(),
-      roomnumber: Enum.random(0..100) + i,
-      hotel: hotel,
-      pricerange: Enum.random(priceranges)
-    })
+  for j <- 1..3 do
+    hotelroom =
+      Backend.Repo.insert!(%Backend.Schema.Hotelroom{
+        roomname: Faker.Pokemon.name(),
+        roomnumber: Enum.random(0..100) + i + j,
+        hotel: hotel,
+        pricerange: Enum.random(priceranges)
+      })
 
-  Backend.Repo.insert!(%Backend.Schema.Offer{
-    hotelroom: hotelroom,
-    validitystart: now,
-    validityend: Date.add(now, Enum.random(0..100))
-  })
+    Backend.Repo.insert!(%Backend.Schema.Offer{
+      hotelroom: hotelroom,
+      validitystart: now,
+      validityend: Date.add(now, Enum.random(0..100))
+    })
+  end
 end
