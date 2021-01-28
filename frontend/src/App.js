@@ -12,6 +12,11 @@ import OffersPage from './pages/OffersPage';
 import HotelsPage from './pages/HotelsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
 import RegisterPage from './pages/RegisterPage';
+<<<<<<< Updated upstream
+=======
+import ReservationPage from './pages/ReservationPage';
+import RaitingPage from './pages/RatingPage';
+>>>>>>> Stashed changes
 
 function App() {
     return (
@@ -29,6 +34,11 @@ function App() {
                         <Route path="/hotels" component={HotelsPage} />
                         <Route path="/user_settings" component={UserSettingsPage} />
                         <Route path="/register" component={RegisterPage} />
+<<<<<<< Updated upstream
+=======
+                        <Route path="/reservation" component={ReservationPage} />
+                        <Route path="/rating" component={RaitingPage} />
+>>>>>>> Stashed changes
                     </Switch>
                 </main>
             </Router>
