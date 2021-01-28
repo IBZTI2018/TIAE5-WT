@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage';
 import OffersPage from './pages/OffersPage';
 import HotelsPage from './pages/HotelsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                         <Route path="/offers" component={OffersPage} />
                         <Route path="/hotels" component={HotelsPage} />
                         <Route path="/user_settings" component={UserSettingsPage} />
+                        <Route path="/register" component={RegisterPage} />
                     </Switch>
                 </main>
             </Router>
