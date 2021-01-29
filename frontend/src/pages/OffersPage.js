@@ -6,7 +6,7 @@ import { readEndpoint } from 'redux-json-api';
 
 class OffersPage extends Component {
     componentWillMount() {
-        this.props.dispatch(readEndpoint('offers?include=hotelroom&include=hotelroom.hotel'));
+        this.props.dispatch(readEndpoint('offers?include=hotelroom,hotelroom.hotel'));
     }
 
     render() {
