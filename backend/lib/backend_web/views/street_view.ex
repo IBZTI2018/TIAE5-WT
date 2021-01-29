@@ -9,7 +9,7 @@ defmodule BackendWeb.StreetView do
 
   def relationships do
     [
-      City: {CityView, :include}
+      city: {CityView, :include}
     ]
   end
 end
