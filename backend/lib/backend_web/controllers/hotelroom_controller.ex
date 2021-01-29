@@ -1,4 +1,4 @@
-defmodule BackendWeb.HotelroomroomController do
+defmodule BackendWeb.HotelroomController do
   use BackendWeb, :controller
 
   alias Backend.Database

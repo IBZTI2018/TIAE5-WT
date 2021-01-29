@@ -110,10 +110,19 @@ defmodule Backend.Database do
 
     case entry do
       nil -> nil
-      any -> entry.id
+      _ -> entry.id
     end
   end
 
   defp schema_allowed_assocs(s), do: s.__schema__(:associations) |> Enum.map(&"#{&1}")
   defp schema_get_assoc(s, k), do: s.__schema__(:association, :"#{k}")
+
+  @doc """
+  Get a single user from the database by his mail
+  """
+  def get_user_by_mail(usermail) do
+    Backend.Schema.User
+    |> where(email: ^usermail)
+    |> Repo.one()
+  end
 end

@@ -5,23 +5,36 @@ defmodule BackendWeb.Router do
     plug(:accepts, ["json"])
   end
 
+  pipeline :auth do
+    plug(BackendWeb.Plugs.Authorizer)
+  end
+
   scope "/api", BackendWeb do
     pipe_through(:api)
 
-    resources("/titles", TitleController, except: [:edit, :new])
-    resources("/countries", CountryController, except: [:edit, :new])
-    resources("/cities", CityController, except: [:edit, :new])
-    resources("/streets", StreetController, except: [:edit, :new])
-    resources("/addresses", AddressController, except: [:edit, :new])
-    resources("/users", UserController, except: [:edit, :new])
-    resources("/hotels", HotelController, except: [:edit, :new])
-    resources("/hotelrooms", HotelroomController, except: [:edit, :new])
-    resources("/priceranges", PricerangeController, except: [:edit, :new])
-    resources("/hotelequipments", HotelequipmentController, except: [:edit, :new])
-    resources("/roomequipments", RoomequipmentController, except: [:edit, :new])
-    resources("/offers", OfferController, except: [:edit, :new])
-    resources("/reservations", ReservationController, except: [:edit, :new])
-    resources("/ratings", ReservationController, except: [:edit, :new])
+    scope "/v1" do
+      pipe_through(:auth)
+
+      resources("/titles", TitleController, except: [:edit, :new])
+      resources("/countries", CountryController, except: [:edit, :new])
+      resources("/cities", CityController, except: [:edit, :new])
+      resources("/streets", StreetController, except: [:edit, :new])
+      resources("/addresses", AddressController, except: [:edit, :new])
+      resources("/users", UserController, except: [:edit, :new])
+      resources("/hotels", HotelController, except: [:edit, :new])
+      resources("/hotelrooms", HotelroomController, except: [:edit, :new])
+      resources("/priceranges", PricerangeController, except: [:edit, :new])
+      resources("/hotelequipments", HotelequipmentController, except: [:edit, :new])
+      resources("/roomequipments", RoomequipmentController, except: [:edit, :new])
+      resources("/offers", OfferController, except: [:edit, :new])
+      resources("/reservations", ReservationController, except: [:edit, :new])
+      resources("/ratings", ReservationController, except: [:edit, :new])
+    end
+
+    scope "/complex" do
+      post("/signup", AuthController, :sign_up)
+      post("/signin", AuthController, :sign_in)
+    end
   end
 
   # Enables LiveDashboard and Kaffy dashboard only for development

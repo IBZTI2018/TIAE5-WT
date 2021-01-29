@@ -10,14 +10,17 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-now = Date.utc_today()
+# ---
+# Static, predefined values
+# ---
 
 # We insert some common titles
-for desc <- ["Herr", "Frau", "Kampfhubschrauber"] do
-  Backend.Repo.insert!(%Backend.Schema.Title{
-    description: desc
-  })
-end
+titles =
+  for desc <- ["Herr", "Frau", "Kampfhubschrauber"] do
+    Backend.Repo.insert!(%Backend.Schema.Title{
+      description: desc
+    })
+  end
 
 # We insert some common hotel room price ranges
 priceranges =
@@ -27,14 +30,48 @@ priceranges =
     })
   end
 
+# We insert one country for the moment
 switzerland =
   Backend.Repo.insert!(%Backend.Schema.Country{
     isocode: "SUI",
     countryname: "Switzerland"
   })
 
-# We generate 10 hotels with each having 3 rooms on offer
-for i <- 1..10 do
+city =
+  Backend.Repo.insert!(%Backend.Schema.City{
+    postcode: 8800,
+    cityname: "Zürich",
+    country: switzerland
+  })
+
+street =
+  Backend.Repo.insert!(%Backend.Schema.Street{
+    streetname: "Bahnhofstrasse",
+    city: city
+  })
+
+address =
+  Backend.Repo.insert!(%Backend.Schema.Address{
+    housenumber: 1,
+    street: street
+  })
+
+# We insert one admin user
+Backend.Repo.insert!(%Backend.Schema.User{
+  firstname: "IBZ",
+  lastname: "Admin",
+  email: "admin@admin.ch",
+  password: Pbkdf2.hash_pwd_salt("password"),
+  title: Enum.at(titles, 1),
+  contact_address: address,
+  billing_address: address
+})
+
+# ---
+# Dynamic seed data
+# ---
+
+random_address = fn ->
   city =
     Backend.Repo.insert!(%Backend.Schema.City{
       postcode: Faker.Address.zip() |> String.to_integer(),
@@ -54,10 +91,17 @@ for i <- 1..10 do
       street: street
     })
 
+  address
+end
+
+now = Date.utc_today()
+
+# We generate 10 hotels with each having 3 rooms on offer
+for i <- 1..10 do
   hotel =
     Backend.Repo.insert!(%Backend.Schema.Hotel{
       hotelname: Faker.Beer.name(),
-      address: address
+      address: random_address.()
     })
 
   for j <- 1..3 do
@@ -75,4 +119,17 @@ for i <- 1..10 do
       validityend: Date.add(now, Enum.random(0..100))
     })
   end
+end
+
+# We generate 3 user accounts
+for i <- 1..3 do
+  Backend.Repo.insert!(%Backend.Schema.User{
+    firstname: Faker.Person.first_name(),
+    lastname: Faker.Person.last_name(),
+    email: Faker.Internet.email(),
+    password: Pbkdf2.hash_pwd_salt(Faker.Cat.name()),
+    title: Enum.at(titles, 1),
+    contact_address: random_address.(),
+    billing_address: random_address.()
+  })
 end
