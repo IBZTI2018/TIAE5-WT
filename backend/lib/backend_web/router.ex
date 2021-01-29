@@ -32,7 +32,8 @@ defmodule BackendWeb.Router do
     end
 
     scope "/complex" do
-      post("/auth", AuthController, :sign_in)
+      post("/signup", AuthController, :sign_up)
+      post("/signin", AuthController, :sign_in)
     end
   end
 
