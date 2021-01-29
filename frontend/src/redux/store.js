@@ -1,18 +1,9 @@
 
-import { createStore, applyMiddleware } from "redux";
-import { setAxiosConfig } from 'redux-json-api';
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import reducers from "./reducers/index";
+import search from "./search";
+import offers from "./offers";
 
-const store = createStore(reducers, applyMiddleware(thunk));
-store.dispatch(
-  setAxiosConfig({
-    baseURL: "/api",
-    headers: {
-      Authorization: "bearer" + Math.random(),
-      Accept: "application/json"
-    },
-  })
-);
+const store = createStore(combineReducers({ search, offers }), applyMiddleware(thunk));
 
 export default store;

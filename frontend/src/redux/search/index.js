@@ -1,4 +1,4 @@
-import actionTypes from '../actionTypes';
+import types from './types';
 
 const initialState = {
     searchQuery: '',
@@ -9,40 +9,40 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
-        case actionTypes.SET_SEARCH_QUERY:
+        case types.SET_SEARCH_QUERY:
             return {
                 ...state,
                 searchQuery: payload.searchQuery
             }
             break;
-        case actionTypes.SET_START_DATE:
+        case types.SET_START_DATE:
             return {
                 ...state,
                 startDate: payload.startDate
             }
             break;
-        case actionTypes.SET_END_DATE:
+        case types.SET_END_DATE:
             return {
                 ...state,
                 endDate: payload.endDate
             }
             break;
-        case actionTypes.DECREASE_GUEST_COUNTER:
-        case actionTypes.INCREASE_GUEST_COUNTER:
-        case actionTypes.SET_GUEST_COUNTER: {
+        case types.DECREASE_GUEST_COUNTER:
+        case types.INCREASE_GUEST_COUNTER:
+        case types.SET_GUEST_COUNTER: {
             let newGuestCounter = state.guestCounter;
             switch (type) {
-                case actionTypes.DECREASE_GUEST_COUNTER: {
+                case types.DECREASE_GUEST_COUNTER: {
                     newGuestCounter = state.guestCounter - 1;
                     break;
                 }
         
-                case actionTypes.INCREASE_GUEST_COUNTER: {
+                case types.INCREASE_GUEST_COUNTER: {
                     newGuestCounter = state.guestCounter + 1;
                     break;
                 }
         
-                case actionTypes.SET_GUEST_COUNTER: {
+                case types.SET_GUEST_COUNTER: {
                     newGuestCounter = payload.guestCounter;
                     break;
                 }

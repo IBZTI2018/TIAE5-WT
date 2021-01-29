@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as selectors from '../../redux/selectors';
-import * as actions from '../../redux/actions';
+import * as selectors from '../../redux/search/selectors';
+import * as actions from '../../redux/search/actions';
 
 class GuestCounter extends Component {
     render() {

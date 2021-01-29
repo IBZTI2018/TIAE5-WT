@@ -1,5 +1,5 @@
 defmodule BackendWeb.HotelroomView do
-  use JSONAPI.View, type: "hotels"
+  use JSONAPI.View, type: "hotelrooms"
 
   alias BackendWeb.HotelView
   alias BackendWeb.PricerangeView
