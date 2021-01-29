@@ -32,7 +32,7 @@ function App() {
                         <Route path="/user_settings" component={UserSettingsPage} />
                         <Route path="/register" component={RegisterPage} />
                         <Route path="/reservation" component={ReservationPage} />
-                        <Route path="/rating" component={RaitingPage} />
+                        <Route path="/rating" component={RatingPage} />
                     </Switch>
                 </main>
             </Router>
