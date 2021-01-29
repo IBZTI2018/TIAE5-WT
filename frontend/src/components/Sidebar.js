@@ -69,6 +69,9 @@ function SidebarOverlay() {
                 <div className="bs-canvas-content px-3 py-5">
                     <a href="/user_settings" >Benutzereinstellungen</a>
                 </div>
+                <div className="bs-canvas-content px-3 py-5">
+                    <a href="/reservation" >Buchungsübersicht</a>
+                </div>
             </div>
         </div>
     );

@@ -12,6 +12,7 @@ import OffersPage from './pages/OffersPage';
 import HotelsPage from './pages/HotelsPage';
 import UserSettingsPage from './pages/UserSettingsPage';
 import RegisterPage from './pages/RegisterPage';
+import ReservationPage from './pages/ReservationPage';
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                         <Route path="/hotels" component={HotelsPage} />
                         <Route path="/user_settings" component={UserSettingsPage} />
                         <Route path="/register" component={RegisterPage} />
+                        <Route path="/reservation" component={ReservationPage} />
                     </Switch>
                 </main>
             </Router>
