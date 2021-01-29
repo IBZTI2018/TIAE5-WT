@@ -14,7 +14,11 @@ config :backend,
 config :backend, BackendWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "Ta/A1P/GU8nYILh6JgY15SKX5YJxBYKCIgU3MSY1basAs0bZuXy1isUy/SM8z2pL",
-  render_errors: [view: BackendWeb.ErrorView, accepts: ~w(json), layout: false],
+  render_errors: [
+    view: BackendWeb.ErrorView,
+    accepts: ~w(json json-api vnd.api+json),
+    layout: false
+  ],
   pubsub_server: Backend.PubSub,
   live_view: [signing_salt: "gDeCdj4a"]
 
@@ -24,7 +28,12 @@ config :logger, :console,
   metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
+config :phoenix,
+  format_encoders: [
+    json: Jason,
+    "vnd.api+json": Jason
+  ],
+  json_library: Jason
 
 config :jsonapi,
   scheme: "http",
@@ -44,5 +53,5 @@ config :kaffy,
 import_config "#{Mix.env()}.exs"
 
 config :mime, :types, %{
-    "application/vnd.api+json" => ["vnd.api+json"]
+  "application/vnd.api+json" => ["json"]
 }
