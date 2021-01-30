@@ -5,12 +5,18 @@ import StarRating from './offer/StarRating';
 class Rating extends Component {
     constructor(props) {
         super(props);
-    this.handleReservation = this.handleReservation.bind(this);
+        this.handleReservation = this.handleReservation.bind(this);
+        this.handleStarsFeedback = this.handleStarsFeedback.bind(this);
     }
 
     handleReservation(event) {
         this.props.history.push('/reservation');
         event.preventDefault();
+        return false;
+    }
+
+    handleStarsFeedback(event) {
+        alert(event);
         return false;
     }
 
@@ -27,7 +33,7 @@ class Rating extends Component {
                         <textarea className="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your rating here ..." rows="5"></textarea>
                         <hr />
                         <h4>Stars</h4>
-                        <StarRating />
+                        <StarRating feedback={this.handleStarsFeedback}/>
                         <hr />
                             <div className="float-right">
                                 <button onClick={this.handleReservation} className="btn btn-danger mt-1" type="button">
