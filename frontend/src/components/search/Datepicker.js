@@ -29,11 +29,11 @@ class Datepicker extends Component {
 
         return (
             <DateRangePicker 
-                startDatePlaceholderText="Von"
+                startDatePlaceholderText="From"
                 startDate={startDate}
                 startDateId="startDate"
                 onDatesChange={this.handleOnDatesChange}
-                endDatePlaceholderText="Bis"
+                endDatePlaceholderText="To"
                 endDate={endDate}
                 endDateId="endDate"
                 minDate = {moment()}

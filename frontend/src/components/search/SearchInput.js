@@ -15,7 +15,7 @@ class SearchInput extends Component {
             <input 
                 type="text" 
                 className="form-control" 
-                placeholder="Nach Hotel / Gebiet / Angebot suchen" 
+                placeholder="Search for a hotel / offer / area " 
                 value={searchQuery} 
                 onChange={e => setSearchQuery(e.target.value)} 
             />

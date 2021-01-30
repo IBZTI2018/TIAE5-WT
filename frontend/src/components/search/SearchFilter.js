@@ -22,18 +22,18 @@ class SearchFilter extends Component {
                     <div className="form-group">
                         <label>Destination</label>
                         <SearchInput />
-                        <small id="emailHelp" className="form-text text-muted">Bsp: Lenzerheide</small>
+                        <small id="emailHelp" className="form-text text-muted">E.g: Lenzerheide</small>
                     </div>
                     <div className="form-group">
                         <label>Check-in & Check-out date</label>
                         <Datepicker />
                     </div>
                     <div className="form-group">
-                        <label>Anzahl Gäste</label>
+                        <label>Number of guests </label>
                         <GuestCounter />
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-block btn-primary" type="submit">Suchen</button>
+                        <button className="btn btn-block btn-primary" type="submit">Search</button>
                     </div>
                 </form>
             </div>

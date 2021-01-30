@@ -3,7 +3,7 @@ import Reservation from '../components/Reservation';
 function ReservationPage() {
     return (
         <div>
-            <h1>Buchungen: </h1>
+            <h1>Reservation overview: </h1>
             <Reservation />
         </div>
     );

@@ -9,14 +9,14 @@ class User extends Component {
     render() {
         return (
             <section className="mt-5">
-                <h3>Benutzerprofil von <b>{ this.props.data.attributes.firstname } { this.props.data.attributes.lastname } </b></h3>
+                <h3>Userprofile of <b>{ this.props.data.attributes.firstname } { this.props.data.attributes.lastname } </b></h3>
                 <hr />
                 <table>
                     <tr>
-                        <td>Registrierungsdatum</td> 
-                        <td>Anrede</td>
-                        <td>Rechnungsadresse</td>
-                        <td>Lieferadresse</td>
+                        <td>Date of registration</td> 
+                        <td>Title </td>
+                        <td>Billing address</td>
+                        <td>delivery address</td>
                     </tr>
                     <tr>
                         <td>{ this.props.data.attributes.reg_date }</td>

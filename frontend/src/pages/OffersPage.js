@@ -28,7 +28,7 @@ class OffersPage extends Component {
               <Offer offer={offer} />
             ))}
             {offers.length == 0 && (
-              <p>Zurzeit gibt es keine Angebote beim Server</p>
+              <p>There are currently no offers on the server</p>
             )}
           </div>
         </div>

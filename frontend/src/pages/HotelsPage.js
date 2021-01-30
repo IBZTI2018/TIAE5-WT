@@ -31,7 +31,7 @@ class HotelsPage extends Component {
     render() {
         return (
             <div>
-                <h2>Hotel Liste: </h2>
+                <h2>Hotel list: </h2>
                 <div className="row">
                     <div className="col-md-12">
                         {

@@ -67,10 +67,10 @@ function SidebarOverlay() {
                     <h4 className="d-inline-block text-light mb-0 float-right">Konto</h4>
                 </header>
                 <div className="bs-canvas-content px-3 py-5">
-                    <a href="/user_settings" >Benutzereinstellungen</a>
+                    <a href="/user_settings" >Useresettings</a>
                 </div>
                 <div className="bs-canvas-content px-3 py-5">
-                    <a href="/reservation" >Buchungsübersicht</a>
+                    <a href="/reservation" >Reservation overview</a>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@ function SidebarPanel() {
             <header className="bs-canvas-header p-3 bg-primary overflow-auto">
                 <button type="button" className="bs-canvas-close float-left close" aria-label="Close"><span
                         aria-hidden="true" className="text-light">&times;</span></button>
-                <h4 className="d-inline-block text-light mb-0 float-right">Konto</h4>
+                <h4 className="d-inline-block text-light mb-0 float-right">Account</h4>
             </header>
             <div className="bs-canvas-content px-3 py-5">
                 ...

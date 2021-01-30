@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import StarRating from './offer/StarRating';
 
 class Offer extends Component {
+
+    constructor(props) {
+        super(props);
+            this.handleBooking = this.handleBooking.bind(this);
+    }
+
+    handleBooking(event) {
+        this.props.history.push('/booking');
+        event.preventDefault();
+        return false;
+    }
+
     render() {
         return (
             <div className="card mb-3 p-3">
@@ -20,10 +33,10 @@ class Offer extends Component {
                             </p>
                             <p className="card-text">
                                 <small className="text-muted">
-                                    Angebot gültig bis: <b>{this.props.offer.validityend}</b>
+                                Offer valid until: <b>{this.props.offer.validityend}</b>
                                 </small>
                             </p>
-                            <a href="#" className="btn btn-primary">
+                            <a onClick={this.handleBooking} className="btn btn-primary">
                                 <b>CHF {this.props.offer.price}</b>
                             </a>
                         </div>
@@ -34,4 +47,4 @@ class Offer extends Component {
     }
 }
 
-export default Offer;
+export default withRouter(Offer);
