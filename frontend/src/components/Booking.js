@@ -10,7 +10,7 @@ class Booking extends Component {
     }
 
     handleOffer(event) {
-        this.props.history.push('/offer');
+        this.props.history.push('/offers');
         event.preventDefault();
         return false;
     }
