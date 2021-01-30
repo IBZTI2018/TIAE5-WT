@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
-
 class Booking extends Component {
 
     constructor(props) {
@@ -27,19 +26,37 @@ class Booking extends Component {
                             <h5 className="card-title">
                                 Hallo Hotel
                             </h5>
+                            <hr />
                             <p className="card-text small">Roomname: </p>
-                            <p className="card-text">
-                                <small className="text-muted">
-                                    Offer valid until: <b></b>
-                                </small>
-                            </p>
+                            <p className="card-text small">Offer valid until: </p>
+                            <p className="card-text">Hotel Description: </p>
+                            <hr />
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Hotelequipment</th>
+                                        <th scope="col">Roomequipment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <a onClick={this.handleOffer} className="">
+                <a onClick={this.handleOffer} href="#">
                         ...Back to Offers
                 </a>
-            </div>
+                <div>
+                    <button className="btn btn-primary float-right mb-2 mr-1" type="button" onClick="#Modal">
+                    make booking
+                    </button>
+                </div>
+            </div> 
         );
     }
 }
