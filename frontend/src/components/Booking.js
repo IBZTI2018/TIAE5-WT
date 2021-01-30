@@ -27,7 +27,7 @@ class Booking extends Component {
                             <h5 className="card-title">
                                 Hallo Hotel
                             </h5>
-                            <p className="card-text small">Roomnumber: </p>
+                            <p className="card-text small">Roomname: </p>
                             <p className="card-text">
                                 <small className="text-muted">
                                     Offer valid until: <b></b>
