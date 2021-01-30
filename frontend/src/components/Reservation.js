@@ -11,6 +11,7 @@ class Reservation extends Component {
                             <tr>
                                 <th scope="col">Booking-Nr.</th>
                                 <th scope="col">Hotelname</th>
+                                <th scope="vol">Roomname</th>
                                 <th scope="col">City</th>
                                 <th scope="col">Country</th>
                                 <th scope="col">Arrival date</th>
@@ -38,6 +39,7 @@ class Reservation extends Component {
                             <tr>
                                 <th scope="col">Booking-Nr.</th>
                                 <th scope="col">Hotelname</th>
+                                <th scope="col">Roomname</th>
                                 <th scope="col">City</th>
                                 <th scope="col">Country</th>
                                 <th scope="col">Arrival date</th>
@@ -49,6 +51,7 @@ class Reservation extends Component {
                             <tr>
                                 <th scope="row">1234</th>
                                 <td>Hallo</td>
+                                <td>pikapi</td>
                                 <td>Zürich</td>
                                 <td>Sui</td>
                                 <td>01.Okt.2021</td>
