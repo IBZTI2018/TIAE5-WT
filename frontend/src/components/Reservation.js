@@ -27,6 +27,7 @@ class Reservation extends Component {
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <a className="btn btn-primary mt-1" type="button" href="#">Show details</a>
                             </tr>
                         </tbody>
