@@ -20,8 +20,8 @@ class CoronaWarning extends Component {
                         <div className="container">
                             <h6>Coronavirus (COVID-19) Support</h6>
                             <p>
-                                Bitte überprüfen Sie die Reisebeschränkungen. Reisen sind möglicherweise nur für bestimmte Zwecke gestattet, insbesondere touristische Reisen sind möglicherweise nicht gestattet.
-                                </p>
+                                Please check the travel restrictions. Travel may only be permitted for certain purposes, especially tourist travel may not be permitted.
+                            </p>
                             <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={this.handleClick}>
                                 <span aria-hidden="true">&times;</span>
                             </button>

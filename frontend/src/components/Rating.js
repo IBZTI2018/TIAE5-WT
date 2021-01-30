@@ -24,13 +24,13 @@ class Rating extends Component {
                 <div className="col-md-12">
                     <form>
                         <input id="ratings-hidden" name="rating" type="hidden" /> 
-                        <textarea className="form-control animated" cols="50" id="new-review" name="comment" placeholder="Gib eine Bewertung ein..." rows="5"></textarea>
+                        <textarea className="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your rating here ..." rows="5"></textarea>
                         <hr />
 
                         <StarRating />
 
 
-                        <h4>Sterne</h4>
+                        <h4>Stars</h4>
                             <div>
                                 <button className="btn btn-secondary ml-1" href="#" type="button">
                                 <i className="fa fa-star mr-2"></i>
@@ -56,10 +56,10 @@ class Rating extends Component {
                         <hr />
                             <div className="float-right">
                                 <button onClick={this.handleReservation} className="btn btn-danger mt-1" type="button">
-                                    Abbrechen
+                                    Abort
                                 </button>
                                 <button className="btn btn-success mt-1 ml-2" type="button">
-                                    Speichern
+                                    Save
                                 </button>
                             </div>
                     </form>

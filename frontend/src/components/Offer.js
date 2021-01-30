@@ -28,10 +28,10 @@ class Offer extends Component {
                                 {this.props.offer.hotelroom.hotel.hotelname}
                                 <StarRating stars={this.props.offer.stars} />
                             </h5>
-                            <p className="card-text small">Zimmernummer: {this.props.offer.hotelroom.roomname}</p>
+                            <p className="card-text small">Roomnumber: {this.props.offer.hotelroom.roomname}</p>
                             <p className="card-text">
                                 <small className="text-muted">
-                                    Angebot gültig bis: <b>{this.props.offer.validityend}</b>
+                                Offer valid until: <b>{this.props.offer.validityend}</b>
                                 </small>
                             </p>
                             <a onClick={this.handleBooking} className="btn btn-primary">

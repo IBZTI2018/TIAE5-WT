@@ -20,7 +20,7 @@ class Breadcrumbs extends Component {
                 <BrowserRouter>
                     {
                         this.props.location.pathname != '/' && (
-                            <a href="#" onClick={this.handleClick}>… Zurück zur Startseite</a>
+                            <a href="#" onClick={this.handleClick}>… Back to Start</a>
                         )
                     }
                 </BrowserRouter>

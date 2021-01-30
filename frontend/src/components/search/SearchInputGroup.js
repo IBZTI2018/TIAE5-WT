@@ -24,7 +24,7 @@ class SearchInputGroup extends Component {
                     <div className="input-group-append">
                         <Datepicker />
                         <GuestCounter />
-                        <button className="btn btn-primary" type="submit">Suchen</button>
+                        <button className="btn btn-primary" type="submit">Search</button>
                     </div>
                 </div>
             </form>

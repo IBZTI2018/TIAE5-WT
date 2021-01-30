@@ -4,17 +4,17 @@ class Reservation extends Component {
     render() {
         return (
             <div>
-                <h5>Nächste Reisen</h5>
+                <h5>Next trips</h5>
                 <div className="card mb-3 p-3">
                     <table className="table">
                         <thead>
                             <tr>
-                                <th scope="col">Buchungs-Nr.</th>
+                                <th scope="col">Booking-Nr.</th>
                                 <th scope="col">Hotelname</th>
-                                <th scope="col">Ort</th>
-                                <th scope="col">Land</th>
-                                <th scope="col">Anreise-Datum</th>
-                                <th scope="col">Abreise-Datum</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">Arrival date</th>
+                                <th scope="col">Departure date</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -26,22 +26,22 @@ class Reservation extends Component {
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <a className="btn btn-primary mt-1" type="button" href="#">Details anzeigen</a>
+                                <a className="btn btn-primary mt-1" type="button" href="#">Show details</a>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <h5>Vergangene Reisen</h5>
+                <h5>Past trips</h5>
                 <div className="card mb-3 p-3">
                     <table className="table">
                         <thead>
                             <tr>
-                                <th scope="col">Buchungs-Nr.</th>
+                                <th scope="col">Booking-Nr.</th>
                                 <th scope="col">Hotelname</th>
-                                <th scope="col">Ort</th>
-                                <th scope="col">Land</th>
-                                <th scope="col">Anreise-Datum</th>
-                                <th scope="col">Abreise-Datum</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">Arrival date</th>
+                                <th scope="col">Departure date</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -53,7 +53,7 @@ class Reservation extends Component {
                                 <td>Sui</td>
                                 <td>01.Okt.2021</td>
                                 <td>10.Okt.2021</td>
-                                <a className="btn btn-primary mt-1" type="button" href="#">Bewerten</a>
+                                <a className="btn btn-primary mt-1" type="button" href="#">Evaluate</a>
                             </tr>
                         </tbody>
                     </table>

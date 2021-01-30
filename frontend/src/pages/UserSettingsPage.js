@@ -3,7 +3,7 @@ import { Users } from '../api/user';
 function UserSettingsPage() {
     return (
         <div>
-            <h2>Benutzereinstellungen </h2>
+            <h2>Usersettings </h2>
             <Users />
         </div>
     );

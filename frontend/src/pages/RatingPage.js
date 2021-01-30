@@ -3,7 +3,7 @@ import Rating from '../components/Rating';
 function RatingPage() {
     return (
         <div>
-            <h1>Bewertung: </h1>
+            <h1>Rating: </h1>
             <Rating />
         </div>
     );
