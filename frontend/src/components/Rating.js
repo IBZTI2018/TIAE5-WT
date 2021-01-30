@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import StarRating from './offer/StarRating';
 
 class Rating extends Component {
     constructor(props) {
@@ -25,26 +26,30 @@ class Rating extends Component {
                         <input id="ratings-hidden" name="rating" type="hidden" /> 
                         <textarea className="form-control animated" cols="50" id="new-review" name="comment" placeholder="Gib eine Bewertung ein..." rows="5"></textarea>
                         <hr />
+
+                        <StarRating />
+
+
                         <h4>Sterne</h4>
                             <div>
                                 <button className="btn btn-secondary ml-1" href="#" type="button">
-                                <i className="fa fa-heart mr-2"></i>
+                                <i className="fa fa-star mr-2"></i>
                                     1
                                 </button>
                                 <button className="btn btn-secondary ml-1" href="#" type="button">
-                                <i className="fa fa-heart mr-2"></i>
+                                <i className="fa fa-star mr-2"></i>
                                     2
                                 </button>
                                 <button className="btn btn-secondary ml-1" href="#" type="button">
-                                <i className="fa fa-heart mr-2"></i>
+                                <i className="fa fa-star mr-2"></i>
                                     3
                                 </button>
                                 <button className="btn btn-secondary ml-1" href="#" type="button">
-                                <i className="fa fa-heart mr-2"></i>
+                                <i className="fa fa-star mr-2"></i>
                                     4
                                 </button>
                                 <button className="btn btn-secondary ml-1" href="#" type="button">
-                                <i className="fa fa-heart mr-2"></i>
+                                <i className="fa fa-star mr-2"></i>
                                     5
                                 </button>
                             </div>
