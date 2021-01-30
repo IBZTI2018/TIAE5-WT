@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import StarRating from './offer/StarRating';
+
 
 class Booking extends Component {
 
@@ -24,12 +26,13 @@ class Booking extends Component {
                     <div className="col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">
-                                Hallo Hotel
+                                {this.props.offer.hotelroom.hotel.hotelname}
+                                <StarRating stars={this.props.offer.stars} />
                             </h5>
                             <hr />
-                            <p className="card-text small">Roomname: </p>
-                            <p className="card-text small">Offer valid until: </p>
-                            <p className="card-text">Hotel Description: </p>
+                            <p className="card-text small">Location: {this.props.offer.hotelroom.hotel.address.street.city.cityname}, {this.props.offer.hotelroom.hotel.address.street.city.country.countryname}</p>
+                            <p className="card-text small">Offer valid until: <b>{this.props.offer.validityend}</b></p>
+                            <p className="card-text small">Price: <b>CHF {this.props.offer.price}</b></p>
                             <hr />
                             <table className="table">
                                 <thead>

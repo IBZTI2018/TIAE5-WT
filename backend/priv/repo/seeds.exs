@@ -116,7 +116,8 @@ for i <- 1..10 do
     Backend.Repo.insert!(%Backend.Schema.Offer{
       hotelroom: hotelroom,
       validitystart: now,
-      validityend: Date.add(now, Enum.random(0..100))
+      validityend: Date.add(now, Enum.random(0..100)),
+      price: Enum.random(75..500)
     })
   end
 end

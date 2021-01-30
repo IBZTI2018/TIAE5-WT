@@ -85,6 +85,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
     create table("offers") do
       add(:validitystart, :date, null: false)
       add(:validityend, :date, null: false)
+      add(:price, :decimal, null: false)
       add(:hotelroom_id, references("hotelrooms"), null: false)
     end
 

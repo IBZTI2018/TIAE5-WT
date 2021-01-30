@@ -4,7 +4,7 @@ defmodule BackendWeb.OfferView do
   alias BackendWeb.HotelroomView
 
   def fields do
-    [:validitystart, :validityend]
+    [:validitystart, :validityend, :price]
   end
 
   def relationships do

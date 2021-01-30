@@ -14,7 +14,9 @@ export const fetchOffers = () => async (dispatch) => {
         "hotelroom.hotel.address.street.city.country",
       ].join(','),
     },
-    (err, resources) =>
-      dispatch(_fetchOffers(resources.map((resource) => resource.toJSONTree())))
+    (err, resources) => {
+        resources = resources || []
+        dispatch(_fetchOffers(resources.map((resource) => resource.toJSONTree())))
+    }
   );
 };

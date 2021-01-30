@@ -10,7 +10,12 @@ class Offer extends Component {
     }
 
     handleBooking(event) {
-        this.props.history.push('/booking');
+        this.props.history.push({
+            pathname: '/booking',
+            state: {
+                offer: this.props.offer
+            }
+        })
         event.preventDefault();
         return false;
     }
@@ -29,7 +34,7 @@ class Offer extends Component {
                                 <StarRating stars={this.props.offer.stars} />
                             </h5>
                             <p className="card-text small">
-                                {this.props.offer.hotelroom.hotel.address.street.city.cityname}
+                                <p className="card-text small">Location: {this.props.offer.hotelroom.hotel.address.street.city.cityname}, {this.props.offer.hotelroom.hotel.address.street.city.country.countryname}</p>
                             </p>
                             <p className="card-text">
                                 <small className="text-muted">

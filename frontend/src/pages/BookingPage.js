@@ -1,12 +1,25 @@
 import Booking from '../components/Booking';
 
-function BookingPage() {
-    return (
-        <div>
-            <h1>Booking overview: </h1>
-            <Booking />
-        </div>
-    );
+import React, { Component } from 'react';
+
+class BookingPage extends Component {
+    render() {
+        let offer = undefined;
+        if (this.props.location.state != undefined) {
+            offer = this.props.location.state.offer
+        }
+        return (
+            <div>
+                <h1>Booking overview: </h1>
+                {offer && (
+                    <Booking offer={offer} />
+                )}
+                {!offer && (
+                    <p>Keine gesetzte Offerte</p>
+                )}
+            </div>
+        );
+    }
 }
 
 export default BookingPage;
