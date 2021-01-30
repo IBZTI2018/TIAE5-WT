@@ -10,6 +10,7 @@ defmodule Backend.Schema.Hotel do
 
   schema "hotels" do
     field(:hotelname, :string)
+    field(:image, :string)
 
     belongs_to(:address, Address)
 
@@ -19,7 +20,7 @@ defmodule Backend.Schema.Hotel do
 
   def changeset(%Hotel{} = hotel, attrs) do
     hotel
-    |> cast(attrs, [:hotelname, :address_id])
-    |> validate_required([:hotelname, :address_id])
+    |> cast(attrs, [:hotelname, :image, :address_id])
+    |> validate_required([:hotelname, :image, :address_id])
   end
 end

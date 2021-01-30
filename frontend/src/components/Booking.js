@@ -21,7 +21,7 @@ class Booking extends Component {
             <div className="card mb-6 p-6">
                 <div className="row g-0">
                     <div className="col-md-4">
-                        <img className="img-fluid rounded" alt="..." />
+                        <img className="img-fluid rounded" src={this.props.offer.hotelroom.hotel.image} />
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
