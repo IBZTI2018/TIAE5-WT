@@ -66,7 +66,7 @@ class RegisterForm extends Component {
                         <input class="form-control" placeholder="Repeat password" type="password" />
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">create Account</button>
+                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
                     </div>
                 </form>
             </div>

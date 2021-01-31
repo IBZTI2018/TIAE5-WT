@@ -34,7 +34,7 @@ class Navbar extends Component {
             <div className="bg-dark py-5">
                 <div className="d-flex container">
                     <div className="row col-sm align-self-center">
-                        <h3 className="text-white">Hotelreservationsystem</h3>
+                        <h3 className="text-white">BookYourStayToday</h3>
                     </div>
                     <div className="row col-sm align-self-center justify-content-end">
                         {
