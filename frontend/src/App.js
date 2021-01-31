@@ -16,6 +16,7 @@ import LoginPage from './pages/LoginPage';
 import ReservationPage from './pages/ReservationPage';
 import RatingPage from './pages/RatingPage';
 import BookingPage from './pages/BookingPage';
+import ConfirmBookingPage from './pages/ConfirmBookingPage';
 
 function App() {
     return (
@@ -39,6 +40,7 @@ function App() {
                         <Route path="/reservation" component={ReservationPage} />
                         <Route path="/rating" component={RatingPage} />
                         <Route path="/booking" component={BookingPage} />
+                        <Route path="/confirmbooking" component={ConfirmBookingPage} />
                     </Switch>
                 </main>
             </Router>
