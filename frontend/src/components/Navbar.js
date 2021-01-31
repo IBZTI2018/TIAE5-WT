@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import * as selectors from '../redux/auth/selectors';
+import * as actions from '../redux/auth/actions';
 
 class Navbar extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLoggedIn: false
-        }
         this.handleLogin = this.handleLogin.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
+    }
+
+    handleLogout(event) {
+        const { unauthenticateUser } = this.props;
+        unauthenticateUser();
     }
 
     handleLogin(event) {
@@ -28,17 +34,21 @@ class Navbar extends Component {
             <div className="bg-dark py-5">
                 <div className="d-flex container">
                     <div className="row col-sm align-self-center">
-                        <h3 className="text-white">Hotelreservationsystem</h3>
+                        <h3 className="text-white">BookYourStayToday</h3>
                     </div>
                     <div className="row col-sm align-self-center justify-content-end">
                         {
-                            this.state.isLoggedIn && (
-                                <button className="btn btn-primary" type="button" data-toggle="canvas" data-target="#bs-canvas-right"
-                                aria-expanded="false" aria-controls="bs-canvas-right">&#9776; Account</button>
+                            this.props.isLoggedIn && (
+                                <div>
+                                    <span class="user-email"><i class="fa fa-user"></i> {this.props.userEmail}</span>
+                                    <button className="btn btn-primary" type="button" data-toggle="canvas" data-target="#bs-canvas-right"
+                                    aria-expanded="false" aria-controls="bs-canvas-right">&#9776; Account</button>
+                                    <button onClick={this.handleLogout} type="button" class="btn btn-warning ml-2">Logout</button>
+                                </div>
                             )
                         }
                         {
-                            !this.state.isLoggedIn && (
+                            !this.props.isLoggedIn && (
                                 <div>
                                     <button onClick={this.handleLogin} type="button" class="btn btn-primary">Login</button>
                                     <button onClick={this.handleRegister} type="button" class="btn btn-success ml-2">Register</button>
@@ -53,4 +63,9 @@ class Navbar extends Component {
     }
 }
 
-export default withRouter(Navbar);
+const mapSelectors = store => ({
+  isLoggedIn: selectors.isLoggedIn(store),
+  userEmail: selectors.getUserEmail(store)
+});
+
+export default connect(mapSelectors, {...actions})(withRouter(Navbar));
