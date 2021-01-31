@@ -17,7 +17,7 @@ export const authenticateUser = (usermail, password) => async (dispatch) => {
     }
   })
   .catch(function (error) {
-    console.log(error);
+    console.error(error);
   });
 };
 
