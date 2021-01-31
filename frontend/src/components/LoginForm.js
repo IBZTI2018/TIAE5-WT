@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import * as actions from '../redux/auth/actions';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -21,16 +22,8 @@ class LoginForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    axios.post('/api/complex/signin', {
-      usermail: this.state.usermail,
-      password: this.state.password
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    const { authenticateUser } = this.props;
+    authenticateUser(this.state.usermail, this.state.password);
   }
 
   render() {
@@ -72,4 +65,9 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+// const mapSelectors = store => ({
+//     startDate: selectors.getStartDate(store),
+//     endDate: selectors.getEndDate(store)
+// });
+
+export default connect(null, { ...actions })(LoginForm);
