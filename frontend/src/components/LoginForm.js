@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import * as actions from '../redux/auth/actions';
 
@@ -23,7 +24,17 @@ class LoginForm extends Component {
     event.preventDefault();
 
     const { authenticateUser } = this.props;
-    authenticateUser(this.state.usermail, this.state.password);
+    authenticateUser(this.state.usermail, this.state.password)
+    .catch((error) => {
+      this.toastError(error.message);
+    });
+  }
+
+  toastError(message) {
+    toast.error(message, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 5000,
+    })
   }
 
   render() {

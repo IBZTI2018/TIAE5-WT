@@ -16,9 +16,6 @@ export const authenticateUser = (usermail, password) => async (dispatch) => {
       dispatch({type: types.UNAUTHENTICATE_USER, payload: {}})
     }
   })
-  .catch(function (error) {
-    console.error(error);
-  });
 };
 
 export const unauthenticateUser = () => (dispatch) => {
