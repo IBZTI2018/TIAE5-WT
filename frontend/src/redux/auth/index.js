@@ -1,10 +1,8 @@
 import types from './types';
 
 const initialState = {
-  auth: {
-    loggedIn: false,
-    authToken: null
-  }
+  isLoggedIn: false,
+  authToken: null
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -12,20 +10,16 @@ export default (state = initialState, { type, payload }) => {
     case types.AUTHENTICATE_USER:
       return {
         ...state,
-        auth: {
-          loggedIn: true,
-          authToken: payload.token
-        }
+        isLoggedIn: true,
+        authToken: payload.token
       }   
       break;
 
     case types.UNAUTHENTICATE_USER:
       return {
         ...state,
-        auth: {
-          loggedIn: false,
-          authToken: null
-        }
+        isLoggedIn: false,
+        authToken: null
       }
       break;
 
