@@ -17,6 +17,9 @@ import ReservationPage from './pages/ReservationPage';
 import RatingPage from './pages/RatingPage';
 import BookingPage from './pages/BookingPage';
 
+//Edit Pages
+import EditOffersPage from './pages/EditOffersPage';
+
 function App() {
     return (
         <div className="App">
@@ -39,6 +42,8 @@ function App() {
                         <Route path="/reservation" component={ReservationPage} />
                         <Route path="/rating" component={RatingPage} />
                         <Route path="/booking" component={BookingPage} />
+
+                        <Route path="/EditOffers" component={EditOffersPage} />
                     </Switch>
                 </main>
             </Router>
