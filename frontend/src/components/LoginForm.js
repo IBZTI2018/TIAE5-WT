@@ -65,9 +65,4 @@ class LoginForm extends Component {
   }
 }
 
-// const mapSelectors = store => ({
-//     startDate: selectors.getStartDate(store),
-//     endDate: selectors.getEndDate(store)
-// });
-
 export default connect(null, { ...actions })(LoginForm);
