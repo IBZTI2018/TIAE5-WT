@@ -40,6 +40,7 @@ class Navbar extends Component {
                         {
                             this.props.isLoggedIn && (
                                 <div>
+                                    <span class="user-email"><i class="fa fa-user"></i> {this.props.userEmail}</span>
                                     <button className="btn btn-primary" type="button" data-toggle="canvas" data-target="#bs-canvas-right"
                                     aria-expanded="false" aria-controls="bs-canvas-right">&#9776; Account</button>
                                     <button onClick={this.handleLogout} type="button" class="btn btn-warning ml-2">Logout</button>
@@ -64,6 +65,7 @@ class Navbar extends Component {
 
 const mapSelectors = store => ({
   isLoggedIn: selectors.isLoggedIn(store),
+  userEmail: selectors.getUserEmail(store)
 });
 
 export default connect(mapSelectors, {...actions})(withRouter(Navbar));

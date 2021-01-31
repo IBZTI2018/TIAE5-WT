@@ -2,7 +2,8 @@ import types from './types';
 
 const initialState = {
   isLoggedIn: false,
-  authToken: null
+  authToken: null,
+  userEmail: null
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -11,7 +12,8 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoggedIn: true,
-        authToken: payload.token
+        authToken: payload.token,
+        userEmail: payload.email
       }   
       break;
 
@@ -19,7 +21,8 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isLoggedIn: false,
-        authToken: null
+        authToken: null,
+        userEmail: null
       }
       break;
 
