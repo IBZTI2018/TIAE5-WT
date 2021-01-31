@@ -14,6 +14,11 @@ const dumpStateOnLocalStorage = (token, email) => {
   window.localStorage.setItem(LOCAL_STORAGE_EMAIL, email);
 }
 
+const clearStateOnLocalStorage = () => {
+  window.localStorage.removeItem(LOCAL_STORAGE_TOKEN);
+  window.localStorage.removeItem(LOCAL_STORAGE_EMAIL);
+}
+
 const loadStateFromLocalStorage = () => {
   const token = window.localStorage.getItem(LOCAL_STORAGE_TOKEN);
   const email = window.localStorage.getItem(LOCAL_STORAGE_EMAIL);
@@ -25,8 +30,6 @@ const loadStateFromLocalStorage = () => {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case types.AUTHENTICATE_USER:
-      
-      // Pragmatic persistence to local storage
       dumpStateOnLocalStorage(payload.token, payload.email);
 
       return {
@@ -38,6 +41,8 @@ export default (state = initialState, { type, payload }) => {
       break;
 
     case types.UNAUTHENTICATE_USER:
+      clearStateOnLocalStorage();
+
       return {
         ...state,
         isLoggedIn: false,
@@ -47,7 +52,6 @@ export default (state = initialState, { type, payload }) => {
       break;
 
     case "@@INIT":
-      // Pragmatic persistence from local storage
       return loadStateFromLocalStorage();
       break;
 
