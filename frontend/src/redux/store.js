@@ -4,12 +4,14 @@ import thunk from "redux-thunk";
 import search from "./search";
 import offers from "./offers";
 import auth from "./auth";
+import hotels from "./hotels";
 
 let middlewares = [];
 const reducers = {
   search,
   offers,
-  auth
+  auth,
+  hotels
 }
 
 // Very elaborate check to make sure our store also works without the Redux Chrome addon

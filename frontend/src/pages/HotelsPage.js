@@ -1,31 +1,21 @@
 import React, { Component } from 'react';
 import Hotel from '../components/Hotel';
+import { connect } from "react-redux";
+import * as authSelectors from "../redux/auth/selectors";
+import * as hotelSelectors from "../redux/hotels/selectors";
+import * as actions from "../redux/hotels/actions";
 
 class HotelsPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            hotels: [
-                {
-                    id: 1,
-                    image: 'https://picsum.photos/id/112/300',
-                    title: 'Hotel 1',
-                    description: 'Das Lai Lifestyle Hotel bietet Unterkünfte in Lenzerheide. Die Unterkunft verfügt über eine Skipass-Verkaufsstelle und einen Skiraum sowie eine Bar und eine Gemeinschaftslounge.'
-                },
-                {
-                    id: 2,
-                    image: 'https://picsum.photos/id/22/300',
-                    title: 'Hotel 2',
-                    description: 'Das Sunstar Hotel Lenzerheide befindet sich in sonniger und ruhiger Lage, 200 m vom Zentrum entfernt und verfügt über einen Innenpool. Wanderwege sowie die Skipisten führen am Hotel vorbei.'
-                },
-                {
-                    id: 222,
-                    image: 'https://picsum.photos/id/222/300',
-                    title: 'Hotel 3   ',
-                    description: 'Das Sunstar Hotel Lenzerheide befindet sich in sonniger und ruhiger Lage, 200 m vom Zentrum entfernt und verfügt über einen Innenpool. Wanderwege sowie die Skipisten führen am Hotel vorbei.'
-                },
-            ]
-        }
+    componentDidMount(props) {
+        const { fetchHotels } = this.props;
+        
+        // Alternativ
+        // const fetchHotels = this.props.fetchHotels;
+
+        // Check if user is logged in?
+        // if (!this.props.isLoggedIn) { ...}
+
+        fetchHotels();
     }
 
     render() {
@@ -35,7 +25,7 @@ class HotelsPage extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         {
-                            this.state.hotels.map(hotel => (
+                            this.props.hotels.map(hotel => (
                                 <Hotel data={hotel} />
                             ))
                         }
@@ -46,4 +36,9 @@ class HotelsPage extends Component {
     }
 }
 
-export default HotelsPage;
+const mapSelectors = (store) => ({
+    hotels: hotelSelectors.getHotels(store),
+    isLoggedIn: authSelectors.isLoggedIn(store)
+});
+
+export default connect(mapSelectors, {...actions})(HotelsPage);
