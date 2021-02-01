@@ -41,4 +41,6 @@ const mapSelectors = (store) => ({
     isLoggedIn: authSelectors.isLoggedIn(store)
 });
 
-export default connect(mapSelectors, {...actions})(HotelsPage);
+const mapActions = { ...actions };
+
+export default connect(mapSelectors, mapActions)(HotelsPage);
