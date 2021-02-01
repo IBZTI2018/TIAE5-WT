@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 
 // Components
 import { SidebarOverlay, SidebarPanel } from './components/Sidebar';
@@ -44,6 +45,7 @@ function App() {
                     </Switch>
                 </main>
             </Router>
+            <ToastContainer />
         </div>
     );
 }
