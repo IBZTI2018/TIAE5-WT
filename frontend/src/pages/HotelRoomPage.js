@@ -25,8 +25,8 @@ class HotelRoomPage extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         {
-                            this.props.hotels.map(hotelroom => (
-                                <HotelRoom data={hotelroom} />
+                            this.props.hotelrooms.map(hotelrooms => (
+                                <HotelRoom data={hotelrooms} />
                             ))
                         }
                     </div>
@@ -37,7 +37,7 @@ class HotelRoomPage extends Component {
 }
 
 const mapSelectors = (store) => ({
-    hotelroom: hotelroomSelectors.getHotelRooms(store),
+    hotelrooms: hotelroomsSelectors.getHotelRooms(store),
     isLoggedIn: authSelectors.isLoggedIn(store)
 });
 
