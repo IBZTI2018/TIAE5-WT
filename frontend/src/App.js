@@ -10,6 +10,7 @@ import CoronaWarning from './components/CoronaWarning';
 import HomePage from './pages/HomePage';
 import OffersPage from './pages/OffersPage';
 import HotelsPage from './pages/HotelsPage';
+import HotelRoomPage from './pages/HotelRoomPage';
 import UserSettingsPage from './pages/UserSettingsPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
@@ -32,6 +33,8 @@ function App() {
                         <Route exact path="/" component={HomePage} />
                         <Route path="/offers" component={OffersPage} />
                         <Route path="/hotels" component={HotelsPage} />
+
+                        <Route path="/hotelrooms" component={HotelRoomPage} />
                         
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
