@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HotelRoom from '../components/HotelRoom';
 import { connect } from "react-redux";
 import * as authSelectors from "../redux/auth/selectors";
-import * as hotelroomsSelectors from "../redux/rooms/selectors";
+import * as roomSelectors from "../redux/rooms/selectors";
 import * as actions from "../redux/rooms/actions";
 
 class HotelRoomPage extends Component {
@@ -37,7 +37,7 @@ class HotelRoomPage extends Component {
 }
 
 const mapSelectors = (store) => ({
-    hotelrooms: hotelroomsSelectors.getHotelRooms(store),
+    hotelrooms: roomSelectors.getHotelRooms(store),
     isLoggedIn: authSelectors.isLoggedIn(store)
 });
 
