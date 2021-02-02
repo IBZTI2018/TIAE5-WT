@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import StarRating from './offer/StarRating';
 
-class HotelRoom extends Component {
+class HotelRoomEquipment extends Component {
 
     constructor(props) {
         super(props);
-            this.handleHotelRooms = this.handleHotelRooms.bind(this);
+            this.handleRoomEquipment = this.handleRoomEquipment.bind(this);
     }
 
-    handleHotelRooms(event) {
+    handleRoomEquipment(event) {
         this.props.history.push({
-            pathname: '/roomequipments',
+            pathname: '/#',
             state: {
                 data: this.props.data
             }
@@ -30,12 +30,12 @@ class HotelRoom extends Component {
                     <div className="col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">
-                                {this.props.data.roomname}
+                                {this.props.data.hotelequipments}
                                 <StarRating stars={this.props.data.stars} />
                             </h5>
-                            <p className="card-text">{this.props.data.roomequipments}...Equipment</p>
+                            <p className="card-text">{this.props.data.description}...Description</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                            <a onClick={this.handleHotelRooms} className="btn btn-primary">Equipment overview</a>
+                            <a onClick={this.handleRoomEquipment} className="btn btn-primary">Equipment Details</a>
                         </div>
                     </div>
                 </div>
@@ -44,4 +44,4 @@ class HotelRoom extends Component {
     }
 }
 
-export default withRouter(HotelRoom);
+export default withRouter(HotelRoomEquipment);
