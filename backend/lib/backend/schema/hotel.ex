@@ -4,15 +4,20 @@ defmodule Backend.Schema.Hotel do
   import Ecto.Changeset
 
   alias Backend.Schema.Hotel
+  alias Backend.Schema.Hotelroom
   alias Backend.Schema.Address
   alias Backend.Schema.User
   alias Backend.Schema.Hotelequipment
+  alias Backend.Schema.Rating
 
   schema "hotels" do
     field(:hotelname, :string)
     field(:image, :string)
 
     belongs_to(:address, Address)
+
+    has_many(:hotelrooms, Hotelroom)
+    has_many(:ratings, Rating)
 
     many_to_many(:staff, User, join_through: "hotel_staffusers")
     many_to_many(:hotelequipment, Hotelequipment, join_through: "hotel_hotelequipments")

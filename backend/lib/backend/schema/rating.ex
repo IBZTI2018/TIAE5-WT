@@ -3,6 +3,7 @@ defmodule Backend.Schema.Rating do
 
   import Ecto.Changeset
 
+  alias Backend.Schema.Hotel
   alias Backend.Schema.Rating
   alias Backend.Schema.Reservation
 
@@ -13,6 +14,7 @@ defmodule Backend.Schema.Rating do
     field(:published, :boolean, default: false)
 
     belongs_to(:reservation, Reservation)
+    belongs_to(:hotel, Hotel)
   end
 
   def changeset(%Rating{} = rating, attrs) do

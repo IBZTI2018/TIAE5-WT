@@ -98,12 +98,13 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:user_id, references("users"), null: false)
     end
 
-    create table("rating") do
+    create table("ratings") do
       add(:score, :float, null: false)
       add(:comment, :string, null: true)
       add(:anonymous, :boolean, null: false, default: false)
       add(:published, :boolean, null: false, default: false)
       add(:reservation_id, references("reservations"), null: false)
+      add(:hotel_id, references("hotels"), null: false)
     end
 
     create table("medias") do
