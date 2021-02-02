@@ -101,7 +101,7 @@ for i <- 1..10 do
   hotel =
     Backend.Repo.insert!(%Backend.Schema.Hotel{
       hotelname: Faker.Company.name(),
-      image: "https://placedog.net/640/480?random",
+      image: "https://placedog.net/640/480?id=#{i}",
       address: random_address.()
     })
 
