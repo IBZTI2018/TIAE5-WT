@@ -67,7 +67,7 @@ class RegisterForm extends Component {
         
         createNewUser(payload)
             .then(() => {
-                toast.success("Successfully regustered, enjoy your holidays!");
+                toast.success("Successfully registered, enjoy your holidays!");
             
                 // TODO: Redirect user to home page
             })
