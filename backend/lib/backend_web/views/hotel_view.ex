@@ -6,7 +6,17 @@ defmodule BackendWeb.HotelView do
   alias BackendWeb.HotelequipmentView
 
   def fields do
-    [:hotelname, :image]
+    [:hotelname, :image, :rating]
+  end
+
+  def rating(data, _conn) do
+    scores =
+      data
+      |> Backend.Repo.preload(:ratings)
+      |> Map.get(:ratings)
+      |> Enum.map(& &1.score)
+
+    Enum.sum(scores) / Enum.count(scores)
   end
 
   def relationships do
