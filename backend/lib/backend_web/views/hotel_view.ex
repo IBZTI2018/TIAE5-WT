@@ -10,6 +10,9 @@ defmodule BackendWeb.HotelView do
   end
 
   def rating(data, _conn) do
+    # This causes N+1 queries
+    # TODO: Force-preload ratings for hotel listings
+
     scores =
       data
       |> Backend.Repo.preload(:ratings)
