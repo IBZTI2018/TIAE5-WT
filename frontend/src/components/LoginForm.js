@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import * as actions from '../redux/auth/actions';
+import * as toast from '../toast';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -25,16 +25,13 @@ class LoginForm extends Component {
 
     const { authenticateUser } = this.props;
     authenticateUser(this.state.usermail, this.state.password)
-    .catch((error) => {
-      this.toastError(error.message);
-    });
-  }
-
-  toastError(message) {
-    toast.error(message, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 5000,
-    })
+      .then(() => {
+        toast.success("Successfully logged in!");
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Login failed, please check your credentials!");
+      });
   }
 
   render() {
