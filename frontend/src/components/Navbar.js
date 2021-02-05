@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import * as selectors from '../redux/auth/selectors';
 import * as actions from '../redux/auth/actions';
+import * as toast from '../toast';
 
 class Navbar extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class Navbar extends Component {
     handleLogout(event) {
         const { unauthenticateUser } = this.props;
         unauthenticateUser();
+        toast.success("Successfully logged out!");
     }
 
     handleLogin(event) {

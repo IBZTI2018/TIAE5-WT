@@ -5,13 +5,17 @@ import search from "./search";
 import offers from "./offers";
 import auth from "./auth";
 import hotels from "./hotels";
+import titles from "./titles";
+import countries from "./countries";
 
 let middlewares = [];
 const reducers = {
   search,
   offers,
   auth,
-  hotels
+  hotels,
+  titles,
+  countries
 }
 
 // Very elaborate check to make sure our store also works without the Redux Chrome addon
