@@ -24,7 +24,7 @@ class Offer extends Component {
     if (ratings.length > 0) {
       ratings = ratings.map((rating) => rating.score);
       const sum = ratings.reduce((a, b) => a + b, 0);
-      avg = sum / ratings.length || 0;
+      avg = sum / ratings.length;
     }
     return avg;
   }
