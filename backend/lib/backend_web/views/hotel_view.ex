@@ -4,6 +4,7 @@ defmodule BackendWeb.HotelView do
   alias BackendWeb.AddressView
   alias BackendWeb.UserView
   alias BackendWeb.HotelequipmentView
+  alias BackendWeb.RatingView
 
   def fields do
     [:hotelname, :image, :rating]
@@ -26,7 +27,8 @@ defmodule BackendWeb.HotelView do
     [
       address: {AddressView, :include},
       staff: {UserView, :include},
-      hotelequipment: {HotelequipmentView, :include}
+      hotelequipment: {HotelequipmentView, :include},
+      ratings: {RatingView, :include}
     ]
   end
 end

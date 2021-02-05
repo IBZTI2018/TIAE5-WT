@@ -42,7 +42,7 @@ class Navbar extends Component {
                         {
                             this.props.isLoggedIn && (
                                 <div>
-                                    <span className="user-email"><i class="fa fa-user"></i> {this.props.userEmail}</span>
+                                    <span className="user-email"><i className="fa fa-user"></i> {this.props.userEmail}</span>
                                     <button className="btn btn-primary" type="button" data-toggle="canvas" data-target="#bs-canvas-right"
                                     aria-expanded="false" aria-controls="bs-canvas-right">&#9776; Account</button>
                                     <button onClick={this.handleLogout} type="button" className="btn btn-warning ml-2">Logout</button>
