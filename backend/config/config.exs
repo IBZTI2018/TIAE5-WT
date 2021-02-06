@@ -27,6 +27,10 @@ config :backend, Backend.Scheduler,
   jobs: [
     {"* * * * *", {Backend.Scheduled.Mailer, :send_unsent_media, []}}
   ]
+
+# Configure bamboo mailer
+config :backend, Backend.Mailer, adapter: Bamboo.LocalAdapter
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
