@@ -17,6 +17,7 @@ defmodule BackendWeb.Plugs.Authorizer do
     conn
     |> assign(:logged_in, false)
     |> assign(:user, nil)
+    |> assign(:managed_hotels, [])
   end
 
   defp token_auth_info(conn, header) do

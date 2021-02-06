@@ -7,8 +7,8 @@ defmodule BackendWeb.ReservationController do
   alias BackendWeb.ReservationView
 
   plug(JSONAPI.QueryParser,
-    filter: ~w(checkin, checkout, paid),
-    sort: ~w(checkin, checkout),
+    filter: ~w(checkin checkout paid),
+    sort: ~w(checkin checkout),
     view: ReservationView
   )
 
