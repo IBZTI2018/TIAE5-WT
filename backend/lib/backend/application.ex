@@ -14,7 +14,9 @@ defmodule Backend.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Backend.PubSub},
       # Start the Endpoint (http/https)
-      BackendWeb.Endpoint
+      BackendWeb.Endpoint,
+      # Quantum backend job scheduler
+      Backend.Scheduler
       # Start a worker by calling: Backend.Worker.start_link(arg)
       # {Backend.Worker, arg}
     ]
