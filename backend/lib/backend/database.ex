@@ -4,6 +4,7 @@ defmodule Backend.Database do
   import Ecto.Query, warn: false
 
   @default_params %JSONAPI.Config{}
+  @invalid_search_chars ~r/[^0-9A-zÄÖÜäöüÉÈÀéèà]/
 
   @doc """
   Get a generic list of a ressource and apply all common JSON-API query params.
@@ -60,7 +61,14 @@ defmodule Backend.Database do
   end
 
   defp apply_filter(query, []), do: query
-  defp apply_filter(query, filter), do: query |> where(^filter)
+
+  defp apply_filter(query, [{field, value} | tail]) do
+    term = String.replace(value, @invalid_search_chars, "%")
+
+    query
+    |> where([x], like(field(x, ^field), ^term))
+    |> apply_filter(tail)
+  end
 
   defp apply_sort(query, []), do: query
   defp apply_sort(query, sorts), do: query |> order_by(^sorts)
