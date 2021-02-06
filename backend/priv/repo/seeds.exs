@@ -252,6 +252,7 @@ for i <- 1..10 do
       Backend.Repo.insert!(%Backend.Schema.Hotelroom{
         roomname: Faker.Pokemon.name(),
         roomnumber: Enum.random(0..100) + i + j,
+        persons: Enum.random(1..4),
         hotel: hotel,
         pricerange: Enum.random(priceranges)
       })

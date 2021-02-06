@@ -11,6 +11,7 @@ defmodule Backend.Schema.Hotelroom do
   schema "hotelrooms" do
     field(:roomname, :string)
     field(:roomnumber, :integer)
+    field(:persons, :integer)
 
     belongs_to(:hotel, Hotel)
     belongs_to(:pricerange, Pricerange)
@@ -20,7 +21,7 @@ defmodule Backend.Schema.Hotelroom do
 
   def changeset(%Hotelroom{} = hotelroom, attrs) do
     hotelroom
-    |> cast(attrs, [:roomname, :roomnumber, :hotel_id, :pricerange_id])
-    |> validate_required([:roomnumber, :hotel_id, :pricerange_id])
+    |> cast(attrs, [:roomname, :roomnumber, :persons, :hotel_id, :pricerange_id])
+    |> validate_required([:roomnumber, :persons, :hotel_id, :pricerange_id])
   end
 end
