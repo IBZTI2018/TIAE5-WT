@@ -3,7 +3,7 @@ import axios from 'axios';
 import api from "../api";
 import store from '../store';
 import { getUserSelf, getUserSelfRaw } from './selectors';
-import { hasBeenCached } from '../cache';
+import { hasBeenCached, fromCache } from '../cache';
 
 const handleAuthResponse = (dispatch, response) => {
   if (response.status === 200 && response.data && response.data.data) {
@@ -40,8 +40,9 @@ export const unauthenticateUser = () => (dispatch) => {
   dispatch({type: types.UNAUTHENTICATE_USER, payload: {}})
 }
 
-export const loadCurrentUser = () => (dispatch) => {
-  if (hasBeenCached(getUserSelf(store.getState()))) return;
+export const loadCurrentUser = () => async (dispatch) => {
+  const dataInStore = getUserSelf(store.getState());
+  if (hasBeenCached(dataInStore)) return fromCache(dataInStore);
 
   const include = [
     'title',
@@ -49,12 +50,15 @@ export const loadCurrentUser = () => (dispatch) => {
     'billing_address.street.city.country'
   ].join(',');
   
-  return api.get("users", "self", { include }, (err, resource) => {
-    dispatch({ type: types.FETCH_USER_SELF, payload: resource })
-  });
+  return new Promise((resolve, reject) => {
+    return api.get("users", "self", { include }, (err, resource) => {
+      if (err) return reject(err);
+      resolve(dispatch({ type: types.FETCH_USER_SELF, payload: resource }))
+    })
+  })
 }
 
-export const updateUserSelf = (changes) => (dispatch) => {
+export const updateUserSelf = (changes) => async (dispatch) => {
   const self = getUserSelfRaw(store.getState());
 
   Object.keys(changes).forEach((k) => self.set(k, changes[k]))

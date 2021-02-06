@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loader from '../components/Loader';
 import AddressForm from '../components/account/AddressForm';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
@@ -16,14 +17,15 @@ class UserAddressPage extends Component {
     }
 
     this.state = {
-      addressName: addressNames[addressType]
+      addressName: addressNames[addressType],
+      addressDataLoaded: false
     }
   }
 
   componentDidMount() {
     const { loadCurrentUser } =  this.props;
 
-    loadCurrentUser();
+    loadCurrentUser().then(() => this.setState({addressDataLoaded: true}));
   }
 
   render() {
@@ -32,7 +34,12 @@ class UserAddressPage extends Component {
         <h2>My {this.state.addressName}</h2>
         <div className="row">
           <div className="col">
-            <AddressForm user={this.props.user}/>
+            { this.state.addressDataLoaded &&
+              <AddressForm user={this.props.user} addressKey={this.props.match.params.addressType}/>
+            }
+            { !this.state.addressDataLoaded &&
+              <Loader />
+            }
           </div>
         </div>
       </div>

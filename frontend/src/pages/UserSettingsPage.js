@@ -7,11 +7,18 @@ import * as actions from '../redux/auth/actions';
 import * as selectors from '../redux/auth/selectors';
 
 class UserSettingsPage extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      addressDataLoaded: false
+    };
+  }
 
   componentDidMount() {
     const { loadCurrentUser } =  this.props;
 
-    loadCurrentUser();
+    loadCurrentUser().then(() => this.setState({addressDataLoaded: true}));
   }
 
   render() {
@@ -23,22 +30,26 @@ class UserSettingsPage extends Component {
             <AccountForm user={this.props.user}/>
           </div>
           <div className="col-md-4">
-            <div>
-              <AddressCard
-                user={this.props.user}
-                addressName="Contact Address"
-                addressKey="contact_address"
-              />
-            </div>
+            { this.state.addressDataLoaded &&
+              <div>
+                <div>
+                  <AddressCard
+                    user={this.props.user}
+                    addressName="Contact Address"
+                    addressKey="contact_address"
+                  />
+                </div>
 
-            <div className="mt-3">
-              <AddressCard
-                user={this.props.user}
-                addressName="Billing Address"
-                addressKey="billing_address"
-                addressKeyAlt="contact_address"
-              />
-            </div>
+                <div className="mt-3">
+                  <AddressCard
+                    user={this.props.user}
+                    addressName="Billing Address"
+                    addressKey="billing_address"
+                    addressKeyAlt="contact_address"
+                  />
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>
