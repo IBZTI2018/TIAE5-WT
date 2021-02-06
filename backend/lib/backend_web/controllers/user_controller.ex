@@ -20,10 +20,16 @@ defmodule BackendWeb.UserController do
   end
 
   def show(conn, args) do
-    data = Database.generic_item(User, args["id"], conn.assigns.jsonapi_query)
-    render(conn, "show.json", %{data: data})
+    # Only a logged in user may show his own user information
+    with true <- conn.assigns.user.id == args["id"] do
+      data = Database.generic_item(User, args["id"], conn.assigns.jsonapi_query)
+      render(conn, "show.json", %{data: data})
+    else
+      false -> {:error, :forbidden}
+    end
   end
 
+  # Unused, creating users is handled via complex/auth
   def create(conn, args) do
     with {:ok, data} <- Database.generic_create(User, args) do
       conn
@@ -33,11 +39,19 @@ defmodule BackendWeb.UserController do
   end
 
   def update(conn, args) do
-    with {:ok, data} <- Database.generic_update(User, args["id"], args) do
+    # Only a logged in user may update his own profile
+    # The user must re-provide his current password correctly
+    with true <- conn.assigns.user.id == args["id"],
+         true <- Pbkdf2.verify_pass(args["password"], conn.assigns.user.password),
+         {:ok, data} <- Database.generic_update(User, args["id"], args) do
       render(conn, "show.json", %{data: data})
+    else
+      false -> {:error, :forbidden}
+      _ -> {:error, :bad_request}
     end
   end
 
+  # Unused, deleting a user is currently no possible to improve customer numbers :)
   def delete(conn, args) do
     with {:ok, _} <- Database.generic_delete(User, args["id"]) do
       send_resp(conn, 200, "")
