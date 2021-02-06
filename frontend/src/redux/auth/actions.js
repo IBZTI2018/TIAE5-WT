@@ -2,8 +2,14 @@ import types from "./types";
 import axios from 'axios';
 import api from "../api";
 import store from '../store';
-import { getUserSelf, getUserSelfRaw } from './selectors';
+import { getAuthToken, getUserSelf, getUserSelfRaw } from './selectors';
 import { hasBeenCached, fromCache } from '../cache';
+
+const ADDRESS_INCLUDES = [
+  'title',
+  'contact_address.street.city.country',
+  'billing_address.street.city.country'
+].join(',');
 
 const handleAuthResponse = (dispatch, response) => {
   if (response.status === 200 && response.data && response.data.data) {
@@ -44,24 +50,32 @@ export const loadCurrentUser = () => async (dispatch) => {
   const dataInStore = getUserSelf(store.getState());
   if (hasBeenCached(dataInStore)) return fromCache(dataInStore);
 
-  const include = [
-    'title',
-    'contact_address.street.city.country',
-    'billing_address.street.city.country'
-  ].join(',');
-  
   return new Promise((resolve, reject) => {
-    return api.get("users", "self", { include }, (err, resource) => {
+    return api.get("users", "self", { include: ADDRESS_INCLUDES }, (err, resource) => {
       if (err) return reject(err);
       resolve(dispatch({ type: types.FETCH_USER_SELF, payload: resource }))
     })
   })
 }
 
-export const updateUserSelf = (changes) => async (dispatch) => {
+export const updateUserSelf = (changes) => async () => {
   const self = getUserSelfRaw(store.getState());
 
   Object.keys(changes).forEach((k) => self.set(k, changes[k]))
 
   return self.sync();
+}
+
+export const updateUserAddress = (payload) => async (dispatch) => {
+  return axios.post('/api/complex/change_address', payload, {headers: {
+    'Authorization': `Bearer ${getAuthToken(store.getState())}`
+  }})
+    .then(function (response) {
+      return new Promise((resolve, reject) => {
+        return api.get("users", "self", { include: ADDRESS_INCLUDES }, (err, resource) => {
+          if (err) return reject(err);
+          resolve(dispatch({ type: types.FETCH_USER_SELF, payload: resource }))
+        })
+      })
+    })
 }

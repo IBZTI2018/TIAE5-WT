@@ -37,6 +37,12 @@ switzerland =
     countryname: "Switzerland"
   })
 
+germany =
+  Backend.Repo.insert!(%Backend.Schema.Country{
+    isocode: "GER",
+    countryname: "Germany"
+  })
+
 city =
   Backend.Repo.insert!(%Backend.Schema.City{
     postcode: 8800,
@@ -56,10 +62,23 @@ address =
     street: street
   })
 
+city2 =
+  Backend.Repo.insert!(%Backend.Schema.City{
+    postcode: 10000,
+    cityname: "Berlin",
+    country: germany
+  })
+
+street2 =
+  Backend.Repo.insert!(%Backend.Schema.Street{
+    streetname: "Speergasse",
+    city: city2
+  })
+
 address2 =
   Backend.Repo.insert!(%Backend.Schema.Address{
     housenumber: 2,
-    street: street
+    street: street2
   })
 
 # We insert one admin user
@@ -72,7 +91,7 @@ admin =
     is_manager: true,
     title: Enum.at(titles, 1),
     contact_address: address,
-    billing_address: address2
+    billing_address: nil
   })
 
 staff =
@@ -84,7 +103,7 @@ staff =
     is_manager: true,
     title: Enum.at(titles, 1),
     contact_address: address,
-    billing_address: nil
+    billing_address: address2
   })
 
 Backend.Repo.insert!(%Backend.Schema.User{

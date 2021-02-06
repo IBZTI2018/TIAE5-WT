@@ -17,7 +17,7 @@ class AddressForm extends Component {
                 housenumber: address.housenumber,
                 postcode: address.street.city.postcode,
                 cityname: address.street.city.cityname,
-                country: address.street.city.country.countryname
+                country_id: address.street.city.country.id
             }
         } else {
             this.state = {
@@ -45,6 +45,16 @@ class AddressForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
+        const { updateUserAddress } = this.props;        
+        updateUserAddress({ ...this.state, address_type: this.props. addressKey })
+            .then(() => {
+                toast.success('Successfully updated address!')
+            })
+            .catch((error) => {
+                console.error(error)
+                toast.error('Failed to update address!')
+            })
     }
 
     handleDiscard(event) {
@@ -101,7 +111,7 @@ class AddressForm extends Component {
                         <select className="custom-select">
                             {
                                 this.props.countries.map((country) => (
-                                    <option value={country.id}>{country.countryname}</option>
+                                    <option value={country.id} selected={country.id == this.state.country_id}>{country.countryname}</option>
                                 ))
                             }
                         </select>
