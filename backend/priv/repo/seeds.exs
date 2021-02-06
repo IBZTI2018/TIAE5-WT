@@ -56,6 +56,12 @@ address =
     street: street
   })
 
+address2 =
+  Backend.Repo.insert!(%Backend.Schema.Address{
+    housenumber: 2,
+    street: street
+  })
+
 # We insert one admin user
 admin =
   Backend.Repo.insert!(%Backend.Schema.User{
@@ -66,7 +72,7 @@ admin =
     is_manager: true,
     title: Enum.at(titles, 1),
     contact_address: address,
-    billing_address: address
+    billing_address: address2
   })
 
 staff =
@@ -78,7 +84,7 @@ staff =
     is_manager: true,
     title: Enum.at(titles, 1),
     contact_address: address,
-    billing_address: address
+    billing_address: nil
   })
 
 Backend.Repo.insert!(%Backend.Schema.User{
@@ -89,7 +95,7 @@ Backend.Repo.insert!(%Backend.Schema.User{
   is_manager: false,
   title: Enum.at(titles, 2),
   contact_address: address,
-  billing_address: address
+  billing_address: nil
 })
 
 # We insert some generic hotel extras
