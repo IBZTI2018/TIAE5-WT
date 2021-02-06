@@ -15,17 +15,24 @@ defmodule BackendWeb.Router do
     scope "/v1" do
       pipe_through(:auth)
 
-      resources("/titles", TitleController, except: [:edit, :new])
-      resources("/countries", CountryController, except: [:edit, :new])
-      resources("/cities", CityController, except: [:edit, :new])
-      resources("/streets", StreetController, except: [:edit, :new])
-      resources("/addresses", AddressController, except: [:edit, :new])
-      resources("/users", UserController, except: [:edit, :new])
-      resources("/hotels", HotelController, except: [:edit, :new])
+      # Ressources managed by admins via Kaffy Dashboard
+      resources("/titles", TitleController, only: [:index, :show])
+      resources("/countries", CountryController, only: [:index, :show])
+      resources("/hotels", HotelController, only: [:index, :show])
+      resources("/hotelequipments", HotelequipmentController, only: [:index, :show])
+      resources("/roomequipments", RoomequipmentController, only: [:index, :show])
+      resources("/priceranges", PricerangeController, only: [:index, :show])
+
+      # Ressources managed by db wrapper internally
+      resources("/cities", CityController, only: [:index, :show])
+      resources("/streets", StreetController, only: [:index, :show])
+      resources("/addresses", AddressController, only: [:index, :show])
+
+      # Generic, full REST ressources with permission scope
+      resources("/users", UserController, except: [:edit, :new, :index, :create, :delete])
+
+      # TODO: Complete these - sven
       resources("/hotelrooms", HotelroomController, except: [:edit, :new])
-      resources("/priceranges", PricerangeController, except: [:edit, :new])
-      resources("/hotelequipments", HotelequipmentController, except: [:edit, :new])
-      resources("/roomequipments", RoomequipmentController, except: [:edit, :new])
       resources("/offers", OfferController, except: [:edit, :new])
       resources("/reservations", ReservationController, except: [:edit, :new])
       resources("/ratings", ReservationController, except: [:edit, :new])

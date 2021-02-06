@@ -13,6 +13,7 @@ defmodule Backend.Schema.User do
     field(:lastname, :string)
     field(:email, :string)
     field(:password, :string)
+    field(:is_manager, :boolean, default: false)
 
     belongs_to(:title, Title)
     belongs_to(:contact_address, Address)
@@ -28,6 +29,7 @@ defmodule Backend.Schema.User do
       :lastname,
       :email,
       :password,
+      :is_manager,
       :title_id,
       :contact_address_id,
       :billing_address_id
@@ -37,6 +39,7 @@ defmodule Backend.Schema.User do
       :lastname,
       :email,
       :password,
+      :is_manager,
       :title_id,
       :contact_address_id
     ])

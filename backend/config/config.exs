@@ -22,6 +22,11 @@ config :backend, BackendWeb.Endpoint,
   pubsub_server: Backend.PubSub,
   live_view: [signing_salt: "gDeCdj4a"]
 
+# Configures the quantum scheduler
+config :backend, Backend.Scheduler,
+  jobs: [
+    {"* * * * *", {Backend.Scheduled.Mailer, :send_unsent_media, []}}
+  ]
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

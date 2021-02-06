@@ -16,7 +16,13 @@ defmodule BackendWeb.HotelController do
 
   def index(conn, _args) do
     data = Database.generic_list(Hotel, conn.assigns.jsonapi_query)
-    render(conn, "index.json", %{data: data})
+
+    # We apply a custom filter to this API, so that only managers
+    # can query a list of hotels and only the hotels they manage!
+    # TODO: Move pre-query and let the DB do the heavy lifting
+    filtered_data = Enum.filter(data, &(&1.id in conn.assigns.managed_hotels))
+
+    render(conn, "index.json", %{data: filtered_data})
   end
 
   def show(conn, args) do

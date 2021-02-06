@@ -6,7 +6,7 @@ defmodule BackendWeb.UserView do
   alias BackendWeb.HotelView
 
   def fields do
-    [:firstname, :lastname, :email]
+    [:firstname, :lastname, :email, :is_manager]
   end
 
   def relationships do

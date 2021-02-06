@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 
 // Components
 import { SidebarOverlay, SidebarPanel } from './components/Sidebar';
@@ -40,7 +41,7 @@ function App() {
                         
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
-                        <Route path="/user_settings" component={UserSettingsPage} />
+                        <Route path="/account" component={UserSettingsPage} />
 
                         <Route path="/reservation" component={ReservationPage} />
                         <Route path="/rating" component={RatingPage} />
@@ -49,6 +50,7 @@ function App() {
                     </Switch>
                 </main>
             </Router>
+            <ToastContainer />
         </div>
     );
 }

@@ -4,10 +4,6 @@ defmodule BackendWeb.HotelequipmentView do
   alias BackendWeb.HotelView
 
   def fields do
-    [:hotelname]
-  end
-
-  def fields do
     [:description]
   end
 

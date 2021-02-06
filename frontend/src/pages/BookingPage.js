@@ -15,7 +15,7 @@ class BookingPage extends Component {
                     <Booking offer={offer} />
                 )}
                 {!offer && (
-                    <p>Keine gesetzte Offerte</p>
+                    <p>No offer was chosen</p>
                 )}
             </div>
         );

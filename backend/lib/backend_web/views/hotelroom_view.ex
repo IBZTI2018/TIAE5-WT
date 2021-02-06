@@ -6,7 +6,7 @@ defmodule BackendWeb.HotelroomView do
   alias BackendWeb.RoomequipmentView
 
   def fields do
-    [:roomname, :roomnumber]
+    [:roomname, :roomnumber, :persons]
   end
 
   def relationships do

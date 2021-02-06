@@ -33,6 +33,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:lastname, :string, null: false)
       add(:email, :string, null: false, size: 50)
       add(:password, :string, null: false)
+      add(:is_manager, :boolean, null: false, default: false)
       add(:contact_address_id, references("addresses"), null: false)
       add(:billing_address_id, references("addresses"), null: true)
       add(:title_id, references("titles"), null: false)
@@ -61,6 +62,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
     create table("hotelrooms") do
       add(:roomname, :string, null: true)
       add(:roomnumber, :integer, null: false)
+      add(:persons, :integer, null: false)
       add(:pricerange_id, references("priceranges"), null: false)
       add(:hotel_id, references("hotels"), null: false)
     end
@@ -98,12 +100,13 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:user_id, references("users"), null: false)
     end
 
-    create table("rating") do
+    create table("ratings") do
       add(:score, :float, null: false)
       add(:comment, :string, null: true)
       add(:anonymous, :boolean, null: false, default: false)
       add(:published, :boolean, null: false, default: false)
       add(:reservation_id, references("reservations"), null: false)
+      add(:hotel_id, references("hotels"), null: false)
     end
 
     create table("medias") do

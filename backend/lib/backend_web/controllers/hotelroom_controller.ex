@@ -7,8 +7,8 @@ defmodule BackendWeb.HotelroomController do
   alias BackendWeb.HotelroomView
 
   plug(JSONAPI.QueryParser,
-    filter: ~w(roomname roomnumber),
-    sort: ~w(roomname roomnumber),
+    filter: ~w(roomname roomnumber persons),
+    sort: ~w(roomname roomnumber persons),
     view: HotelroomView
   )
 
