@@ -47,7 +47,7 @@ class AddressCard extends Component {
             {this.state.postcode} {this.state.cityname} <br />
             {this.state.country}
           </p>
-          <a href="#" className="btn btn-primary">Change</a>
+          <a href={`/user/address/${this.props.addressKey}`} className="btn btn-primary">Change</a>
         </div>
       </div>
     );

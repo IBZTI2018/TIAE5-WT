@@ -11,7 +11,7 @@ import CoronaWarning from './components/CoronaWarning';
 import HomePage from './pages/HomePage';
 import OffersPage from './pages/OffersPage';
 import HotelsPage from './pages/HotelsPage';
-import UserSettingsPage from './pages/UserSettingsPage';
+import UserPage from './pages/UserPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ReservationPage from './pages/ReservationPage';
@@ -36,7 +36,7 @@ function App() {
                         
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
-                        <Route path="/account" component={UserSettingsPage} />
+                        <Route path="/user" component={UserPage} />
 
                         <Route path="/reservation" component={ReservationPage} />
                         <Route path="/rating" component={RatingPage} />
