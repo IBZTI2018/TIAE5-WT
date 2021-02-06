@@ -1,6 +1,9 @@
 import types from "./types";
 import axios from 'axios';
 import api from "../api";
+import store from '../store';
+import { getUserSelf } from './selectors';
+import { hasBeenCached } from '../cache';
 
 const handleAuthResponse = (dispatch, response) => {
   if (response.status === 200 && response.data && response.data.data) {
@@ -17,7 +20,6 @@ const handleAuthResponse = (dispatch, response) => {
 }
 
 export const createNewUser = (payload) => async (dispatch) => {
-  console.log('ayo')
   return axios.post('/api/complex/signup', payload)
   .then(function (response) {
     handleAuthResponse(dispatch, response);
@@ -39,6 +41,8 @@ export const unauthenticateUser = () => (dispatch) => {
 }
 
 export const loadCurrentUser = () => (dispatch) => {
+  if (hasBeenCached(getUserSelf(store.getState()))) return;
+
   const include = [
     'title',
     'contact_address.street.city.country',
