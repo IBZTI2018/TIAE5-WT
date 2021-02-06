@@ -2,7 +2,7 @@ import types from "./types";
 import axios from 'axios';
 import api from "../api";
 import store from '../store';
-import { getUserSelf } from './selectors';
+import { getUserSelf, getUserSelfRaw } from './selectors';
 import { hasBeenCached } from '../cache';
 
 const handleAuthResponse = (dispatch, response) => {
@@ -50,7 +50,16 @@ export const loadCurrentUser = () => (dispatch) => {
   ].join(',');
   
   return api.get("users", "self", { include }, (err, resource) => {
-    const payload = resource.toJSONTree()
-    dispatch({ type: types.FETCH_USER_SELF, payload })
+    dispatch({ type: types.FETCH_USER_SELF, payload: resource })
   });
+}
+
+export const updateUserSelf = (changes) => (dispatch) => {
+  const self = getUserSelfRaw(store.getState());
+  console.log(self)
+  console.log(self.sync)
+  // return api.update("users", id, payload, (err, resource) => {
+  //   const payload = resource.toJSONTree()
+  //   dispatch({ type: types.FETCH_USER_SELF, payload })
+  // });
 }

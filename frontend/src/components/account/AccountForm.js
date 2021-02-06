@@ -34,6 +34,18 @@ class RegisterForm extends Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
+
+        if (this.missingValue(this.state.email)) return toast.error("E-Mail address must be valid")
+        if (this.state.password != this.state.passwordRepeat) return toast.error("Passwords do not match")
+        if (this.missingValue(this.state.currentPassword)) return toast.error("Current password must be provided")
+
+        const { updateUserSelf } = this.props;
+        updateUserSelf(this.props.user);
+    }
+
+    missingValue(str) {
+        return str === undefined || str.length < 3;
     }
 
     render() {
@@ -45,10 +57,7 @@ class RegisterForm extends Component {
             title: title.description,
             firstname: user.firstname,
             lastname: user.lastname,
-            email: user.email,
-            password: '',
-            passwordRepeat: '',
-            currentPassword: ''
+            email: user.email
         }
 
         return (
@@ -115,7 +124,7 @@ class RegisterForm extends Component {
                             name="password"
                             className="form-control"
                             placeholder="New Password (empty = unchanged)"
-                            type="text"
+                            type="password"
                         />
                         <input 
                             value={this.state.passwordRepeat}
@@ -123,7 +132,7 @@ class RegisterForm extends Component {
                             name="passwordRepeat"
                             className="form-control"
                             placeholder="Repeat New Password (empty = unchanged)"
-                            type="text"
+                            type="password"
                         />
                     </div>
                     <div className="form-group input-group">
@@ -133,10 +142,10 @@ class RegisterForm extends Component {
                         <input 
                             value={this.state.currentPassword}
                             onChange={this.handleChange}
-                            name="password"
+                            name="currentPassword"
                             className="form-control"
                             placeholder="Current Password)"
-                            type="text"
+                            type="password"
                         />
                     </div>
                     <div className="form-group">
