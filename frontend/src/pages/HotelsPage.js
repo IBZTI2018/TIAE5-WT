@@ -6,16 +6,26 @@ import * as hotelSelectors from "../redux/hotels/selectors";
 import * as actions from "../redux/hotels/actions";
 
 class HotelsPage extends Component {
+
     componentDidMount(props) {
-        const { fetchHotels } = this.props;
-        
-        // Alternativ
-        // const fetchHotels = this.props.fetchHotels;
+        if (this.props.isManager) {
+            const { fetchHotels } = this.props;
 
-        // Check if user is logged in?
-        // if (!this.props.isLoggedIn) { ...}
+            // Alternativ
+            // const fetchHotels = this.props.fetchHotels;
 
-        fetchHotels();
+            // Check if user is logged in?
+            // if (!this.props.isLoggedIn) { ...}
+
+            fetchHotels();
+        }
+        else
+        {
+            this.props.history.push({
+                pathname: "/",
+              });
+        }
+
     }
 
     render() {
@@ -38,7 +48,8 @@ class HotelsPage extends Component {
 
 const mapSelectors = (store) => ({
     hotels: hotelSelectors.getHotels(store),
-    isLoggedIn: authSelectors.isLoggedIn(store)
+    isLoggedIn: authSelectors.isLoggedIn(store),
+    isManager: authSelectors.isManager(store)
 });
 
 const mapActions = { ...actions };
