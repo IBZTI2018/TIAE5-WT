@@ -36,7 +36,7 @@ function App() {
                         
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
-                        <Route path="/user_settings" component={UserSettingsPage} />
+                        <Route path="/account" component={UserSettingsPage} />
 
                         <Route path="/reservation" component={ReservationPage} />
                         <Route path="/rating" component={RatingPage} />
