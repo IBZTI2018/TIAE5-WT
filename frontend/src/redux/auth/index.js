@@ -16,7 +16,8 @@ const initialUserState = {
 const initialState = {
   isLoggedIn: false,
   authToken: null,
-  user: initialUserState
+  user: initialUserState,
+  self: null
 }
 
 const dumpStateOnLocalStorage = (payload) => {
@@ -75,9 +76,16 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         isLoggedIn: false,
         authToken: null,
-        user: initialUserState
+        user: initialUserState,
+        self: null
       }
       break;
+
+    case types.FETCH_USER_SELF:
+      return {
+        ...state,
+        self: payload
+      }
 
     case "@@INIT":
       return loadStateFromLocalStorage();

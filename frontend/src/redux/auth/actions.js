@@ -1,8 +1,9 @@
 import types from "./types";
 import axios from 'axios';
+import api from "../api";
 
 const handleAuthResponse = (dispatch, response) => {
-  if (response.status == 200 && response.data && response.data.data) {
+  if (response.status === 200 && response.data && response.data.data) {
     dispatch({type: types.AUTHENTICATE_USER, payload: {
       token: response.data.data.token,
       email: response.data.data.email,
@@ -35,4 +36,17 @@ export const authenticateUser = (usermail, password) => async (dispatch) => {
 
 export const unauthenticateUser = () => (dispatch) => {
   dispatch({type: types.UNAUTHENTICATE_USER, payload: {}})
+}
+
+export const loadCurrentUser = () => (dispatch) => {
+  const include = [
+    'title',
+    'contact_address.street.city.country',
+    'billing_address.street.city.country'
+  ].join(',');
+  
+  return api.get("users", "self", { include }, (err, resource) => {
+    const payload = resource.toJSONTree()
+    dispatch({ type: types.FETCH_USER_SELF, payload })
+  });
 }
