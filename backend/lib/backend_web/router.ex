@@ -20,6 +20,7 @@ defmodule BackendWeb.Router do
   end
 
   pipeline :internal_auth do
+    # TODO: Move this to environment variables before deployment!
     plug(:basic_auth, username: "admin", password: "ibz2022")
   end
 
