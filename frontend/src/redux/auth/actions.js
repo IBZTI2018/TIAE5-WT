@@ -56,10 +56,8 @@ export const loadCurrentUser = () => (dispatch) => {
 
 export const updateUserSelf = (changes) => (dispatch) => {
   const self = getUserSelfRaw(store.getState());
-  console.log(self)
-  console.log(self.sync)
-  // return api.update("users", id, payload, (err, resource) => {
-  //   const payload = resource.toJSONTree()
-  //   dispatch({ type: types.FETCH_USER_SELF, payload })
-  // });
+
+  Object.keys(changes).forEach((k) => self.set(k, changes[k]))
+
+  return self.sync();
 }

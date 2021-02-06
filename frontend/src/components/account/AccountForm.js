@@ -41,7 +41,17 @@ class RegisterForm extends Component {
         if (this.missingValue(this.state.currentPassword)) return toast.error("Current password must be provided")
 
         const { updateUserSelf } = this.props;
-        updateUserSelf(this.props.user);
+        updateUserSelf({
+            password: this.state.password,
+            currentPassword: this.state.currentPassword,
+        })
+        .then(() => {
+            toast.success("Successfully updated account settings")
+        })
+        .catch((error) => {
+            console.error(error)
+            toast.error("Failed to update account settings")
+        })
     }
 
     missingValue(str) {
@@ -107,11 +117,11 @@ class RegisterForm extends Component {
                         </div>
                         <input 
                             value={this.state.email}
-                            onChange={this.handleChange}
                             name="email"
                             className="form-control"
                             placeholder="E-Mail"
                             type="email"
+                            disabled
                         />
                     </div>
                     <div className="form-group input-group">
