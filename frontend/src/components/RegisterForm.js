@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router";
 import * as authActions from '../redux/auth/actions';
 import * as titleActions from '../redux/titles/actions';
 import * as titleSelectors from '../redux/titles/selectors';
@@ -68,8 +69,7 @@ class RegisterForm extends Component {
         createNewUser(payload)
             .then(() => {
                 toast.success("Successfully registered, enjoy your holidays!");
-            
-                // TODO: Redirect user to home page
+                this.props.history.push({pathname: "/"});
             })
             .catch((error) => {
               console.error(error);
@@ -220,4 +220,4 @@ const mapSelectors = (store) => ({
 
 const mapActions = { ...authActions, ...titleActions, ...countryActions}
 
-export default connect(mapSelectors, mapActions)(RegisterForm);
+export default connect(mapSelectors, mapActions)(withRouter(RegisterForm));

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router";
 import * as actions from '../redux/auth/actions';
 import * as toast from '../toast';
 
@@ -27,6 +28,7 @@ class LoginForm extends Component {
     authenticateUser(this.state.usermail, this.state.password)
       .then(() => {
         toast.success("Successfully logged in!");
+        this.props.history.push({pathname: "/"});
       })
       .catch((error) => {
         console.error(error);
@@ -73,4 +75,4 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, { ...actions })(LoginForm);
+export default connect(null, { ...actions })(withRouter(LoginForm));

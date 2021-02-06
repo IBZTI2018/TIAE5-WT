@@ -17,6 +17,7 @@ class Navbar extends Component {
         const { unauthenticateUser } = this.props;
         unauthenticateUser();
         toast.success("Successfully logged out!");
+        this.props.history.push({pathname: "/"});
     }
 
     handleLogin(event) {
