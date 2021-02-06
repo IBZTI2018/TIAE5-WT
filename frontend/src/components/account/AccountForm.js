@@ -10,11 +10,14 @@ class RegisterForm extends Component {
     constructor(props) {
         super(props);
 
+        const user = this.props.user || {};
+        const title = user.title || {};
+
         this.state = {
-            title: '',
-            firstname: '',
-            lastname: '',
-            email: '',
+            title: title.description,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
             password: '',
             passwordRepeat: '',
             currentPassword: ''
@@ -47,6 +50,11 @@ class RegisterForm extends Component {
         })
         .then(() => {
             toast.success("Successfully updated account settings")
+            this.setState({
+                password: '',
+                passwordRepeat: '',
+                currentPassword: ''
+            })
         })
         .catch((error) => {
             console.error(error)
@@ -59,17 +67,6 @@ class RegisterForm extends Component {
     }
 
     render() {
-        const user = this.props.user || {};
-        const title = user.title || {};
-
-        this.state = {
-            ...this.state,
-            title: title.description,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email
-        }
-
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>

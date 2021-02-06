@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AccountForm from '../components/account/AccountForm';
 import AddressCard from '../components/account/AddressCard';
+import Loader from '../components/Loader';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 import * as actions from '../redux/auth/actions';
@@ -11,6 +12,7 @@ class UserSettingsPage extends Component {
     super(props)
 
     this.state = {
+      userDataLoaded: false,
       addressDataLoaded: false
     };
   }
@@ -18,7 +20,10 @@ class UserSettingsPage extends Component {
   componentDidMount() {
     const { loadCurrentUser } =  this.props;
 
-    loadCurrentUser().then(() => this.setState({addressDataLoaded: true}));
+    loadCurrentUser().then(() => this.setState({
+      userDataLoaded: true,
+      addressDataLoaded: true
+    }));
   }
 
   render() {
@@ -27,7 +32,12 @@ class UserSettingsPage extends Component {
         <h2>My Account</h2>
         <div className="row">
           <div className="col-md-8">
-            <AccountForm user={this.props.user}/>
+            { this.state.userDataLoaded && 
+              <AccountForm user={this.props.user}/>
+            }
+            { !this.state.userDataLoaded &&
+              <Loader />
+            }
           </div>
           <div className="col-md-4">
             { this.state.addressDataLoaded &&
