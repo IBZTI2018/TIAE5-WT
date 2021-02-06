@@ -66,7 +66,15 @@ defmodule BackendWeb.AuthController do
 
           conn
           |> put_status(200)
-          |> json(%{data: %{token: token}})
+          |> json(%{
+            data: %{
+              token: token,
+              email: user.email,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              is_manager: user.is_manager
+            }
+          })
         else
           {:error, :unauthorized}
         end

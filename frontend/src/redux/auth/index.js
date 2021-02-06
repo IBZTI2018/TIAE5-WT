@@ -3,10 +3,17 @@ import types from './types';
 const LOCAL_STORAGE_TOKEN = 'tiae5AuthToken';
 const LOCAL_STORAGE_EMAIL = 'tiae5UserMail';
 
+const initialUserState = {
+  firstname: null,
+  lastname: null,
+  email: null,
+  isManager: false
+}
+
 const initialState = {
   isLoggedIn: false,
   authToken: null,
-  userEmail: null
+  user: initialUserState
 }
 
 const dumpStateOnLocalStorage = (token, email) => {
@@ -36,7 +43,12 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         isLoggedIn: true,
         authToken: payload.token,
-        userEmail: payload.email
+        user: {
+          email: payload.email,
+          firstname: payload.firstname,
+          lastname: payload.lastname,
+          isManager: payload.isManager
+        }
       }   
       break;
 
@@ -47,7 +59,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         isLoggedIn: false,
         authToken: null,
-        userEmail: null
+        user: initialUserState
       }
       break;
 

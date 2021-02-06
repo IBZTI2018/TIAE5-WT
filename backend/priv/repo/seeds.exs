@@ -72,7 +72,7 @@ admin =
 staff =
   Backend.Repo.insert!(%Backend.Schema.User{
     firstname: "IBZ",
-    lastname: "Customer",
+    lastname: "Manager",
     email: "manager@admin.ch",
     password: Pbkdf2.hash_pwd_salt("password"),
     is_manager: true,
