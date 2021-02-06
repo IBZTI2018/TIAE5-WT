@@ -2,6 +2,9 @@ import types from './types';
 
 const LOCAL_STORAGE_TOKEN = 'tiae5AuthToken';
 const LOCAL_STORAGE_EMAIL = 'tiae5UserMail';
+const LOCAL_STORAGE_FIRSTNAME = 'tiae5UserFirstName';
+const LOCAL_STORAGE_LASTNAME = 'tiae5UserLastName';
+const LOCAL_STORAGE_ISMANAGER = 'tiae5UserIsManager';
 
 const initialUserState = {
   firstname: null,
@@ -16,28 +19,41 @@ const initialState = {
   user: initialUserState
 }
 
-const dumpStateOnLocalStorage = (token, email) => {
-  window.localStorage.setItem(LOCAL_STORAGE_TOKEN, token);
-  window.localStorage.setItem(LOCAL_STORAGE_EMAIL, email);
+const dumpStateOnLocalStorage = (payload) => {
+  window.localStorage.setItem(LOCAL_STORAGE_TOKEN, payload.token);
+  window.localStorage.setItem(LOCAL_STORAGE_EMAIL, payload.email);
+  window.localStorage.setItem(LOCAL_STORAGE_FIRSTNAME, payload.firstname);
+  window.localStorage.setItem(LOCAL_STORAGE_LASTNAME, payload.lastname);
+  window.localStorage.setItem(LOCAL_STORAGE_ISMANAGER, payload.isManager);
 }
 
 const clearStateOnLocalStorage = () => {
   window.localStorage.removeItem(LOCAL_STORAGE_TOKEN);
   window.localStorage.removeItem(LOCAL_STORAGE_EMAIL);
+  window.localStorage.removeItem(LOCAL_STORAGE_FIRSTNAME);
+  window.localStorage.removeItem(LOCAL_STORAGE_LASTNAME);
+  window.localStorage.removeItem(LOCAL_STORAGE_ISMANAGER);
 }
 
 const loadStateFromLocalStorage = () => {
   const token = window.localStorage.getItem(LOCAL_STORAGE_TOKEN);
   const email = window.localStorage.getItem(LOCAL_STORAGE_EMAIL);
+  const firstname = window.localStorage.getItem(LOCAL_STORAGE_FIRSTNAME);
+  const lastname = window.localStorage.getItem(LOCAL_STORAGE_LASTNAME);
+  const isManager = window.localStorage.getItem(LOCAL_STORAGE_ISMANAGER);
 
-  if (email && token) return { isLoggedIn: true, authToken: token, userEmail: email };
+  if (email && token) return {
+    isLoggedIn: true, authToken: token, user: {
+      email, firstname, lastname, isManager
+    }
+  };
   return initialState;
 }
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case types.AUTHENTICATE_USER:
-      dumpStateOnLocalStorage(payload.token, payload.email);
+      dumpStateOnLocalStorage(payload);
 
       return {
         ...state,
