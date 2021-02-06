@@ -68,6 +68,53 @@ admin =
     billing_address: address
   })
 
+user =
+  Backend.Repo.insert!(%Backend.Schema.User{
+    firstname: "IBZ",
+    lastname: "Manager",
+    email: "manager@admin.ch",
+    password: Pbkdf2.hash_pwd_salt("password"),
+    title: Enum.at(titles, 1),
+    contact_address: address,
+    billing_address: address
+  })
+
+# We insert some generic hotel extras
+hotel_equipments =
+  for e <- [
+        "fitness center",
+        "sauna",
+        "wellness area",
+        "entertainer",
+        "free parking",
+        "swimming pool",
+        "wine bar",
+        "cigar lounge"
+      ] do
+    Backend.Repo.insert!(%Backend.Schema.Hotelequipment{
+      description: e
+    })
+  end
+
+# We insert some generic room extras
+room_equipments =
+  for e <- [
+        "mountain view",
+        "sea view",
+        "lake view",
+        "queen size bed",
+        "kind size bed",
+        "upgraded minibar",
+        "bathtub",
+        "movie library",
+        "luxury bathroom",
+        "extra comfy pillows"
+      ] do
+    Backend.Repo.insert!(%Backend.Schema.Roomequipment{
+      description: e
+    })
+  end
+
 # ---
 # Dynamic seed data
 # ---
@@ -247,6 +294,20 @@ for i <- 1..10 do
       address: random_address.()
     })
 
+  # Hotels belong to our staff user
+  Backend.Repo.insert!(%Backend.Schema.JoinHotelStaff{
+    hotel: hotel,
+    user: user
+  })
+
+  # Rooms have randomly 1 - 4 extra equipments
+  for k <- 0..Enum.random(1..4) do
+    Backend.Repo.insert!(%Backend.Schema.JoinHotelHotelequipment{
+      hotel: hotel,
+      hotelequipment: Enum.at(hotel_equipments, k)
+    })
+  end
+
   for j <- 1..5 do
     hotelroom =
       Backend.Repo.insert!(%Backend.Schema.Hotelroom{
@@ -256,6 +317,14 @@ for i <- 1..10 do
         hotel: hotel,
         pricerange: Enum.random(priceranges)
       })
+
+    # Rooms have randomly 1 - 4 extra equipments
+    for k <- 0..Enum.random(1..4) do
+      Backend.Repo.insert!(%Backend.Schema.JoinHotelroomRoomequipment{
+        hotelroom: hotelroom,
+        roomequipment: Enum.at(room_equipments, k)
+      })
+    end
 
     offer =
       Backend.Repo.insert!(%Backend.Schema.Offer{
