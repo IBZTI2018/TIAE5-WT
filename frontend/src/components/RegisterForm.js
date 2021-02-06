@@ -193,7 +193,7 @@ class RegisterForm extends Component {
                             name="password"
                             className="form-control"
                             placeholder="Password"
-                            type="text"
+                            type="password"
                         />
                         <input 
                             value={this.state.passwordRepeat}
@@ -201,7 +201,7 @@ class RegisterForm extends Component {
                             name="passwordRepeat"
                             className="form-control"
                             placeholder="Repeat Password"
-                            type="text"
+                            type="password"
                         />
                     </div>
                     <div className="form-group">
