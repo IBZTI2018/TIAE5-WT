@@ -11,9 +11,12 @@ services:
 
   backend:
     build: ./backend
-    command: mix phx.server
+    command: mix do deps.get, phx.server
     environment:
       - MIX_ENV=prod
+      - DATABASE_URL=ecto://root:supersecret@mysql/backend_dev
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
     volumes:
       - ./backend:/app
     ports:

@@ -33,3 +33,11 @@ enter_backend:
 
 nuke:
 	docker-compose build --no-cache
+
+deploy:
+	ssh vpn.cybrox.eu sudo systemctl stop tiae
+	tar -czf app.tar.gz --exclude ".git" --exclude ".elixir_ls" ./*
+	scp ./app.tar.gz vpn.cybrox.eu:/opt/tiae/app.tar.gz
+	ssh vpn.cybrox.eu "cd /opt/tiae && sudo chmod -R 777 backend && sudo chmod -R 777 frontend && tar -xzf app.tar.gz && rm app.tar.gz"
+	ssh vpn.cybrox.eu sudo systemctl start tiae
+	rm app.tar.gz
