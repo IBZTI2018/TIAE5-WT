@@ -29,7 +29,8 @@ defmodule BackendWeb.Router do
       resources("/addresses", AddressController, only: [:index, :show])
 
       # Generic, full REST ressources with permission scope
-      resources("/users", UserController, except: [:edit, :new, :index, :create, :delete])
+      resources("/users", UserController, only: [:update])
+      get("/users/self", UserController, :show_self)
 
       # TODO: Complete these - sven
       resources("/hotelrooms", HotelroomController, except: [:edit, :new])

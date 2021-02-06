@@ -29,6 +29,15 @@ defmodule BackendWeb.UserController do
     end
   end
 
+  def show_self(conn, _args) do
+    with true <- conn.assigns.logged_in do
+      data = Database.generic_item(User, conn.assigns.user.id, conn.assigns.jsonapi_query)
+      render(conn, "show.json", %{data: data})
+    else
+      false -> {:error, :forbidden}
+    end
+  end
+
   # Unused, creating users is handled via complex/auth
   def create(conn, args) do
     with {:ok, data} <- Database.generic_create(User, args) do
