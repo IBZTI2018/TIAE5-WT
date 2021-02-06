@@ -3,6 +3,8 @@ defmodule BackendWeb.Router do
 
   import Plug.BasicAuth
 
+  @env Mix.env()
+
   pipeline :browser do
     plug(:fetch_session)
     plug(:protect_from_forgery)
@@ -75,5 +77,7 @@ defmodule BackendWeb.Router do
 
   # TODO: Figure out alternate way to demo this, the plug is only
   #       intended for development and cannot be scope-nested!
-  # forward("/api/internal/sent_emails", Bamboo.SentEmailViewerPlug)
+  if @env == :dev do
+    forward("/api/internal/sent_emails", Bamboo.SentEmailViewerPlug)
+  end
 end
