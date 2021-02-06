@@ -41,6 +41,16 @@ defmodule BackendWeb.Plugs.Authorizer do
         conn
         |> assign(:logged_in, true)
         |> assign(:user, user)
+        |> assign_hotel_info()
+    end
+  end
+
+  defp assign_hotel_info(conn) do
+    if conn.assigns.user.is_manager do
+      hotels = conn.assigns.user |> Database.get_hotels_for_user() |> Enum.map(& &1.hotel)
+      assign(conn, :managed_hotels, Enum.map(hotels, & &1.id))
+    else
+      assign(conn, :managed_hotels, [])
     end
   end
 end

@@ -133,4 +133,14 @@ defmodule Backend.Database do
     |> where(email: ^usermail)
     |> Repo.one()
   end
+
+  @doc """
+  Get all hotels that a manager can manage
+  """
+  def get_hotels_for_user(user) do
+    Backend.Schema.JoinHotelStaff
+    |> where(user_id: ^user.id)
+    |> preload(:hotel)
+    |> Repo.all()
+  end
 end

@@ -307,11 +307,13 @@ for i <- 1..10 do
       address: random_address.()
     })
 
-  # Hotels belong to our staff user
-  Backend.Repo.insert!(%Backend.Schema.JoinHotelStaff{
-    hotel: hotel,
-    user: staff
-  })
+  # Hotels have a 50/50 chance to belong to our staff user
+  if maybe.() do
+    Backend.Repo.insert!(%Backend.Schema.JoinHotelStaff{
+      hotel: hotel,
+      user: staff
+    })
+  end
 
   # Rooms have randomly 1 - 4 extra equipments
   for k <- 0..Enum.random(1..4) do
