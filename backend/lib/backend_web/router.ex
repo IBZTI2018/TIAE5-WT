@@ -57,10 +57,11 @@ defmodule BackendWeb.Router do
     end
 
     scope "/internal" do
+      import Phoenix.LiveDashboard.Router
+
       pipe_through(:browser)
       pipe_through(:internal_auth)
 
-      import Phoenix.LiveDashboard.Router
       live_dashboard("/dashboard", metrics: BackendWeb.Telemetry)
     end
   end
@@ -71,4 +72,8 @@ defmodule BackendWeb.Router do
 
     use Kaffy.Routes, scope: "/webadmin"
   end
+
+  # TODO: Figure out alternate way to demo this, the plug is only
+  #       intended for development and cannot be scope-nested!
+  # forward("/api/internal/sent_emails", Bamboo.SentEmailViewerPlug)
 end
