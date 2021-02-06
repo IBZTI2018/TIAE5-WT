@@ -133,7 +133,7 @@ class RegisterForm extends Component {
                             onChange={this.handleChange}
                             name="password"
                             className="form-control"
-                            placeholder="New Password (empty = unchanged)"
+                            placeholder="New Password"
                             type="password"
                         />
                         <input 
@@ -141,7 +141,7 @@ class RegisterForm extends Component {
                             onChange={this.handleChange}
                             name="passwordRepeat"
                             className="form-control"
-                            placeholder="Repeat New Password (empty = unchanged)"
+                            placeholder="Repeat New Password"
                             type="password"
                         />
                     </div>
@@ -154,7 +154,7 @@ class RegisterForm extends Component {
                             onChange={this.handleChange}
                             name="currentPassword"
                             className="form-control"
-                            placeholder="Current Password)"
+                            placeholder="Current Password"
                             type="password"
                         />
                     </div>
