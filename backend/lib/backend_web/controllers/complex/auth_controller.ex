@@ -31,6 +31,7 @@ defmodule BackendWeb.AuthController do
          user_args <- Map.take(args, ["firstname", "lastname", "title_id", "email"]),
          user_args <- Map.put(user_args, "contact_address_id", address.id),
          user_args <- Map.put(user_args, "password", Pbkdf2.hash_pwd_salt(password)),
+         user_args <- Map.put(user_args, "is_manager", false),
          {:ok, user} <- Database.generic_create(User, %{"data" => %{"attributes" => user_args}}) do
       sign_in_user(conn, user.email, password)
     end

@@ -63,21 +63,34 @@ admin =
     lastname: "Admin",
     email: "admin@admin.ch",
     password: Pbkdf2.hash_pwd_salt("password"),
+    is_manager: true,
     title: Enum.at(titles, 1),
     contact_address: address,
     billing_address: address
   })
 
-user =
+staff =
   Backend.Repo.insert!(%Backend.Schema.User{
     firstname: "IBZ",
-    lastname: "Manager",
+    lastname: "Customer",
     email: "manager@admin.ch",
     password: Pbkdf2.hash_pwd_salt("password"),
+    is_manager: true,
     title: Enum.at(titles, 1),
     contact_address: address,
     billing_address: address
   })
+
+Backend.Repo.insert!(%Backend.Schema.User{
+  firstname: "IBZ",
+  lastname: "Customer",
+  email: "customer@admin.ch",
+  password: Pbkdf2.hash_pwd_salt("password"),
+  is_manager: false,
+  title: Enum.at(titles, 2),
+  contact_address: address,
+  billing_address: address
+})
 
 # We insert some generic hotel extras
 hotel_equipments =
@@ -297,7 +310,7 @@ for i <- 1..10 do
   # Hotels belong to our staff user
   Backend.Repo.insert!(%Backend.Schema.JoinHotelStaff{
     hotel: hotel,
-    user: user
+    user: staff
   })
 
   # Rooms have randomly 1 - 4 extra equipments

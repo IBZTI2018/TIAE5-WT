@@ -33,6 +33,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:lastname, :string, null: false)
       add(:email, :string, null: false, size: 50)
       add(:password, :string, null: false)
+      add(:is_manager, :boolean, null: false, default: false)
       add(:contact_address_id, references("addresses"), null: false)
       add(:billing_address_id, references("addresses"), null: true)
       add(:title_id, references("titles"), null: false)
