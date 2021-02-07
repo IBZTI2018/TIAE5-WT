@@ -14,15 +14,7 @@ class Booking extends Component {
     return false;
   }
 
-  averageRating(ratings) {
-    let avg = 0;
-    if (ratings.length > 0) {
-      ratings = ratings.map((rating) => rating.score);
-      const sum = ratings.reduce((a, b) => a + b, 0);
-      avg = sum / ratings.length;
-    }
-    return avg;
-  }
+  
 
   render() {
     return (
@@ -38,11 +30,7 @@ class Booking extends Component {
             <div className="card-body">
               <h5 className="card-title">
                 {this.props.offer.hotelroom.hotel.hotelname}
-                <StarRating
-                  stars={this.averageRating(
-                    this.props.offer.hotelroom.hotel.ratings
-                  )}
-                />
+                <StarRating hotel={this.props.offer.hotelroom.hotel} />
               </h5>
               <hr />
               <p className="card-text small">
