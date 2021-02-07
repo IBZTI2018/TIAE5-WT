@@ -6,16 +6,23 @@ import * as roomSelectors from "../redux/rooms/selectors";
 import * as actions from "../redux/rooms/actions";
 
 class HotelRoomPage extends Component {
+
     componentDidMount(props) {
-        const { fetchRooms } = this.props;
-        
-        // Alternativ
-        // const fetchHotels = this.props.fetchHotels;
+        if (this.props.isManager) {
+            const { fetchRooms } = this.props;
 
-        // Check if user is logged in?
-        // if (!this.props.isLoggedIn) { ...}
+            // Alternativ
+            // const fetchRooms = this.props.fetchRooms;
 
-        fetchRooms();
+            fetchRooms();
+        }
+        else //if not an Manager of any Hotel go to Root
+        {
+            this.props.history.push({
+                pathname: "/",
+              });
+        }
+
     }
 
     render() {
@@ -26,7 +33,7 @@ class HotelRoomPage extends Component {
                     <div className="col-md-12">
                         {
                             this.props.hotelrooms.map(hotelrooms => (
-                                <HotelRoom data={hotelrooms} />
+                                <HotelRoom hotelrooms={hotelrooms} />
                             ))
                         }
                     </div>
@@ -38,7 +45,8 @@ class HotelRoomPage extends Component {
 
 const mapSelectors = (store) => ({
     hotelrooms: roomSelectors.getHotelRooms(store),
-    isLoggedIn: authSelectors.isLoggedIn(store)
+    isLoggedIn: authSelectors.isLoggedIn(store),
+    isManager: authSelectors.isManager(store)
 });
 
 const mapActions = { ...actions };

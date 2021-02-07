@@ -14,16 +14,13 @@ class HotelsPage extends Component {
             // Alternativ
             // const fetchHotels = this.props.fetchHotels;
 
-            // Check if user is logged in?
-            // if (!this.props.isLoggedIn) { ...}
-
             fetchHotels();
         }
-        else
+        else //if not an Manager of any Hotel go to Root
         {
             this.props.history.push({
                 pathname: "/",
-              });
+            });
         }
 
     }
@@ -31,12 +28,14 @@ class HotelsPage extends Component {
     render() {
         return (
             <div>
-                <h2>Hotel list: </h2>
+                <h2>
+                    Hotels of: {this.props.user.firstname}{" "}{this.props.user.lastname}
+                </h2>
                 <div className="row">
                     <div className="col-md-12">
                         {
                             this.props.hotels.map(hotel => (
-                                <Hotel data={hotel} />
+                                <Hotel hotels={hotel} />
                             ))
                         }
                     </div>
@@ -49,7 +48,8 @@ class HotelsPage extends Component {
 const mapSelectors = (store) => ({
     hotels: hotelSelectors.getHotels(store),
     isLoggedIn: authSelectors.isLoggedIn(store),
-    isManager: authSelectors.isManager(store)
+    isManager: authSelectors.isManager(store),
+    user: authSelectors.getUserData(store)
 });
 
 const mapActions = { ...actions };
