@@ -7,6 +7,7 @@ import auth from "./auth";
 import hotels from "./hotels";
 import hotelrooms from "./rooms";
 import hotelequipments from "./hotelequipments";
+import hotelroomequipments from "./hotelroomequipments";
 import titles from "./titles";
 import countries from "./countries";
 import layout from "./layout";
@@ -19,6 +20,7 @@ const reducers = {
   hotels,
   hotelrooms,
   hotelequipments,
+  hotelroomequipments,
   titles,
   countries,
   layout

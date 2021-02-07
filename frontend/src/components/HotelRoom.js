@@ -12,7 +12,7 @@ class HotelRoom extends Component {
 
     handlehotelroomequipment(event) {
         this.props.history.push({
-            pathname: '/roomequipments',
+            pathname: '/hotelroomequipments',
             state: {
                 hotelrooms: this.props.hotelrooms
             }
@@ -47,8 +47,8 @@ class HotelRoom extends Component {
                             </h5>
                             <p className="card-text">{this.props.hotelrooms.roomequipments}...Equipments not loading ?</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                            <a onClick={this.handlehotelroomequipment} className="btn btn-primary">Equipment overview</a><br></br><br></br>
-                            <a onClick={this.handleOffers} className="btn btn-primary">Show offers</a>
+                            <a onClick={this.handlehotelroomequipment} className="btn btn-primary">Room Equipment overview</a><br></br><br></br>
+                            <a onClick={this.handleOffers} className="btn btn-primary">Show Room offers</a>
                         </div>
                     </div>
                 </div>
