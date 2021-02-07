@@ -9,6 +9,7 @@ import hotelrooms from "./rooms";
 import hotelequipments from "./equipments";
 import titles from "./titles";
 import countries from "./countries";
+import layout from "./layout";
 
 let middlewares = [];
 const reducers = {
@@ -19,7 +20,8 @@ const reducers = {
   hotelrooms,
   hotelequipments,
   titles,
-  countries
+  countries,
+  layout
 }
 
 // Very elaborate check to make sure our store also works without the Redux Chrome addon

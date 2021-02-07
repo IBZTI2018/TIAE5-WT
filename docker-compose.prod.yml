@@ -1,0 +1,55 @@
+version: "3.2"
+
+services:
+  webserver:
+    build: ./webserver
+    ports:
+      - "10001:80"
+    links:
+      - frontend
+      - backend
+
+  backend:
+    build: ./backend
+    command: mix do deps.get, phx.server
+    environment:
+      - MIX_ENV=prod
+      - DATABASE_URL=ecto://root:supersecret@mysql/backend_dev
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+    volumes:
+      - ./backend:/app
+    ports:
+      - '4000'
+    links:
+      - mysql
+
+  frontend:
+    image: node:latest
+    environment: 
+      - NODE_ENV=production
+    working_dir: /code
+    volumes:
+      - ./frontend:/code
+      - node_modules:/code/node_modules/
+    command: bash -c "yarn install && yarn start"
+    ports: 
+      - '3000'
+
+  mysql:
+    image: mariadb:10.1  
+    environment:
+      - MYSQL_ROOT_PASSWORD=supersecret
+      - MYSQL_USER=backend
+      - MYSQL_PASSWORD=password
+    volumes:
+      - mariadbdata:/var/lib/mysql
+    ports:
+      - '3306'
+
+volumes:
+  mariadbdata:
+    driver: local
+  node_modules:
+    driver: local
+

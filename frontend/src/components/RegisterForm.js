@@ -32,12 +32,8 @@ class RegisterForm extends Component {
 
     componentWillMount() {
         const { fetchTitles, fetchCountries } = this.props;
-        if (this.presetNotLoaded(this.props.titles)) fetchTitles();
-        if (this.presetNotLoaded(this.props.countries)) fetchCountries();
-    }
-
-    presetNotLoaded(preset) {
-        return preset === undefined || (Array.isArray(preset) && preset.length === 0)
+        fetchTitles();
+        fetchCountries();
     }
 
     handleChange(event) {
@@ -193,7 +189,7 @@ class RegisterForm extends Component {
                             name="password"
                             className="form-control"
                             placeholder="Password"
-                            type="text"
+                            type="password"
                         />
                         <input 
                             value={this.state.passwordRepeat}
@@ -201,7 +197,7 @@ class RegisterForm extends Component {
                             name="passwordRepeat"
                             className="form-control"
                             placeholder="Repeat Password"
-                            type="text"
+                            type="password"
                         />
                     </div>
                     <div className="form-group">

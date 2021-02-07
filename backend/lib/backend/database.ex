@@ -135,12 +135,31 @@ defmodule Backend.Database do
   end
 
   @doc """
+  Update a user directly
+  """
+  def update_user(user, attrs) do
+    user
+    |> Backend.Schema.User.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
   Get all hotels that a manager can manage
   """
   def get_hotels_for_user(user) do
     Backend.Schema.JoinHotelStaff
     |> where(user_id: ^user.id)
     |> preload(:hotel)
+    |> Repo.all()
+  end
+
+  @doc """
+  Get a list of offers
+  """
+  def get_offers_list(ids) do
+    Backend.Schema.Offer
+    |> where([o], o.id in ^ids)
+    |> preload([{:hotelroom, :hotel}])
     |> Repo.all()
   end
 end

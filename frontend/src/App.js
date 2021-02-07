@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 
 // Components
-import { SidebarOverlay, SidebarPanel } from './components/Sidebar';
+import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Breadcrumbs from './components/Breadcrumbs';
 import CoronaWarning from './components/CoronaWarning';
@@ -13,7 +13,7 @@ import OffersPage from './pages/OffersPage';
 import HotelsPage from './pages/HotelsPage';
 import HotelRoomPage from './pages/HotelRoomPage';
 import HotelRoomEquipmentPage from './pages/HotelRoomEquipmentPage';
-import UserSettingsPage from './pages/UserSettingsPage';
+import UserPage from './pages/UserPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ReservationPage from './pages/ReservationPage';
@@ -25,12 +25,11 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <SidebarOverlay />
+                <Sidebar />
                 <Navbar />
                 <CoronaWarning />
                 <Breadcrumbs />
                 <main role="main" className="container">
-                    <SidebarPanel />
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route path="/offers" component={OffersPage} />
@@ -41,7 +40,7 @@ function App() {
                         
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
-                        <Route path="/account" component={UserSettingsPage} />
+                        <Route path="/user" component={UserPage} />
 
                         <Route path="/reservation" component={ReservationPage} />
                         <Route path="/rating" component={RatingPage} />

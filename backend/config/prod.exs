@@ -13,6 +13,13 @@ config :backend, BackendWeb.Endpoint,
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :backend, Backend.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: {:system, "SENDGRID_API_KEY"},
+  hackney_opts: [
+    recv_timeout: :timer.minutes(1)
+  ]
+
 # Do not print debug messages in production
 config :logger, level: :info
 

@@ -29,6 +29,15 @@ defmodule BackendWeb.UserController do
     end
   end
 
+  def show_self(conn, _args) do
+    with true <- conn.assigns.logged_in do
+      data = Database.generic_item(User, conn.assigns.user.id, conn.assigns.jsonapi_query)
+      render(conn, "show.json", %{data: data})
+    else
+      false -> {:error, :forbidden}
+    end
+  end
+
   # Unused, creating users is handled via complex/auth
   def create(conn, args) do
     with {:ok, data} <- Database.generic_create(User, args) do
@@ -41,9 +50,25 @@ defmodule BackendWeb.UserController do
   def update(conn, args) do
     # Only a logged in user may update his own profile
     # The user must re-provide his current password correctly
-    with true <- conn.assigns.user.id == args["id"],
-         true <- Pbkdf2.verify_pass(args["password"], conn.assigns.user.password),
-         {:ok, data} <- Database.generic_update(User, args["id"], args) do
+    data = args["data"]
+    attrs = data["attributes"]
+    current_password = attrs["currentPassword"]
+
+    new_attrs = Map.delete(attrs, "currentPassword")
+
+    new_attrs =
+      if new_attrs["password"] == nil || new_attrs["password"] == "" do
+        Map.delete(new_attrs, "password")
+      else
+        Map.put(new_attrs, "password", Pbkdf2.hash_pwd_salt(new_attrs["password"]))
+      end
+
+    new_data = Map.put(data, "attributes", new_attrs)
+    new_args = Map.put(args, "data", new_data)
+
+    with true <- "#{conn.assigns.user.id}" == args["data"]["id"],
+         true <- Pbkdf2.verify_pass(current_password, conn.assigns.user.password),
+         {:ok, data} <- Database.generic_update(User, args["id"], new_args) do
       render(conn, "show.json", %{data: data})
     else
       false -> {:error, :forbidden}

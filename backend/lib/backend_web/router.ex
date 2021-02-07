@@ -1,25 +1,44 @@
 defmodule BackendWeb.Router do
   use BackendWeb, :router
 
+  import Plug.BasicAuth
+
+  @env Mix.env()
+
+  pipeline :browser do
+    plug(:fetch_session)
+    plug(:protect_from_forgery)
+    plug(:accepts, ["html"])
+  end
+
   pipeline :api do
     plug(:accepts, ["json"])
   end
 
-  pipeline :auth do
+  pipeline :app_auth do
     plug(BackendWeb.Plugs.Authorizer)
   end
 
-  scope "/api", BackendWeb do
-    pipe_through(:api)
+  pipeline :internal_auth do
+    # TODO: Move this to environment variables before deployment!
+    plug(:basic_auth, username: "admin", password: "ibz2022")
+  end
 
+  scope "/api", BackendWeb do
     scope "/v1" do
-      pipe_through(:auth)
+      pipe_through(:api)
+      pipe_through(:app_auth)
 
       # Ressources managed by admins via Kaffy Dashboard
       resources("/titles", TitleController, only: [:index, :show])
       resources("/countries", CountryController, only: [:index, :show])
       resources("/hotels", HotelController, only: [:index, :show])
       resources("/hotelequipments", HotelequipmentController, only: [:index, :show])
+
+      resources("/hotel_hotelequipments", JoinHotelHotelequipmentController,
+        only: [:create, :delete]
+      )
+
       resources("/roomequipments", RoomequipmentController, only: [:index, :show])
       resources("/priceranges", PricerangeController, only: [:index, :show])
 
@@ -29,7 +48,8 @@ defmodule BackendWeb.Router do
       resources("/addresses", AddressController, only: [:index, :show])
 
       # Generic, full REST ressources with permission scope
-      resources("/users", UserController, except: [:edit, :new, :index, :create, :delete])
+      resources("/users", UserController, only: [:update])
+      get("/users/self", UserController, :show_self)
 
       # TODO: Complete these - sven
       resources("/hotelrooms", HotelroomController, except: [:edit, :new])
@@ -39,26 +59,34 @@ defmodule BackendWeb.Router do
     end
 
     scope "/complex" do
+      pipe_through(:api)
+
       post("/signup", AuthController, :sign_up)
       post("/signin", AuthController, :sign_in)
+      post("/change_address", AuthController, :change_address)
+      get("/search_hotels", SearchController, :search_hotels)
+    end
+
+    scope "/internal" do
+      import Phoenix.LiveDashboard.Router
+
+      pipe_through(:browser)
+      pipe_through(:internal_auth)
+
+      live_dashboard("/dashboard", metrics: BackendWeb.Telemetry)
     end
   end
 
-  # Enables LiveDashboard and Kaffy dashboard only for development
-  #
-  # If you want to use the LiveDashboard in production, you should put
-  # it behind authentication and allow only admins to access it.
-  # If your application does not have an admins-only section yet,
-  # you can use Plug.BasicAuth to set up some basic authentication
-  # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  scope "/" do
+    pipe_through(:browser)
+    pipe_through(:internal_auth)
 
-    scope "/" do
-      pipe_through([:fetch_session, :protect_from_forgery])
-      live_dashboard("/livedash", metrics: BackendWeb.Telemetry)
-    end
+    use Kaffy.Routes, scope: "/webadmin"
+  end
 
-    use Kaffy.Routes, scope: "/kaffydash"
+  # TODO: Figure out alternate way to demo this, the plug is only
+  #       intended for development and cannot be scope-nested!
+  if @env == :dev do
+    forward("/api/internal/sent_emails", Bamboo.SentEmailViewerPlug)
   end
 end

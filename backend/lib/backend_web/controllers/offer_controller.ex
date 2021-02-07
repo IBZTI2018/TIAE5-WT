@@ -7,8 +7,8 @@ defmodule BackendWeb.OfferController do
   alias BackendWeb.OfferView
 
   plug(JSONAPI.QueryParser,
-    filter: ~w(validitystart, validityend),
-    sort: ~w(validitystart, validityend),
+    filter: ~w(validitystart validityend),
+    sort: ~w(validitystart validityend),
     view: OfferView
   )
 

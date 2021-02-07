@@ -44,11 +44,7 @@ class Offer extends Component {
             <div className="card-body">
               <h5 className="card-title">
                 {this.props.offer.hotelroom.hotel.hotelname}
-                <StarRating
-                  stars={this.averageRating(
-                    this.props.offer.hotelroom.hotel.ratings
-                  )}
-                />
+                <StarRating hotel={this.props.offer.hotelroom.hotel} />
               </h5>
               <p className="card-text small">
                 <p className="card-text small">
