@@ -1,0 +1,3 @@
+export default {
+  FETCH_PRICERANGES: "FETCH_PRICERANGES",
+};

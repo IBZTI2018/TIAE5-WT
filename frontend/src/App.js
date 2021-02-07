@@ -18,6 +18,7 @@ import ReservationPage from './pages/ReservationPage';
 import RatingPage from './pages/RatingPage';
 import BookingPage from './pages/BookingPage';
 import ConfirmBookingPage from './pages/ConfirmBookingPage';
+import HotelroomsPage from './pages/HotelroomsPage';
 
 function App() {
     return (
@@ -32,7 +33,8 @@ function App() {
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route path="/offers" component={OffersPage} />
-                        <Route path="/hotels" component={HotelsPage} />
+                        <Route exact path="/hotels" component={HotelsPage} />
+                        <Route path="/hotels/:id/hotelrooms" component={HotelroomsPage} />
                         
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />

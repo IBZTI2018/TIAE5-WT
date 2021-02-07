@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 
 class Hotel extends Component {
     render() {
@@ -14,6 +16,7 @@ class Hotel extends Component {
                             <p className="card-text">{this.props.data.description}</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                             <a href="#" className="btn btn-primary">Hotel overview</a>
+                            <Link to={'/hotels/' + this.props.data.id + '/hotelrooms/create'} className="btn btn-warning ml-2">Create Hotel room</Link>
                         </div>
                     </div>
                 </div>
@@ -22,4 +25,4 @@ class Hotel extends Component {
     }
 }
 
-export default Hotel;
+export default withRouter(Hotel);
