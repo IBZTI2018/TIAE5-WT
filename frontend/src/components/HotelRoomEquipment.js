@@ -30,7 +30,7 @@ class HotelRoomEquipment extends Component {
                     <div className="col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">
-                                {this.props.data.hoteleroomquipments}
+                                {this.props.data.hoteleroomequipments}
                                 <StarRating stars={this.props.data.stars} />
                             </h5>
                             <p className="card-text">{this.props.data.description}...Description</p>
