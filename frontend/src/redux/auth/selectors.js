@@ -1,3 +1,5 @@
+import { toJSONTree } from '../json';
+
 // States
 export const authState = store => store.auth;
 
@@ -5,3 +7,5 @@ export const authState = store => store.auth;
 export const isLoggedIn = store => authState(store).isLoggedIn;
 export const getAuthToken = store => authState(store).authToken;
 export const getUserData = store => authState(store).user;
+export const getUserSelf = store => toJSONTree(authState(store).self);
+export const getUserSelfRaw = store => authState(store).self;

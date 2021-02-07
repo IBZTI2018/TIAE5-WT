@@ -135,6 +135,15 @@ defmodule Backend.Database do
   end
 
   @doc """
+  Update a user directly
+  """
+  def update_user(user, attrs) do
+    user
+    |> Backend.Schema.User.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
   Get all hotels that a manager can manage
   """
   def get_hotels_for_user(user) do

@@ -67,7 +67,7 @@ function SidebarOverlay() {
                     <h4 className="d-inline-block text-light mb-0 float-right">Account</h4>
                 </header>
                 <div className="bs-canvas-content px-3 py-5">
-                    <a href="/account" >My Account</a>
+                    <a href="/user" >My Account</a>
                 </div>
                 <div className="bs-canvas-content px-3 py-5">
                     <a href="/reservation" >Reservation overview</a>

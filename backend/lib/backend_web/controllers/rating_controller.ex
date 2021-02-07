@@ -7,7 +7,7 @@ defmodule BackendWeb.RatingController do
   alias BackendWeb.RatingView
 
   plug(JSONAPI.QueryParser,
-    filter: ~w(score, anonymous, published),
+    filter: ~w(score anonymous published),
     sort: ~w(score),
     view: RatingView
   )
