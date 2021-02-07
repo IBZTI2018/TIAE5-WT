@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import * as actions from '../redux/auth/actions';
-import * as toast from '../toast';
+import * as authActions from "../redux/auth/actions";
+import * as layoutActions from "../redux/layout/actions";
+import * as toast from "../toast";
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-  
+
     this.state = {
-      usermail: '',
-      password: ''
-    }
+      usermail: "",
+      password: "",
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event) {
@@ -28,7 +29,8 @@ class LoginForm extends Component {
     authenticateUser(this.state.usermail, this.state.password)
       .then(() => {
         toast.success("Successfully logged in!");
-        this.props.history.push({pathname: "/"});
+        this.props.history.push({ pathname: "/" });
+        setTimeout(() => this.props.openSidebar(), 1000);
       })
       .catch((error) => {
         console.error(error);
@@ -42,7 +44,10 @@ class LoginForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group input-group">
             <div className="input-group-prepend">
-              <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
+              <span className="input-group-text">
+                {" "}
+                <i className="fa fa-envelope"></i>{" "}
+              </span>
             </div>
             <input
               name="usermail"
@@ -55,7 +60,10 @@ class LoginForm extends Component {
           </div>
           <div className="form-group input-group">
             <div className="input-group-prepend">
-              <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
+              <span className="input-group-text">
+                {" "}
+                <i className="fa fa-lock"></i>{" "}
+              </span>
             </div>
             <input
               name="password"
@@ -67,7 +75,9 @@ class LoginForm extends Component {
             />
           </div>
           <div className="form-group">
-              <button type="submit" className="btn btn-primary btn-block">Login</button>
+            <button type="submit" className="btn btn-primary btn-block">
+              Login
+            </button>
           </div>
         </form>
       </div>
@@ -75,4 +85,6 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, { ...actions })(withRouter(LoginForm));
+export default connect(null, { ...authActions, ...layoutActions })(
+  withRouter(LoginForm)
+);
