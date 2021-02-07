@@ -31,7 +31,7 @@ defmodule BackendWeb.SearchController do
 
   today = DateTime.utc_now
   validitystart = [today.year, today.month, today.day] |> Enum.map(&to_string/1) |> Enum.map(&String.pad_leading(&1, 2, "0")) |> Enum.join("-")
-  validityend = today |> Date.add(7)
+  validityend = today |> Date.add(365)
   validityend = [validityend.year, validityend.month, validityend.day] |> Enum.map(&to_string/1) |> Enum.map(&String.pad_leading(&1, 2, "0")) |> Enum.join("-")
 
   @optional_params %{"validitystart" => validitystart, "validityend" => validityend, "persons" => 1}

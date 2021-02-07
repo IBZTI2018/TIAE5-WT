@@ -65,6 +65,19 @@ class Offer extends Component {
                   Offer valid until: <b>{this.props.offer.validityend}</b>
                 </small>
               </p>
+              <p className="card-text">
+                <small className="text-muted">  
+                  Room for: 
+                  <b className="ml-1">
+                      {this.props.offer.hotelroom.persons}
+                      {this.props.offer.hotelroom.persons == 1? (
+                          <label className="ml-1">Person</label>
+                      ): (
+                          <label className="ml-1">Persons</label>
+                      )}
+                  </b>
+                </small>
+              </p>
               <a onClick={this.handleBooking} className="btn btn-primary">
                 <b>CHF {this.props.offer.price}</b>
               </a>
