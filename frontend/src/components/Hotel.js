@@ -23,7 +23,7 @@ class Hotel extends Component {
 
     handlehotelequipment(event) {
         this.props.history.push({
-            pathname: '/roomequipments',
+            pathname: '/hotelequipments',
             state: {
                 hotels: this.props.hotels
             }
@@ -32,15 +32,6 @@ class Hotel extends Component {
         return false;
     }
 
-    averageRating(ratings) {
-        let avg = 0;
-        if (ratings.length > 0) {
-          ratings = ratings.map((rating) => rating.score);
-          const sum = ratings.reduce((a, b) => a + b, 0);
-          avg = sum / ratings.length;
-        }
-        return avg;
-      }
 
     render() {
         return (
@@ -58,7 +49,7 @@ class Hotel extends Component {
                             
                             <p className="card-text">{this.props.hotels.hotelequipment}...Hotelequipment how to show here ?or just any description from hotel ?</p>
                             <p className="card-text">{this.props.hotels.staff}...Hotelstaff how to show here ?</p>
-                            <p className="card-text">{this.props.hotels.rating}...Hotelrating how to showupon StarRating Component ?</p>
+                            <p className="card-text">{this.props.hotels.rating}...STARS -- Hotelrating how to show up on StarRating Component, rating is wrong ?</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago  and Start arent right assigned...</small></p>
                             <a onClick={this.handlehotelrooms} className="btn btn-primary">Show Hotel Rooms</a> <br></br> <br></br>
                             <a onClick={this.handlehotelequipment} className="btn btn-primary">Show Hotelequipment</a>

@@ -1,3 +1,0 @@
-export default {
-  SET_ROOM_EQUIPMENT_LIST: "SET_ROOM_EQUIPMENT_LIST"
-};

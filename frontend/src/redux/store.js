@@ -6,7 +6,7 @@ import offers from "./offers";
 import auth from "./auth";
 import hotels from "./hotels";
 import hotelrooms from "./rooms";
-import hotelequipments from "./equipments";
+import hotelequipments from "./hotelequipments";
 import titles from "./titles";
 import countries from "./countries";
 import layout from "./layout";

@@ -12,7 +12,7 @@ import HomePage from './pages/HomePage';
 import OffersPage from './pages/OffersPage';
 import HotelsPage from './pages/HotelsPage';
 import HotelRoomPage from './pages/HotelRoomPage';
-import HotelRoomEquipmentPage from './pages/HotelRoomEquipmentPage';
+import HotelEquipmentPage from './pages/HotelEquipmentPage';
 import UserPage from './pages/UserPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
@@ -36,7 +36,7 @@ function App() {
                         <Route path="/hotels" component={HotelsPage} />
 
                         <Route path="/hotelrooms" component={HotelRoomPage} />
-                        <Route path="/roomequipments" component={HotelRoomEquipmentPage} />
+                        <Route path="/hotelequipments" component={HotelEquipmentPage} />
                         
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />

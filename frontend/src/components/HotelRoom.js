@@ -37,7 +37,7 @@ class HotelRoom extends Component {
             <div className="card mb-3 p-3">
                 <div className="row g-0">
                     <div className="col-md-4">
-                        <img className="img-fluid rounded" src={this.props.hotelrooms.image} alt="How do i get the Image here?" />
+                        <img className="img-fluid rounded" src={this.props.hotelrooms.image} alt="How do i get the Hotel-Image here?" />
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">

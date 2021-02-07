@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import HotelRoomEquipment from '../components/HotelRoomEquipment';
+import HotelEquipment from '../components/HotelEquipment';
 import { connect } from "react-redux";
 import * as authSelectors from "../redux/auth/selectors";
-import * as equipmentSelectors from "../redux/equipments/selectors";
-import * as actions from "../redux/equipments/actions";
+import * as equipmentSelectors from "../redux/hotelequipments/selectors";
+import * as actions from "../redux/hotelequipments/actions";
 
-class HotelRoomEquipmentPage extends Component {
+class HotelEquipmentPage extends Component {
     componentDidMount(props) {
-        const { fetchRoomEquipment } = this.props;
+        const { fetchHotelEquipment } = this.props;
         
         // Alternativ
         // const fetchHotels = this.props.fetchHotels;
@@ -15,18 +15,18 @@ class HotelRoomEquipmentPage extends Component {
         // Check if user is logged in?
         // if (!this.props.isLoggedIn) { ...}
 
-        fetchRoomEquipment();
+        fetchHotelEquipment();
     }
 
     render() {
         return (
             <div>
-                <h2>Equipment list: </h2>
+                <h2>Hotelequipment list: </h2>
                 <div className="row">
                     <div className="col-md-12">
                         {
                             this.props.hotelequipments.map(hotelequipments => (
-                                <HotelRoomEquipment data={hotelequipments} />
+                                <HotelEquipment data={hotelequipments} />
                             ))
                         }
                     </div>
@@ -37,10 +37,10 @@ class HotelRoomEquipmentPage extends Component {
 }
 
 const mapSelectors = (store) => ({
-    hotelequipments: equipmentSelectors.getRoomEquipment(store),
+    hotelequipments: equipmentSelectors.getHotelEquipment(store),
     isLoggedIn: authSelectors.isLoggedIn(store)
 });
 
 const mapActions = { ...actions };
 
-export default connect(mapSelectors, mapActions)(HotelRoomEquipmentPage);
+export default connect(mapSelectors, mapActions)(HotelEquipmentPage);
