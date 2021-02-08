@@ -1,7 +1,6 @@
 
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
-import search from "./search";
 import offers from "./offers";
 import auth from "./auth";
 import hotels from "./hotels";
@@ -11,7 +10,6 @@ import layout from "./layout";
 
 let middlewares = [];
 const reducers = {
-  search,
   offers,
   auth,
   hotels,

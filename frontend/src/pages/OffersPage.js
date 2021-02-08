@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Offer from "../components/Offer";
+import Loader from "../components/Loader";
 import { connect } from "react-redux";
 import * as selectors from "../redux/offers/selectors";
 import * as actions from "../redux/offers/actions";
@@ -12,9 +13,20 @@ class OffersPage extends Component {
     fetchOffers();
   }
 
+  renderOffers() {
+    const { offers } = this.props;
+    if (offers.length > 0) {
+      return offers.map((offer) => (<Offer offer={offer} />) )
+    }
+    else {
+      return (<p>There are currently no offers on the server</p>)
+    }
+  }
+
+
   render() {
     // State
-    const { offers } = this.props;
+    
 
     return (
       <div>
@@ -24,12 +36,10 @@ class OffersPage extends Component {
             <SearchFilter />
           </div>
           <div className="col-md-8">
-            {offers.length > 0 && offers.map((offer) => (
-              <Offer offer={offer} />
-            ))}
-            {offers.length == 0 && (
-              <p>There are currently no offers on the server</p>
+            {this.props.isFetching && (
+              <Loader />
             )}
+            {!this.props.isFetching && this.renderOffers() }
           </div>
         </div>
       </div>
@@ -39,6 +49,7 @@ class OffersPage extends Component {
 
 const mapSelectors = (store) => ({
   offers: selectors.getOffers(store),
+  isFetching: selectors.isFetching(store)
 });
 
 const mapActions = { ...actions };
