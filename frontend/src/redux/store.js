@@ -1,7 +1,6 @@
 
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
-import search from "./search";
 import offers from "./offers";
 import auth from "./auth";
 import hotels from "./hotels";
@@ -10,10 +9,10 @@ import countries from "./countries";
 import hotelrooms from "./hotelrooms";
 import priceranges from "./priceranges";
 import roomequipments from "./roomequipments";
+import layout from "./layout";
 
 let middlewares = [];
 const reducers = {
-  search,
   offers,
   auth,
   hotels,
@@ -21,7 +20,8 @@ const reducers = {
   countries,
   hotelrooms,
   priceranges,
-  roomequipments
+  roomequipments,
+  layout
 }
 
 // Very elaborate check to make sure our store also works without the Redux Chrome addon

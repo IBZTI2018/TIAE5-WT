@@ -3,6 +3,9 @@ import { withRouter } from 'react-router';
 import SearchInput from './SearchInput';
 import Datepicker from './Datepicker';
 import GuestCounter from './GuestCounter';
+import { connect } from "react-redux";
+import * as selectors from "../../redux/offers/selectors";
+import * as actions from "../../redux/offers/actions";
 
 class SearchFilter extends Component {
     constructor(props) {
@@ -11,7 +14,7 @@ class SearchFilter extends Component {
     }
     
     handleSubmit(event) {
-        this.props.history.push('/offers');
+        this.props.fetchOffers();
         event.preventDefault();
     }
 
@@ -41,4 +44,12 @@ class SearchFilter extends Component {
     }
 }
 
-export default withRouter(SearchFilter);
+const mapSelectors = (store) => ({
+    offers: selectors.getOffers(store),
+    isFetching: selectors.isFetching(store)
+});
+
+const mapActions = { ...actions };
+
+export default connect(mapSelectors, mapActions)(withRouter(SearchFilter));
+  

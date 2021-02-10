@@ -34,6 +34,11 @@ defmodule BackendWeb.Router do
       resources("/countries", CountryController, only: [:index, :show])
       resources("/hotels", HotelController, only: [:index, :show])
       resources("/hotelequipments", HotelequipmentController, only: [:index, :show])
+
+      resources("/hotel_hotelequipments", JoinHotelHotelequipmentController,
+        only: [:create, :delete]
+      )
+
       resources("/roomequipments", RoomequipmentController, only: [:index, :show])
       resources("/priceranges", PricerangeController, only: [:index, :show])
 
@@ -59,6 +64,7 @@ defmodule BackendWeb.Router do
       post("/signup", AuthController, :sign_up)
       post("/signin", AuthController, :sign_in)
       post("/change_address", AuthController, :change_address)
+      get("/search_hotels", SearchController, :search_hotels)
     end
 
     scope "/internal" do

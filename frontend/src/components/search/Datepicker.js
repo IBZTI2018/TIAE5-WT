@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { DateRangePicker } from 'react-dates';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import * as selectors from '../../redux/search/selectors';
-import * as actions from '../../redux/search/actions';
+import * as selectors from '../../redux/offers/selectors';
+import * as actions from '../../redux/offers/actions';
 
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';

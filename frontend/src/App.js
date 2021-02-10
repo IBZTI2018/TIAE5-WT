@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 
 // Components
-import { SidebarOverlay, SidebarPanel } from './components/Sidebar';
+import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Breadcrumbs from './components/Breadcrumbs';
 import CoronaWarning from './components/CoronaWarning';
@@ -24,12 +24,11 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <SidebarOverlay />
+                <Sidebar />
                 <Navbar />
                 <CoronaWarning />
                 <Breadcrumbs />
                 <main role="main" className="container">
-                    <SidebarPanel />
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route path="/offers" component={OffersPage} />
