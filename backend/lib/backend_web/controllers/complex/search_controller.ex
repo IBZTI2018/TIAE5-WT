@@ -23,7 +23,7 @@ defmodule BackendWeb.SearchController do
     WHERE
       (h.hotelname LIKE '%$1%' OR c.cityname LIKE '%$1%')
       AND
-      (o.validitystart >= '$2' AND o.validityend <= '$3')
+      (o.validitystart <= '$2' AND o.validityend <= '$3' AND o.validityend >= '$2')
       AND
       (hr.persons = $4)
     ;

@@ -39,6 +39,10 @@ defmodule BackendWeb.Router do
         only: [:create, :delete]
       )
 
+      resources("/hotelroom_roomequipments", JoinHotelroomRoomequipmentController,
+        only: [:create, :delete]
+      )
+
       resources("/roomequipments", RoomequipmentController, only: [:index, :show])
       resources("/priceranges", PricerangeController, only: [:index, :show])
 

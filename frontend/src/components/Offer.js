@@ -62,6 +62,8 @@ class Offer extends Component {
               </p>
               <p className="card-text">
                 <small className="text-muted">
+                  Offer valid from: <b>{this.props.offer.validitystart}</b>
+                  <br/>
                   Offer valid until: <b>{this.props.offer.validityend}</b>
                 </small>
               </p>
