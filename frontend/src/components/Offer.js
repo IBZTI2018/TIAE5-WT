@@ -38,14 +38,7 @@ class Offer extends Component {
     }
     return avg;
   }
-
-  renderStars(hotel) {
-    if (!hotel) return (<span></span>);
-    if (!hotel.hotelcategory.stars) return (<span></span>);
-    const text = "★".repeat(hotel.hotelcategory.stars);
-    return (<span class="hotel-stars"> {text} </span>)
-  }
-
+  
   render() {
     return (
       <div className="card mb-3 p-3">
