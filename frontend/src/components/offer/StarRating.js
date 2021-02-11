@@ -28,6 +28,9 @@ export default class StarRating extends Component {
             size={20}
             color="grey"
             activeColor="#ffd700"
+            emptyIcon={<i></i>}
+            halfIcon={<i className="far fa-heart"></i>}
+            fullIcon={<i className="fa fa-heart"></i>}
           />
         )}
         {!this.props.feedback && (
@@ -36,6 +39,9 @@ export default class StarRating extends Component {
             size={16}
             color="#ffd700"
             activeColor="#ffd700"
+            emptyIcon={<i></i>}
+            halfIcon={<i className="far fa-heart"></i>}
+            fullIcon={<i className="fa fa-heart"></i>}
           />
         )}
       </div>
