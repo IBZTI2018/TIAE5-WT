@@ -10,7 +10,7 @@ class Booking extends Component {
 
     this.state = {
       startDate: moment(),
-      endDate: moment(),
+      endDate: moment().add(1, 'd'),
       focus: null
     }
 
