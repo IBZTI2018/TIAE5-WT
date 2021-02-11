@@ -61,6 +61,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
     create table("hotels") do
       add(:hotelname, :string, null: false)
       add(:image, :string, null: false)
+      add(:description, :string, null: true)
       add(:address_id, references("addresses"), null: false)
       add(:hotelcategory_id, references("hotelcategories"), null: false)
     end

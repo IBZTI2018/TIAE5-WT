@@ -345,6 +345,7 @@ for i <- 1..10 do
     Backend.Repo.insert!(%Backend.Schema.Hotel{
       hotelname: random_hotel_name.(),
       image: "https://placedog.net/640/480?id=#{i}",
+      description: Faker.Lorem.paragraph(10),
       address: random_address.(),
       hotelcategory: Enum.random(hotel_categories)
     })
