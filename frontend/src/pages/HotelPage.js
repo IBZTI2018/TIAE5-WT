@@ -44,13 +44,23 @@ class HotelPage extends Component {
           <div className="card">
             <h5 className="card-header">{this.props.hotel.hotelname}</h5>
             <div className="card-body">
-              <h5 className="card-title">
-                {this.props.hotel.hotelcategory.description}
-                {this.renderStars()}
-              </h5>
-              <p className="card-text">{this.props.hotel.description}</p>
-
-              <a href="#" className="btn btn-primary" onClick={this.handleBooking}>Book here!</a>
+              <div className="row g-0">
+                <div className="col-md-4">
+                  <img
+                    className="img-fluid rounded"
+                    src={this.props.hotel.image}
+                    alt="..."
+                  />
+                </div>
+                <div className="col-md-8">
+                  <h5 className="card-title">
+                    {this.props.hotel.hotelcategory.description}
+                    {this.renderStars()}
+                  </h5>
+                  <p className="card-text">{this.props.hotel.description}</p>
+                  <a href="#" className="btn btn-primary" onClick={this.handleBooking}>Book here!</a>
+                </div>
+              </div>
 
               <hr />
 
