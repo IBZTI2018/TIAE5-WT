@@ -10,11 +10,12 @@ defmodule Backend.Database do
   Get a generic list of a ressource and apply all common JSON-API query params.
   This does not currently support pagination due to the scope of the project.
   """
-  def generic_list(schema, params) do
+  def generic_list(schema, params, filter \\ & &1) do
     schema
     |> apply_filter(params.filter)
     |> apply_sort(params.sort)
     |> apply_preloads(params.include)
+    |> filter.()
     |> Repo.all()
   end
 
