@@ -1,5 +1,6 @@
 defmodule BackendWeb.ReservationController do
   use BackendWeb, :controller
+  require Ecto.Query
 
   alias Backend.Database
   alias Backend.Schema.Reservation
@@ -15,8 +16,17 @@ defmodule BackendWeb.ReservationController do
   action_fallback(BackendWeb.FallbackController)
 
   def index(conn, _args) do
-    data = Database.generic_list(Reservation, conn.assigns.jsonapi_query)
-    render(conn, "index.json", %{data: data})
+    with true <- conn.assigns.logged_in do
+      # Scope request to only include reservations for the current user
+      data =
+        Database.generic_list(Reservation, conn.assigns.jsonapi_query, fn query ->
+          query |> Ecto.Query.where(user_id: ^conn.assigns.user.id)
+        end)
+
+      render(conn, "index.json", %{data: data})
+    else
+      false -> {:error, :unauthorized}
+    end
   end
 
   def show(conn, args) do
