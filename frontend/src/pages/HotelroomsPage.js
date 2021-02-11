@@ -24,7 +24,7 @@ class HotelroomsPage extends Component {
       }
     }
 
-    if (hotelrooms.length > 0) {
+    if (hotelrooms && hotelrooms.length > 0) {
       return hotelrooms.map((hotelroom) => (
         <HotelroomCard hotelroom={hotelroom} />
       ));
@@ -36,7 +36,9 @@ class HotelroomsPage extends Component {
   render() {
     return (
       <Switch>
-        <Route path={`${this.props.match.path}`}>{this.renderHotelrooms()}</Route>
+        <Route exact path={`${this.props.match.path}`}>
+          {this.renderHotelrooms()}
+        </Route>
         <Route path={`${this.props.match.path}/create`}>
           <h2 className="mt-4 mb-4">Create a new hotel room</h2>
           <HotelroomForm hotelId={this.props.match.params.id} />

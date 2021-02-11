@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link} from 'react-router-dom';
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
+import * as authSelectors from "../redux/auth/selectors";
 import * as layoutSelectors from "../redux/layout/selectors";
 import * as layoutActions from "../redux/layout/actions";
 
@@ -56,6 +57,11 @@ class Sidebar extends Component {
           <div className="bs-canvas-content px-3 py-5">
             <Link to="/user" onClick={this.handleLinkClose}>My Account</Link>
           </div>
+          {this.props.isManager && (
+            <div className="bs-canvas-content px-3 py-5">
+              <Link to="/hotels" onClick={this.handleLinkClose}>My Hotels</Link>
+            </div>
+          )}
           <div className="bs-canvas-content px-3 py-5">
             <Link to="/reservation" onClick={this.handleLinkClose}>Reservation overview</Link>
           </div>
@@ -67,6 +73,7 @@ class Sidebar extends Component {
 
 const mapSelectors = (store) => ({
   isSidebarActive: layoutSelectors.isSidebarActive(store),
+  isManager: authSelectors.getUserData(store).isManager
 });
 
 export default connect(mapSelectors, { ...layoutActions })(withRouter(Sidebar));
