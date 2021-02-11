@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import StarRating from "./offer/StarRating";
+import HotelStars from "./hotel/HotelStars";
 
 class Offer extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class Offer extends Component {
             <div className="card-body">
               <h5 className="card-title">
                 <a href="#" onClick={this.handleTitleClick}>{this.props.offer.hotelroom.hotel.hotelname}</a>
-                { this.renderStars(this.props.offer.hotelroom.hotel) }
+                <HotelStars hotel={this.props.offer.hotelroom.hotel} />
               </h5>
               <p className="card-text small">
                 <p className="card-text small">

@@ -24,7 +24,10 @@ class Review extends Component {
                 }
                 {
                   !this.state.review.anonymous &&
-                  <strong>Previous Guest</strong>
+                  <strong>
+                    {this.state.review.reservation.user.firstname} 
+                    {this.state.review.reservation.user.lastname}
+                  </strong>
                 }
                 </h5>
                 <ReactStars
