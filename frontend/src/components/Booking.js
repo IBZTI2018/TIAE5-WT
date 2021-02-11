@@ -21,10 +21,15 @@ class Booking extends Component {
       <div className="card mb-6 p-6">
         <div className="row g-0">
           <div className="col-md-4">
-            <img
-              className="img-fluid rounded"
-              src={this.props.offer.hotelroom.hotel.image}
-            />
+            <div className="mb-4">
+              <img
+                className="img-fluid rounded"
+                src={this.props.offer.hotelroom.hotel.image}
+              />
+            </div>
+            <a onClick={this.handleOffer} href="#">
+              &larr; Back to Offers
+            </a>
           </div>
           <div className="col-md-8">
             <div className="card-body">
@@ -32,6 +37,9 @@ class Booking extends Component {
                 {this.props.offer.hotelroom.hotel.hotelname}
                 <StarRating hotel={this.props.offer.hotelroom.hotel} />
               </h5>
+              <p>
+                {this.props.offer.hotelroom.hotel.description}
+              </p>
               <hr />
               <p className="card-text small">
                 Location:{" "}
@@ -65,16 +73,13 @@ class Booking extends Component {
             </div>
           </div>
         </div>
-        <a onClick={this.handleOffer} href="#">
-          ...Back to Offers
-        </a>
         <div>
           <button
-            className="btn btn-primary float-right mb-2 mr-1"
+            className="btn btn-primary float-right mb-2 mr-2"
             type="button"
             onClick="#Modal"
           >
-            make booking
+            Book Now!
           </button>
         </div>
       </div>
