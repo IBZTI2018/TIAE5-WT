@@ -1,11 +1,8 @@
 defmodule Backend.Repo.Migrations.AddBasicTables do
   use Ecto.Migration
 
-  # Safe cascade should use `:nilify_all` on delete but the MySQL
-  # adapter does not seem to support this at the moment!
-
   @simple_cascade [on_delete: :delete_all, on_update: :nothing]
-  @safe_cascade [on_delete: :nothing, on_update: :nothing]
+  @safe_cascade [on_delete: :nilify_all, on_update: :nothing]
 
   def change do
     create table("titles") do
@@ -43,7 +40,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:is_manager, :boolean, null: false, default: false)
       add(:contact_address_id, references("addresses"), null: false)
       add(:billing_address_id, references("addresses"), null: true)
-      add(:title_id, references("titles", @safe_cascade), null: false)
+      add(:title_id, references("titles", @safe_cascade), null: true)
     end
 
     create(unique_index("users", [:email]))
@@ -70,14 +67,14 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:image, :string, null: false)
       add(:description, :string, null: true)
       add(:address_id, references("addresses"), null: false)
-      add(:hotelcategory_id, references("hotelcategories", @safe_cascade), null: false)
+      add(:hotelcategory_id, references("hotelcategories", @safe_cascade), null: true)
     end
 
     create table("hotelrooms") do
       add(:roomname, :string, null: true)
       add(:roomnumber, :integer, null: false)
       add(:persons, :integer, null: false)
-      add(:pricerange_id, references("priceranges", @safe_cascade), null: false)
+      add(:pricerange_id, references("priceranges", @safe_cascade), null: true)
       add(:hotel_id, references("hotels", @simple_cascade), null: false)
     end
 
@@ -118,7 +115,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:checkin, :date, null: true)
       add(:checkout, :date, null: true)
       add(:paid, :boolean, null: false, default: false)
-      add(:offer_id, references("offers", @safe_cascade), null: false)
+      add(:offer_id, references("offers", @safe_cascade), null: true)
       add(:user_id, references("users", @simple_cascade), null: false)
     end
 
@@ -127,7 +124,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:comment, :string, null: true)
       add(:anonymous, :boolean, null: false, default: false)
       add(:published, :boolean, null: false, default: false)
-      add(:reservation_id, references("reservations", @safe_cascade), null: false)
+      add(:reservation_id, references("reservations", @safe_cascade), null: true)
       add(:hotel_id, references("hotels", @simple_cascade), null: false)
     end
 
