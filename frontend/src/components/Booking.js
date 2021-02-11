@@ -1,17 +1,30 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import StarRating from "./offer/StarRating";
+import { DateRangePicker } from 'react-dates';
+import moment from 'moment';
 
 class Booking extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      startDate: moment(),
+      endDate: moment().add(1, 'd'),
+      focus: null
+    }
+
     if (!this.props.offer) {
       // TODO: load offer!
     }
 
+    this.handleOnDatesChange = this.handleOnDatesChange.bind(this);
     this.handleOffer = this.handleOffer.bind(this);
     this.handleBooking = this.handleBooking.bind(this);
+  }
+
+  handleOnDatesChange = ({ startDate, endDate }) => {
+    this.setState({startDate, endDate});
   }
 
   handleOffer(event) {
@@ -23,6 +36,7 @@ class Booking extends Component {
   handleBooking(event) {
     event.preventDefault();
 
+    console.log(this.state)
     // TODO: Create booking here!
   }
 
@@ -63,7 +77,7 @@ class Booking extends Component {
                 Offer valid until: <b>{this.props.offer.validityend}</b>
               </p>
               <p className="card-text small">
-                Price: <b>CHF {this.props.offer.price}</b>
+                Price: <b><u>CHF {this.props.offer.price}</u></b>
               </p>
               <hr />
               <table className="table">
@@ -92,6 +106,21 @@ class Booking extends Component {
           </div>
           <div className="col-md-10">
             <h5>Book a stay now</h5>
+
+            Please chose the duration of your stay<br />
+            <DateRangePicker 
+                startDatePlaceholderText="From"
+                startDate={this.state.startDate}
+                startDateId="startDate"
+                onDatesChange={this.handleOnDatesChange}
+                endDatePlaceholderText="To"
+                endDate={this.state.endDate}
+                endDateId="endDate"
+                minDate = {moment()}
+                displayFormat="DD/MM/yyyy"
+                focusedInput={this.state.focus}
+                onFocusChange={focus => this.setState({ focus })}
+            />
           </div>
         </div>
 
