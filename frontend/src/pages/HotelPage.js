@@ -34,23 +34,23 @@ class HotelPage extends Component {
       if (!this.props.hotel) return (<span></span>);
       if (!this.props.hotel.hotelcategory.stars) return (<span></span>);
       const text = "★".repeat(this.props.hotel.hotelcategory.stars);
-      return (<span class="hotel-stars"> {text} </span>)
+      return (<span className="hotel-stars"> {text} </span>)
     }
 
     render() {
       return(
       <div>
         { this.state.hasLoadedHotelData &&
-          <div class="card">
-            <h5 class="card-header">{this.props.hotel.hotelname}</h5>
-            <div class="card-body">
-              <h5 class="card-title">
+          <div className="card">
+            <h5 className="card-header">{this.props.hotel.hotelname}</h5>
+            <div className="card-body">
+              <h5 className="card-title">
                 {this.props.hotel.hotelcategory.description}
                 {this.renderStars()}
               </h5>
-              <p class="card-text">{this.props.hotel.description}</p>
+              <p className="card-text">{this.props.hotel.description}</p>
 
-              <a href="#" class="btn btn-primary" onClick={this.handleBooking}>Book here!</a>
+              <a href="#" className="btn btn-primary" onClick={this.handleBooking}>Book here!</a>
 
               <hr />
 
