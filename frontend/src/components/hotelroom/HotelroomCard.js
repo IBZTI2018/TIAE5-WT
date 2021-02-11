@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import api from "../../redux/api";
+import { connect } from "react-redux";
+import * as actions from "../../redux/hotels/actions";
+import * as toast from '../../toast';
 
 class HotelroomCard extends Component {
   constructor(props) {
@@ -9,10 +12,12 @@ class HotelroomCard extends Component {
   }
 
   deleteHotelroom(event) {
+    const { fetchHotels } = this.props;
     let fakeHotelroom = api.create("hotelrooms");
     fakeHotelroom._base.id = this.hotelroom.id;
-    fakeHotelroom.delete(() => {
-      alert("Deleted");
+    fakeHotelroom.delete(() => { 
+      toast.success('The hotelroom was successfully deleted. Fetching list again.');
+      fetchHotels();
     });
     event.preventDefault();
     return false;
@@ -44,4 +49,6 @@ class HotelroomCard extends Component {
   }
 }
 
-export default HotelroomCard;
+const mapSelectors = (store) => ({})
+
+export default connect(mapSelectors, { ...actions })(HotelroomCard);

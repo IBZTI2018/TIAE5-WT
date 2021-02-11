@@ -7,6 +7,7 @@ import * as hotelroomsActions from "../../redux/hotelrooms/actions";
 import * as pricerangesActions from "../../redux/priceranges/actions";
 import * as roomequipmentsActions from "../../redux/roomequipments/actions";
 import * as toast from "../../toast";
+import api from "../../redux/api";
 
 class HotelroomForm extends Component {
   constructor(props) {
@@ -48,8 +49,15 @@ class HotelroomForm extends Component {
 
     const { createHotelroom } = this.props;
     createHotelroom({ ...this.state })
-      .then(() => {
+      .then((hotelroom) => {
+        for (let roomequipment of this.state.roomequipments) {
+          let fakeObj = api.create("hotelroom_roomequipments");
+          fakeObj.set("hotelroom_id", hotelroom._base.id);
+          fakeObj.set("roomequipment_id", roomequipment);
+          fakeObj.sync();
+        }
         toast.success("Successfully created a new hotelroom!");
+        
       })
       .catch((error) => {
         console.error(error);

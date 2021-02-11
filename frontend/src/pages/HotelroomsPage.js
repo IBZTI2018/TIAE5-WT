@@ -16,8 +16,6 @@ class HotelroomsPage extends Component {
     const { hotels } = this.props;
     let hotelrooms = [];
 
-    console.log(hotels);
-
     for (let hotel of hotels) {
       if (hotel.id == this.props.match.params.id) {
         hotelrooms = hotel.hotelrooms;
