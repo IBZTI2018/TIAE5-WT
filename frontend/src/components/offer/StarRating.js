@@ -27,21 +27,17 @@ export default class StarRating extends Component {
             onChange={this.props.feedback}
             size={20}
             color="grey"
-            activeColor="#ffd700"
-            emptyIcon={<i></i>}
-            halfIcon={<i className="far fa-heart"></i>}
-            fullIcon={<i className="fa fa-heart"></i>}
+            activeColor="#ef5350"
+            char="❤"
           />
         )}
         {!this.props.feedback && (
           <ReactStars
             count={this.getStars()}
             size={16}
-            color="#ffd700"
-            activeColor="#ffd700"
-            emptyIcon={<i></i>}
-            halfIcon={<i className="far fa-heart"></i>}
-            fullIcon={<i className="fa fa-heart"></i>}
+            color="#ef5350"
+            activeColor="#ef5350"
+            char="❤"
           />
         )}
       </div>
