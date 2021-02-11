@@ -27,8 +27,9 @@ class HotelPage extends Component {
   
     handleBooking(event) {
       event.preventDefault();
+      const encodedName = encodeURIComponent(this.props.hotel.hotelname)
 
-      // TODO: Redirect to search with predefined hotel name
+      this.props.history.push(`/offers?searchQuery=${encodedName}`);
     }
 
     render() {
