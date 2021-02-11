@@ -7,6 +7,7 @@ defmodule Backend.Schema.Hotelroom do
   alias Backend.Schema.Hotel
   alias Backend.Schema.Pricerange
   alias Backend.Schema.Roomequipment
+  alias Backend.Schema.Offer
 
   schema "hotelrooms" do
     field(:roomname, :string)
@@ -17,6 +18,7 @@ defmodule Backend.Schema.Hotelroom do
     belongs_to(:pricerange, Pricerange)
 
     many_to_many(:roomequipments, Roomequipment, join_through: "hotelroom_roomequipments")
+    has_many(:offers, Offer)
   end
 
   def changeset(%Hotelroom{} = hotelroom, attrs) do

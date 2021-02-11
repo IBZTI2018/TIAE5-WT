@@ -62,6 +62,11 @@ class Sidebar extends Component {
               <Link to="/hotels" onClick={this.handleLinkClose}>My Hotels</Link>
             </div>
           )}
+          {this.props.isManager && (
+            <div className="bs-canvas-content px-3 py-5">
+              <Link to="/my_offers" onClick={this.handleLinkClose}>My Offers</Link>
+            </div>
+          )}
           <div className="bs-canvas-content px-3 py-5">
             <Link to="/reservation" onClick={this.handleLinkClose}>Reservation overview</Link>
           </div>

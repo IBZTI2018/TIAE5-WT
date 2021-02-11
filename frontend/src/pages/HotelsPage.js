@@ -37,8 +37,7 @@ class HotelsPage extends Component {
 }
 
 const mapSelectors = (store) => ({
-    hotels: hotelSelectors.getHotels(store),
-    isLoggedIn: authSelectors.isLoggedIn(store)
+    hotels: hotelSelectors.getHotels(store)
 });
 
 export default connect(mapSelectors, {...actions})(HotelsPage);

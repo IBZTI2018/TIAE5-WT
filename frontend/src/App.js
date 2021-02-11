@@ -11,6 +11,7 @@ import CoronaWarning from "./components/CoronaWarning";
 // Pages
 import HomePage from './pages/HomePage';
 import OffersPage from './pages/OffersPage';
+import MyOffersPage from './pages/MyOffersPage';
 import HotelsPage from './pages/HotelsPage';
 import HotelPage from './pages/HotelPage';
 import UserPage from './pages/UserPage';
@@ -35,6 +36,9 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/offers" component={OffersPage} />
+
+              <Route path="/my_offers" component={MyOffersPage} />
+
               <Route exact path="/hotels" component={HotelsPage} />
               <Route exact path="/hotels" component={HotelsPage} />
               <Route path="/hotels/:id/hotelrooms" component={HotelroomsPage} />

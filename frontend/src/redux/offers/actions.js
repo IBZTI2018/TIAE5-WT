@@ -1,7 +1,14 @@
 import types from "./types";
+import api from "../api";
 import complexApi from "../complexApi";
 import store from "../store";
 import moment from "moment";
+
+export const createOffer = (newItem) => async (dispatch) => {
+  var offer = api.create("offers");
+  Object.keys(newItem).forEach((k) => offer.set(k, newItem[k]))
+  return offer.sync();
+};
 
 export const fetchOffers = () => async (dispatch) => {
   dispatch({ type: types.IS_FETCHING, payload: true });
@@ -17,7 +24,7 @@ export const fetchOffers = () => async (dispatch) => {
 
   return complexApi.find(
     "search_hotels",
-    {
+    { 
       query: store.getState().offers.searchQuery,
       ...validityGroup,
       persons: store.getState().offers.guestCounter,
@@ -26,7 +33,7 @@ export const fetchOffers = () => async (dispatch) => {
       resources = resources || [];
       const payload = resources.map((resource) => resource.toJSONTree());
       dispatch({ type: types.FETCH_OFFERS, payload });
-      setTimeout(() => dispatch({ type: types.IS_FETCHING, payload: false }), 1000);
+      setTimeout(() => dispatch({ type: types.IS_FETCHING, payload: false }), 0);
     }
   );
 };

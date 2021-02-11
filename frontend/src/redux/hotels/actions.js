@@ -7,7 +7,7 @@ const SINGLE_HOTEL_INCLUDES = [
 ].join(',')
 
 export const fetchHotels = () => async (dispatch) => {
-  api.find("hotels", { include: "hotelrooms" }, (err, resources) => {
+  api.find("hotels", { include: "hotelrooms.offers" }, (err, resources) => {
     resources = resources || []
     resources = resources.map((resource) => resource.toJSONTree());
     dispatch({type: types.SET_HOTEL_LIST, payload: resources})

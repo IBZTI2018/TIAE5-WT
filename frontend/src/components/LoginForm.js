@@ -30,7 +30,7 @@ class LoginForm extends Component {
       .then(() => {
         toast.success("Successfully logged in!");
         this.props.history.push({ pathname: "/" });
-        setTimeout(() => this.props.openSidebar(), 1000);
+        setTimeout(() => this.props.openSidebar(), 0);
       })
       .catch((error) => {
         console.error(error);
