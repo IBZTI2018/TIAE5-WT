@@ -14,6 +14,8 @@ defmodule BackendWeb.SearchController do
       ON o.hotelroom_id = hr.id
     INNER JOIN hotels h
       ON hr.hotel_id = h.id
+    INNER JOIN hotelcategories hc
+      ON h.hotelcategory_id = hc.id
     INNER JOIN addresses a
       ON h.address_id = a.id
     INNER JOIN streets s
