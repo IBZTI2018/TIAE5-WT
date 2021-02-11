@@ -7,7 +7,6 @@ export const fetchOffers = () => async (dispatch) => {
   dispatch({ type: types.IS_FETCHING, payload: true });
 
   let validityGroup = {};
-    console.log(store.getState().offers.startDate)
    if (store.getState().offers.startDate != null) {
         validityGroup["validitystart"] = moment(store.getState().offers.startDate).format('YYYY-MM-DD');
    }
