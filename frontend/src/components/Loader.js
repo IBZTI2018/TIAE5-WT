@@ -1,6 +1,6 @@
 function Loader() {
     return (
-      <center style={{'font-size': '5em'}}>
+      <center style={{'fontSize': '5em'}}>
         <i className="fa fa-spinner fa-spin"></i>
       </center>
     );
