@@ -9,16 +9,17 @@ import Breadcrumbs from "./components/Breadcrumbs";
 import CoronaWarning from "./components/CoronaWarning";
 
 // Pages
-import HomePage from "./pages/HomePage";
-import OffersPage from "./pages/OffersPage";
-import HotelsPage from "./pages/HotelsPage";
-import UserPage from "./pages/UserPage";
-import RegisterPage from "./pages/RegisterPage";
-import LoginPage from "./pages/LoginPage";
-import ReservationPage from "./pages/ReservationPage";
-import RatingPage from "./pages/RatingPage";
-import BookingPage from "./pages/BookingPage";
-import ConfirmBookingPage from "./pages/ConfirmBookingPage";
+import HomePage from './pages/HomePage';
+import OffersPage from './pages/OffersPage';
+import HotelsPage from './pages/HotelsPage';
+import HotelPage from './pages/HotelPage';
+import UserPage from './pages/UserPage';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import ReservationPage from './pages/ReservationPage';
+import RatingPage from './pages/RatingPage';
+import BookingPage from './pages/BookingPage';
+import ConfirmBookingPage from './pages/ConfirmBookingPage';
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
               <Route exact path="/" component={HomePage} />
               <Route path="/offers" component={OffersPage} />
               <Route path="/hotels" component={HotelsPage} />
+              <Route path="/hotel/:id" component={HotelPage} />
 
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />

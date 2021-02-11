@@ -8,3 +8,14 @@ export const fetchHotels = () => async (dispatch) => {
     dispatch({type: types.SET_HOTEL_LIST, payload: resources})
   });
 }
+
+export const fetchHotel = (hotelId) => async (dispatch) => {
+  return new Promise((resolve, reject) => {
+    api.get("hotels", hotelId, (err, resource) => {
+      if (err) return reject(err);
+      const payload = resource.toJSONTree();
+      dispatch({type: types.SET_CURRENT_HOTEL, payload})
+      resolve(payload);
+    })
+  })
+}

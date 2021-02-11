@@ -6,6 +6,15 @@ class Offer extends Component {
   constructor(props) {
     super(props);
     this.handleBooking = this.handleBooking.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
+  }
+
+  handleTitleClick(event) {
+    event.preventDefault();
+
+    this.props.history.push({
+      pathname: `/hotel/${this.props.offer.hotelroom.hotel.id}`
+    });
   }
 
   handleBooking(event) {
@@ -43,7 +52,7 @@ class Offer extends Component {
           <div className="col-md-8">
             <div className="card-body">
               <h5 className="card-title">
-                {this.props.offer.hotelroom.hotel.hotelname}
+                <a href="#" onClick={this.handleTitleClick}>{this.props.offer.hotelroom.hotel.hotelname}</a>
                 <StarRating hotel={this.props.offer.hotelroom.hotel} />
               </h5>
               <p className="card-text small">
