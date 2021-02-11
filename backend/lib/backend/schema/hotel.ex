@@ -8,13 +8,16 @@ defmodule Backend.Schema.Hotel do
   alias Backend.Schema.Address
   alias Backend.Schema.User
   alias Backend.Schema.Hotelequipment
+  alias Backend.Schema.Hotelcategory
   alias Backend.Schema.Rating
 
   schema "hotels" do
     field(:hotelname, :string)
     field(:image, :string)
+    field(:description, :string)
 
     belongs_to(:address, Address)
+    belongs_to(:hotelcategory, Hotelcategory)
 
     has_many(:hotelrooms, Hotelroom)
     has_many(:ratings, Rating)
@@ -25,7 +28,7 @@ defmodule Backend.Schema.Hotel do
 
   def changeset(%Hotel{} = hotel, attrs) do
     hotel
-    |> cast(attrs, [:hotelname, :image, :address_id])
-    |> validate_required([:hotelname, :image, :address_id])
+    |> cast(attrs, [:hotelname, :image, :description, :address_id, :hotelcategory_id])
+    |> validate_required([:hotelname, :image, :address_id, :hotelcategory_id])
   end
 end

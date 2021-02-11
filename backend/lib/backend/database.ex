@@ -159,8 +159,9 @@ defmodule Backend.Database do
   def get_offers_list(ids) do
     Backend.Schema.Offer
     |> where([o], o.id in ^ids)
-    |> preload([hotelroom: [hotel: [address: [street: [city: [:country]]]]]])
-    |> preload([hotelroom: [hotel: [:ratings]]])
+    |> preload(hotelroom: [hotel: [address: [street: [city: [:country]]]]])
+    |> preload(hotelroom: [hotel: [:ratings]])
+    |> preload(hotelroom: [hotel: [:hotelcategory]])
     |> Repo.all()
   end
 end

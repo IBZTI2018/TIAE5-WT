@@ -27,15 +27,17 @@ export default class StarRating extends Component {
             onChange={this.props.feedback}
             size={20}
             color="grey"
-            activeColor="#ffd700"
+            activeColor="#ef5350"
+            char="❤"
           />
         )}
         {!this.props.feedback && (
           <ReactStars
             count={this.getStars()}
             size={16}
-            color="#ffd700"
-            activeColor="#ffd700"
+            color="#ef5350"
+            activeColor="#ef5350"
+            char="❤"
           />
         )}
       </div>

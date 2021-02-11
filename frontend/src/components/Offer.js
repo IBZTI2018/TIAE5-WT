@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import StarRating from "./offer/StarRating";
+import HotelStars from "./hotel/HotelStars";
 
 class Offer extends Component {
   constructor(props) {
     super(props);
     this.handleBooking = this.handleBooking.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
+  }
+
+  handleTitleClick(event) {
+    event.preventDefault();
+
+    this.props.history.push({
+      pathname: `/hotel/${this.props.offer.hotelroom.hotel.id}`
+    });
   }
 
   handleBooking(event) {
     this.props.history.push({
-      pathname: "/booking",
+      pathname: `/booking/${this.props.offer.id}`,
       state: {
         offer: this.props.offer,
       },
@@ -29,6 +39,13 @@ class Offer extends Component {
     return avg;
   }
 
+  renderStars(hotel) {
+    if (!hotel) return (<span></span>);
+    if (!hotel.hotelcategory.stars) return (<span></span>);
+    const text = "★".repeat(hotel.hotelcategory.stars);
+    return (<span class="hotel-stars"> {text} </span>)
+  }
+
   render() {
     return (
       <div className="card mb-3 p-3">
@@ -43,8 +60,8 @@ class Offer extends Component {
           <div className="col-md-8">
             <div className="card-body">
               <h5 className="card-title">
-                {this.props.offer.hotelroom.hotel.hotelname}
-                <StarRating hotel={this.props.offer.hotelroom.hotel} />
+                <a href="#" onClick={this.handleTitleClick}>{this.props.offer.hotelroom.hotel.hotelname}</a>
+                <HotelStars hotel={this.props.offer.hotelroom.hotel} />
               </h5>
               <p className="card-text small">
                 <p className="card-text small">
@@ -83,6 +100,7 @@ class Offer extends Component {
               <a onClick={this.handleBooking} className="btn btn-primary">
                 <b>CHF {this.props.offer.price}</b>
               </a>
+              <span className="pl-3">Rating: <StarRating hotel={this.props.offer.hotelroom.hotel} /></span>
             </div>
           </div>
         </div>

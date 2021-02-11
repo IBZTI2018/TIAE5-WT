@@ -30,6 +30,22 @@ priceranges =
     })
   end
 
+# We insert hotel categories for all common star classes
+hotel_categories =
+  for {desc, stars} <- [
+        {"One Star", 1},
+        {"Two Star", 2},
+        {"Three Star", 3},
+        {"Four Star", 4},
+        {"Five Star", 5},
+        {"Six Star", 6}
+      ] do
+    Backend.Repo.insert!(%Backend.Schema.Hotelcategory{
+      description: desc,
+      stars: stars
+    })
+  end
+
 # We insert one country for the moment
 switzerland =
   Backend.Repo.insert!(%Backend.Schema.Country{
@@ -329,7 +345,9 @@ for i <- 1..10 do
     Backend.Repo.insert!(%Backend.Schema.Hotel{
       hotelname: random_hotel_name.(),
       image: "https://placedog.net/640/480?id=#{i}",
-      address: random_address.()
+      description: Faker.Lorem.paragraph(10),
+      address: random_address.(),
+      hotelcategory: Enum.random(hotel_categories)
     })
 
   # Hotels have a 50/50 chance to belong to our staff user
