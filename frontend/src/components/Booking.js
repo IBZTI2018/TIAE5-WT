@@ -5,7 +5,13 @@ import StarRating from "./offer/StarRating";
 class Booking extends Component {
   constructor(props) {
     super(props);
+
+    if (!this.props.offer) {
+      // TODO: load offer!
+    }
+
     this.handleOffer = this.handleOffer.bind(this);
+    this.handleBooking = this.handleBooking.bind(this);
   }
 
   handleOffer(event) {
@@ -14,7 +20,11 @@ class Booking extends Component {
     return false;
   }
 
-  
+  handleBooking(event) {
+    event.preventDefault();
+
+    // TODO: Create booking here!
+  }
 
   render() {
     return (
@@ -73,11 +83,23 @@ class Booking extends Component {
             </div>
           </div>
         </div>
+
+        <hr />
+
+        <div className="row g-0">
+          <div className="col-md-2">
+            &nbsp;
+          </div>
+          <div className="col-md-10">
+            <h5>Book a stay now</h5>
+          </div>
+        </div>
+
         <div>
           <button
             className="btn btn-primary float-right mb-2 mr-2"
             type="button"
-            onClick="#Modal"
+            onClick={this.handleBooking}
           >
             Book Now!
           </button>

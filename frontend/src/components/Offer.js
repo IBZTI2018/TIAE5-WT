@@ -19,7 +19,7 @@ class Offer extends Component {
 
   handleBooking(event) {
     this.props.history.push({
-      pathname: "/booking",
+      pathname: `/booking/${this.props.offer.id}`,
       state: {
         offer: this.props.offer,
       },

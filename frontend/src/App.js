@@ -36,6 +36,7 @@ class App extends Component {
               <Route path="/offers" component={OffersPage} />
               <Route path="/hotels" component={HotelsPage} />
               <Route path="/hotel/:id" component={HotelPage} />
+              <Route path="/booking/:id" component={BookingPage} />
 
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
@@ -43,7 +44,6 @@ class App extends Component {
 
               <Route path="/reservation" component={ReservationPage} />
               <Route path="/rating" component={RatingPage} />
-              <Route path="/booking" component={BookingPage} />
               <Route path="/confirmbooking" component={ConfirmBookingPage} />
             </Switch>
           </main>
