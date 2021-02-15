@@ -122,16 +122,17 @@ staff =
     billing_address: address2
   })
 
-Backend.Repo.insert!(%Backend.Schema.User{
-  firstname: "IBZ",
-  lastname: "Customer",
-  email: "customer@admin.ch",
-  password: Pbkdf2.hash_pwd_salt("password"),
-  is_manager: false,
-  title: Enum.at(titles, 2),
-  contact_address: address,
-  billing_address: nil
-})
+customer =
+  Backend.Repo.insert!(%Backend.Schema.User{
+    firstname: "IBZ",
+    lastname: "Customer",
+    email: "customer@admin.ch",
+    password: Pbkdf2.hash_pwd_salt("password"),
+    is_manager: false,
+    title: Enum.at(titles, 2),
+    contact_address: address,
+    billing_address: nil
+  })
 
 # We insert some generic hotel extras
 hotel_equipments =
@@ -394,13 +395,21 @@ for i <- 1..10 do
 
     # Three out of five rooms have a reservation
     if j <= 3 do
+      # Reservations have a chance to already have happened in the past
+      {checkin, checkout} =
+        if maybe.() do
+          {now, Date.add(now, Enum.random(1..20))}
+        else
+          {now, Date.add(now, Enum.random(1..20) * -1)}
+        end
+
       reservation =
         Backend.Repo.insert!(%Backend.Schema.Reservation{
-          checkin: now,
-          checkout: Date.add(now, Enum.random(1..20)),
+          checkin: checkin,
+          checkout: checkout,
           paid: maybe.(),
           offer: offer,
-          user: admin
+          user: customer
         })
 
       # Two out of three rooms are rated

@@ -1,12 +1,52 @@
-import Reservation from '../components/Reservation';
+import React, { Component } from 'react';
+import Reservations from '../components/Reservations';
+import { connect } from 'react-redux';
+import * as actions from '../redux/reservations/actions';
+import * as selectors from '../redux/reservations/selectors';
+import Loader from '../components/Loader';
+import moment from 'moment';
 
-function ReservationPage() {
-    return (
-        <div>
-            <h1>Reservation overview: </h1>
-            <Reservation />
-        </div>
-    );
+class ReservationPage extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            pastReservations: [],
+            nextReservations: []
+        }
+    }
+
+    componentDidMount() {
+        const { fetchReservations } = this.props;
+        fetchReservations().then(() => {
+            this.setState({
+                pastReservations: this.props.reservations.filter((r) => moment().isAfter(moment(r.checkout))),
+                nextReservations: this.props.reservations.filter((r) => moment().isBefore(moment(r.checkout)))
+            })
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Reservation overview: </h1>
+                { this.props.isLoading && 
+                    <Loader />
+                }
+                { !this.props.isLoading &&
+                    <div>
+                        <Reservations title="Upcoming reservations" reservations={this.state.nextReservations} />
+                        <Reservations title="Past reservations" reservations={this.state.pastReservations} />
+                    </div>
+                }
+            </div>
+        );
+    }
 }
 
-export default ReservationPage;
+const mapSelectors = (store) => ({
+    reservations: selectors.reservations(store),
+    isLoading: selectors.isLoading(store)
+})
+
+export default connect(mapSelectors, { ...actions })(ReservationPage);

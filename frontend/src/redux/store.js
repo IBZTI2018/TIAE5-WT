@@ -9,6 +9,7 @@ import countries from "./countries";
 import hotelrooms from "./hotelrooms";
 import priceranges from "./priceranges";
 import roomequipments from "./roomequipments";
+import reservations from "./reservations";
 import layout from "./layout";
 
 let middlewares = [];
@@ -21,6 +22,7 @@ const reducers = {
   hotelrooms,
   priceranges,
   roomequipments,
+  reservations,
   layout
 }
 
