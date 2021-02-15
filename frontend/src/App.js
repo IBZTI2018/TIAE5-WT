@@ -22,6 +22,7 @@ import RatingPage from './pages/RatingPage';
 import BookingPage from './pages/BookingPage';
 import ConfirmBookingPage from './pages/ConfirmBookingPage';
 import HotelroomsPage from './pages/HotelroomsPage';
+import ReservationDetailsPage from './pages/ReservationDetailsPage';
 
 class App extends Component {
   render() {
@@ -49,6 +50,7 @@ class App extends Component {
               <Route path="/user" component={UserPage} />
 
               <Route path="/reservation" component={ReservationPage} />
+              <Route path="/details" component={ReservationDetailsPage} />
               <Route path="/rating" component={RatingPage} />
               <Route path="/confirmbooking" component={ConfirmBookingPage} />
             </Switch>
