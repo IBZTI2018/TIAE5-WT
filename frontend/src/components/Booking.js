@@ -11,8 +11,10 @@ class Booking extends Component {
     this.state = {
       startDate: moment(),
       endDate: moment().add(1, 'd'),
+      showPopup: false,
       focus: null
     }
+    
 
     if (!this.props.offer) {
       // TODO: load offer!
@@ -38,6 +40,11 @@ class Booking extends Component {
 
     console.log(this.state)
     // TODO: Create booking here!
+  }
+  togglePopup(){
+    this.setState ({
+      showPopup: !this.state.showPopup
+    });
   }
 
   render() {
@@ -126,12 +133,30 @@ class Booking extends Component {
 
         <div>
           <button
-            className="btn btn-primary float-right mb-2 mr-2"
+            className="btn btn-primary float-right mb-2 mr-2 popup"
             type="button"
-            onClick={this.handleBooking}
+            onClick={this.togglePopup.bind(this)}
           >
             Book Now!
           </button>
+          {this.state.showPopup ?
+          <Popup text="Close Me" closePopup={this.togglePopup.bind(this)} />
+          :null
+          }
+        </div>
+      </div>
+    );
+  }
+}
+
+class Popup extends Component {
+  render () {
+    return (
+      <div>
+        <div className="popup" style= {{position: "fixed"}, {width: "100%"}, {height: "100%"},{top: "0"}, {left: "0"}, {right: "0"}, {bottom: "0"},{margin: "auto"}}>
+          <div className="popup_inner" style= {{position: "absolute"}, {left: "25%"}, {right: "25%"}, {top: "25%"}, {bottom: "25%"}, {margin: "auto"}}>
+            <button onClick={this.props.closePopup}>abort booking</button>
+          </div>
         </div>
       </div>
     );
