@@ -8,6 +8,7 @@ class Offer extends Component {
     super(props);
     this.handleBooking = this.handleBooking.bind(this);
     this.handleTitleClick = this.handleTitleClick.bind(this);
+    this.handelConfirmBooking = this.handelConfirmBooking.bind(this);
   }
 
   handleTitleClick(event) {
@@ -21,6 +22,17 @@ class Offer extends Component {
   handleBooking(event) {
     this.props.history.push({
       pathname: `/booking/${this.props.offer.id}`,
+      state: {
+        offer: this.props.offer,
+      },
+    });
+    event.preventDefault();
+    return false;
+  }
+
+  handelConfirmBooking(event) {
+    this.props.history.push({
+      pathname: `/confirmbooking/${this.props.offer.id}`,
       state: {
         offer: this.props.offer,
       },
