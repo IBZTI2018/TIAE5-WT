@@ -14,7 +14,7 @@ class Offer extends Component {
     event.preventDefault();
 
     this.props.history.push({
-      pathname: `/hotel/${this.props.offer.hotelroom.hotel.id}`
+      pathname: `/hotels/${this.props.offer.hotelroom.hotel.id}`
     });
   }
 

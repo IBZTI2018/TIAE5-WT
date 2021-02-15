@@ -15,7 +15,7 @@ class Hotel extends Component {
                             <h5 className="card-title">{this.props.data.hotelname}</h5>
                             <p className="card-text">{this.props.data.description}</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                            <a href="#" className="btn btn-primary">Hotel overview</a>
+                            <Link to={'/hotels/' + this.props.data.id}  className="btn btn-primary">Hotel overview</Link>
                             <Link to={'/hotels/' + this.props.data.id + '/hotelrooms'} className="btn btn-dark ml-2">View Hotel rooms</Link>
                             <Link to={'/hotels/' + this.props.data.id + '/hotelrooms/create'} className="btn btn-warning ml-2">Create Hotel room</Link>
                         </div>

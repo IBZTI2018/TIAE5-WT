@@ -40,9 +40,8 @@ class App extends Component {
               <Route path="/my_offers" component={MyOffersPage} />
 
               <Route exact path="/hotels" component={HotelsPage} />
-              <Route exact path="/hotels" component={HotelsPage} />
+              <Route exact path="/hotels/:id" component={HotelPage} />
               <Route path="/hotels/:id/hotelrooms" component={HotelroomsPage} />
-              <Route exact path="/hotel/:id" component={HotelPage} />
               <Route path="/booking/:id" component={BookingPage} />
 
               <Route path="/login" component={LoginPage} />
