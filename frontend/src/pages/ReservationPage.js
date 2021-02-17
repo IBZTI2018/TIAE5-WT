@@ -12,7 +12,8 @@ class ReservationPage extends Component {
 
         this.state = {
             pastReservations: [],
-            nextReservations: []
+            nextReservations: [],
+            isLoading: true
         }
     }
 
@@ -23,17 +24,19 @@ class ReservationPage extends Component {
                 pastReservations: this.props.reservations.filter((r) => moment().isAfter(moment(r.checkout))),
                 nextReservations: this.props.reservations.filter((r) => moment().isBefore(moment(r.checkout)))
             })
-        });
+        }).finally(() => {
+            this.setState({isLoading: false})
+        })
     }
 
     render() {
         return (
             <div>
                 <h1>Reservation overview: </h1>
-                { this.props.isLoading && 
+                { (this.props.isLoading || this.state.isLoading) && 
                     <Loader />
                 }
-                { !this.props.isLoading &&
+                { !(this.props.isLoading || this.state.isLoading) &&
                     <div>
                         <Reservations title="Upcoming reservations" reservations={this.state.nextReservations} />
                         <Reservations title="Past reservations" reservations={this.state.pastReservations} />
