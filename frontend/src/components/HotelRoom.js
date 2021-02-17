@@ -45,7 +45,7 @@ class HotelRoom extends Component {
                                 {this.props.hotelrooms.roomname}
                                 <StarRating stars={this.props.hotelrooms.stars} />
                             </h5>
-                            <p className="card-text">{this.props.hotelrooms.roomequipments}...Equipments not loading ?</p>
+                            <p className="card-text">{this.props.hotelrooms.roomequipments}...Equipments not loading ?XXX</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                             <a onClick={this.handlehotelroomequipment} className="btn btn-primary">Room Equipment overview</a><br></br><br></br>
                             <a onClick={this.handleOffers} className="btn btn-primary">Show Room offers</a>

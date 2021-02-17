@@ -47,7 +47,7 @@ class Hotel extends Component {
                                 <StarRating data={this.props.hotels.rating} />
                             </h5>
                             
-                            <p className="card-text">{this.props.hotels.hotelequipment}...Hotelequipment how to show here ?or just any description from hotel or Adress?</p>
+                            <p className="card-text">{this.props.hotels.hotelequipment}...Hotelequipment how to show here ?or just any description from hotel or Adress?XXX</p>
                             <p className="card-text">{this.props.hotels.staff}...Hotelstaff how to show here ?</p>
                             <p className="card-text">{this.props.hotels.rating}...STARS -- Hotelrating how to show up on StarRating Component, rating on top is wrong ?</p>
                             <p className="card-text"><small className="text-muted">Last updated 3 mins ago.</small></p>
