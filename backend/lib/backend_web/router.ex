@@ -56,7 +56,7 @@ defmodule BackendWeb.Router do
       resources("/hotelrooms", HotelroomController, @opt_crd)
       resources("/offers", OfferController, @opt_crd)
       resources("/ratings", RatingController, @opt_crd)
-      resources("/reservations", ReservationController, @opt_crd)
+      resources("/reservations", ReservationController, except: [:edit, :new, :update])
     end
 
     scope "/complex" do
