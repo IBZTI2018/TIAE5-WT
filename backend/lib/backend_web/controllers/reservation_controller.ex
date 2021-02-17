@@ -30,27 +30,37 @@ defmodule BackendWeb.ReservationController do
   end
 
   def show(conn, args) do
+    # TODO: Protect this from anyone accessing
+
     data = Database.generic_item(Reservation, args["id"], conn.assigns.jsonapi_query)
     render(conn, "show.json", %{data: data})
   end
 
   def create(conn, args) do
-    with {:ok, data} <- Database.generic_create(Reservation, args) do
+    user_id = args["data"]["relationships"]["user"]["data"]["id"]
+
+    with true <- conn.assigns.logged_in,
+         true <- "#{conn.assigns.user.id}" == "#{user_id}",
+         {:ok, data} <- Database.generic_create(Reservation, args) do
       conn
       |> put_status(:created)
       |> render("show.json", %{data: data})
-    end
-  end
-
-  def update(conn, args) do
-    with {:ok, data} <- Database.generic_update(Reservation, args["id"], args) do
-      render(conn, "show.json", %{data: data})
+    else
+      false -> {:error, :forbidden}
+      error -> error
     end
   end
 
   def delete(conn, args) do
-    with {:ok, _} <- Database.generic_delete(Reservation, args["id"]) do
+    reservation = Database.generic_item(Reservation, args["id"])
+
+    with true <- conn.assigns.logged_in,
+         true <- conn.assigns.user.id == reservation.user_id,
+         {:ok, _} <- Database.generic_delete(Reservation, args["id"]) do
       send_resp(conn, 200, "")
+    else
+      false -> {:error, :forbidden}
+      error -> error
     end
   end
 end

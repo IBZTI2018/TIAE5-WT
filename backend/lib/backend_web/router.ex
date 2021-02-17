@@ -54,11 +54,9 @@ defmodule BackendWeb.Router do
       resources("/hotel_hotelequipments", JoinHotelHotelequipmentController, @opt_cd)
       resources("/hotelroom_roomequipments", JoinHotelroomRoomequipmentController, @opt_cd)
       resources("/hotelrooms", HotelroomController, @opt_crd)
-
-      # TODO: Complete these - sven
       resources("/offers", OfferController, @opt_crd)
-      resources("/reservations", ReservationController, @opt_crd)
       resources("/ratings", RatingController, @opt_crd)
+      resources("/reservations", ReservationController, @opt_crd)
     end
 
     scope "/complex" do

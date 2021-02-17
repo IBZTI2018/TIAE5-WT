@@ -22,7 +22,7 @@ defmodule BackendWeb.UserController do
   def show(conn, args) do
     # Only a logged in user may show his own user information
     with true <- conn.assigns.logged_in,
-         true <- conn.assigns.user.id == args["id"] do
+         true <- "#{conn.assigns.user.id}" == "#{args["id"]}" do
       data = Database.generic_item(User, args["id"], conn.assigns.jsonapi_query)
       render(conn, "show.json", %{data: data})
     else
