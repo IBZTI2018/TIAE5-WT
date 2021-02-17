@@ -41,7 +41,7 @@ const loadStateFromLocalStorage = () => {
   const email = window.localStorage.getItem(LOCAL_STORAGE_EMAIL);
   const firstname = window.localStorage.getItem(LOCAL_STORAGE_FIRSTNAME);
   const lastname = window.localStorage.getItem(LOCAL_STORAGE_LASTNAME);
-  const isManager = window.localStorage.getItem(LOCAL_STORAGE_ISMANAGER);
+  const isManager = window.localStorage.getItem(LOCAL_STORAGE_ISMANAGER) === "true";
 
   if (email && token) return {
     isLoggedIn: true, authToken: token, user: {
