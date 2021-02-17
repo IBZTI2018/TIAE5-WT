@@ -68,7 +68,11 @@ class ReservationRow extends Component {
       <>
         <tr>
             <th scope="row">{this.props.reservation.id}</th>
-            <td>{this.props.reservation.offer.hotelroom.hotel.hotelname}</td>
+            <td>
+              <a href={`/hotels/${this.props.reservation.offer.hotelroom.hotel.id}`}>
+                {this.props.reservation.offer.hotelroom.hotel.hotelname}
+              </a>
+            </td>
             <td>{this.props.reservation.offer.hotelroom.roomname}</td>
             <td>{this.props.reservation.checkin}</td>
             <td>{this.props.reservation.checkout}</td>
