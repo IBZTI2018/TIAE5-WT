@@ -155,6 +155,16 @@ defmodule Backend.Database do
   end
 
   @doc """
+  Get all staff users for a hotel
+  """
+  def get_staff_for_hotel(hotel_id) do
+    Backend.Schema.JoinHotelStaff
+    |> where(hotel_id: ^hotel_id)
+    |> preload(:user)
+    |> Repo.all()
+  end
+
+  @doc """
   Get a list of offers
   """
   def get_offers_list(ids) do

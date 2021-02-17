@@ -19,7 +19,7 @@ defmodule Backend.Schema.Rating do
 
   def changeset(%Rating{} = rating, attrs) do
     rating
-    |> cast(attrs, [:score, :comment, :anonymous, :published, :reservation_id])
-    |> validate_required([:score, :anonymous, :published, :reservation_id])
+    |> cast(attrs, [:score, :comment, :anonymous, :published, :reservation_id, :hotel_id])
+    |> validate_required([:score, :anonymous, :published, :reservation_id, :hotel_id])
   end
 end
