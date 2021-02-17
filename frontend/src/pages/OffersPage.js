@@ -53,7 +53,7 @@ class OffersPage extends Component {
     if (offers.length > 0) {
       return offers.map((offer) => <Offer offer={offer} />);
     } else {
-      return <p>There are currently no offers on the server</p>;
+      return <center>There are currently no offers for your selected settings.<br />However, we're sure you'll find something if you look aroundsome more!</center>;
     }
   }
 
