@@ -26,40 +26,39 @@ defmodule BackendWeb.Router do
 
   scope "/api", BackendWeb do
     scope "/v1" do
+      @opt_is [only: [:index, :show]]
+      @opt_cd [only: [:create, :delete]]
+      @opt_crd [except: [:index, :edit, :new, :update]]
+
       pipe_through(:api)
       pipe_through(:app_auth)
 
       # Ressources managed by admins via Kaffy Dashboard
-      resources("/titles", TitleController, only: [:index, :show])
-      resources("/countries", CountryController, only: [:index, :show])
-      resources("/hotels", HotelController, only: [:index, :show])
-      resources("/hotelequipments", HotelequipmentController, only: [:index, :show])
+      resources("/titles", TitleController, @opt_is)
+      resources("/countries", CountryController, @opt_is)
+      resources("/hotels", HotelController, @opt_is)
+      resources("/hotelequipments", HotelequipmentController, @opt_is)
 
-      resources("/hotel_hotelequipments", JoinHotelHotelequipmentController,
-        only: [:create, :delete]
-      )
-
-      resources("/hotelroom_roomequipments", JoinHotelroomRoomequipmentController,
-        only: [:create, :delete]
-      )
-
-      resources("/roomequipments", RoomequipmentController, only: [:index, :show])
-      resources("/priceranges", PricerangeController, only: [:index, :show])
+      resources("/roomequipments", RoomequipmentController, @opt_is)
+      resources("/priceranges", PricerangeController, @opt_is)
 
       # Ressources managed by db wrapper internally
-      resources("/cities", CityController, only: [:index, :show])
-      resources("/streets", StreetController, only: [:index, :show])
-      resources("/addresses", AddressController, only: [:index, :show])
+      resources("/cities", CityController, @opt_is)
+      resources("/streets", StreetController, @opt_is)
+      resources("/addresses", AddressController, @opt_is)
 
-      # Generic, full REST ressources with permission scope
+      # Generic, RESTful ressources with permission scope
       resources("/users", UserController, only: [:update])
       get("/users/self", UserController, :show_self)
 
+      resources("/hotel_hotelequipments", JoinHotelHotelequipmentController, @opt_cd)
+      resources("/hotelroom_roomequipments", JoinHotelroomRoomequipmentController, @opt_cd)
+      resources("/hotelrooms", HotelroomController, @opt_crd)
+
       # TODO: Complete these - sven
-      resources("/hotelrooms", HotelroomController, except: [:edit, :new])
-      resources("/offers", OfferController, except: [:edit, :new])
-      resources("/reservations", ReservationController, except: [:edit, :new])
-      resources("/ratings", RatingController, except: [:edit, :new])
+      resources("/offers", OfferController, @opt_crd)
+      resources("/reservations", ReservationController, @opt_crd)
+      resources("/ratings", RatingController, @opt_crd)
     end
 
     scope "/complex" do

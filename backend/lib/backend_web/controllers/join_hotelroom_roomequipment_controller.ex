@@ -15,7 +15,8 @@ defmodule BackendWeb.JoinHotelroomRoomequipmentController do
   action_fallback(BackendWeb.FallbackController)
 
   def create(conn, args) do
-    with {:ok, data} <- Database.generic_create(JoinHotelroomRoomequipment, args) do
+    with :ok <- can_manage_hotel(conn, args, "hotel_id"),
+         {:ok, data} <- Database.generic_create(JoinHotelroomRoomequipment, args) do
       conn
       |> put_status(:created)
       |> render("show.json", %{data: data})
@@ -23,7 +24,10 @@ defmodule BackendWeb.JoinHotelroomRoomequipmentController do
   end
 
   def delete(conn, args) do
-    with {:ok, _} <- Database.generic_delete(JoinHotelroomRoomequipment, args["id"]) do
+    join = Backend.Database.generic_item(Backend.Schema.JoinHotelroomRoomequipment, args["id"])
+
+    with :ok <- can_manage_hotel(conn, join.hotel_id),
+         {:ok, _} <- Database.generic_delete(JoinHotelroomRoomequipment, args["id"]) do
       send_resp(conn, 200, "")
     end
   end

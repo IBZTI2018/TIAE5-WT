@@ -22,7 +22,7 @@ defmodule Backend.Database do
   @doc """
   Get a generic single entry from the database by id.
   """
-  def generic_item(schema, id, params) do
+  def generic_item(schema, id, params \\ @default_params) do
     schema
     |> where(id: ^id)
     |> apply_preloads(params.include)
