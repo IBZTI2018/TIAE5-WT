@@ -27,11 +27,23 @@ defmodule BackendWeb.RatingController do
   end
 
   def create(conn, args) do
-    reservation_id = args["data"]["relationships"]["reservation"]["data"]["id"]
-    reservation = Database.generic_item(Reservation, reservation_id)
+    # reservation_id = args["data"]["relationships"]["reservation"]["data"]["id"]
+    reservation_id = args["data"]["attributes"]["reservation_id"]
+
+    reservation =
+      Reservation
+      |> Database.generic_item(reservation_id)
+      |> Repo.preload(:offer)
+      |> Repo.preload(offer: [:hotelroom])
+
+    # We overwrite the hotel id to make sure the server-side is consistent
+    hotel_id = reservation.offer.hotelroom.hotel_id
+    new_attrs = Map.put(args["data"]["attributes"], "hotel_id", hotel_id)
+    new_data = Map.put(args["data"], "attributes", new_attrs)
+    new_args = Map.put(args, "data", new_data)
 
     with :gt <- Date.compare(Date.utc_today(), reservation.checkout),
-         {:ok, data} <- Database.generic_create(Rating, args) do
+         {:ok, data} <- Database.generic_create(Rating, new_args) do
       notify_hotel_owner(data)
 
       conn

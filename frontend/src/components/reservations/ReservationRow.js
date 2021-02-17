@@ -1,38 +1,66 @@
 import { Component } from "react";
+import { connect } from 'react-redux';
 import moment from 'moment';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import StarRating from '../offer/StarRating';
+import { createRating } from '../../redux/ratings/actions';
 
-export default class ReservationRow extends Component {
+class ReservationRow extends Component {
   constructor(props) {
     super(props)
   
     this.state = {
-      showRatingModal: false
+      showRatingModal: false,
+      feedbackComment: "",
+      feedbackScore: 0,
+      feedbackAnonymous: false,
+      selectedReservation: null
     }
 
+    this.handleChange = this.handleChange.bind(this);
     this.handleEvaluation = this.handleEvaluation.bind(this);
     this.handleNoEvaluate = this.handleNoEvaluate.bind(this);
     this.handleSubmitReview = this.handleSubmitReview.bind(this);
+    this.handleStarsFeedback = this.handleStarsFeedback.bind(this);
   }
 
-  handleEvaluation(event) {
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleEvaluation(event, id) {
     event.preventDefault();
 
-    this.setState({showRatingModal: true})
+    this.setState({showRatingModal: true, selectedReservation: id})
   }
 
   handleNoEvaluate(event) {
     event.preventDefault();
 
-    this.setState({showRatingModal: false})
+    this.setState({showRatingModal: false, selectedReservation: null})
   }
 
   handleSubmitReview(event) {
     event.preventDefault();
 
-    console.log("!!")
+    const { createRating } = this.props;
+    createRating({
+      comment: this.state.feedbackComment,
+      score: this.state.feedbackScore,
+      anonymous: this.state.feedbackAnonymous
+    }, this.state.selectedReservation)
+  }
+
+  handleStarsFeedback(score) {
+    this.setState({feedbackScore: score})
+    return false;
   }
 
   render() {
@@ -46,7 +74,7 @@ export default class ReservationRow extends Component {
             <td>{this.props.reservation.checkout}</td>
             <td>
             { moment().isAfter(moment(this.props.reservation.checkout)) &&
-              <a className="btn btn-primary mt-1" type="button" href="#" onClick={this.handleEvaluation}>Evaluate</a>
+              <a className="btn btn-primary mt-1" type="button" href="#" onClick={(e) => this.handleEvaluation(e, this.props.reservation.id)}>Evaluate</a>
             }
             </td>
         </tr>
@@ -62,20 +90,16 @@ export default class ReservationRow extends Component {
                 <Modal.Body>
                   <div>
                     <div className="row">
-                      <div className="col-md-6">
-                        <div className="well well-sm">
-                          <div className="row" id="post-review-box">
-                            <div className="col-md-12">
-                              <form>
-                                <input id="ratings-hidden" name="rating" type="hidden" /> 
-                                <textarea className="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your rating here ..." rows="5"></textarea>
-                                <hr />
-                                <h4>Stars</h4>
-                                <StarRating feedback={this.handleStarsFeedback}/>
-                              </form>
-                            </div>
-                          </div>
-                        </div> 
+                      <div className="col-md-12">
+                        <form>
+                          <input id="ratings-hidden" name="rating" type="hidden" /> 
+                          <textarea className="form-control animated" cols="50" id="new-review" name="feedbackComment" placeholder="Did you enjoy your stay? Leave the owner some feedback ..." rows="5" value={this.state.feedbackComment} onChange={this.handleChange} />
+                          <input type="checkbox" id="feedbackAnonymous" name="feedbackAnonymous" value={this.state.feedbackAnonymous} onChange={this.handleChange} />
+                          <label htmlFor="feedbackAnonymous">Post anonymous review</label>
+                          <hr />
+                          <h6>Your Rating</h6>
+                          <StarRating feedback={this.handleStarsFeedback}/>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -93,3 +117,5 @@ export default class ReservationRow extends Component {
     );
   }
 }
+
+export default connect(null, { createRating })(ReservationRow);
