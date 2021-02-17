@@ -61,7 +61,10 @@ class HotelPage extends Component {
 
               <h3>What others had to say</h3>
               {
-                this.props.hotel.ratings.map((rating) => ( <Review review={rating} /> ))
+                // TODO: Move filtering to backend!!
+                this.props.hotel.ratings
+                  .filter((rating) => rating.published)
+                  .map((rating) => ( <Review review={rating} /> ))
               }
             </div>
           </div>
