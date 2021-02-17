@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import StarRating from '../offer/StarRating';
 import { createRating } from '../../redux/ratings/actions';
+import * as toast from "../../toast";
 
 class ReservationRow extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class ReservationRow extends Component {
       feedbackComment: "",
       feedbackScore: 0,
       feedbackAnonymous: false,
-      selectedReservation: null
+      selectedReservation: null,
+      hasWrittenReview: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -42,7 +44,7 @@ class ReservationRow extends Component {
   }
 
   handleNoEvaluate(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
 
     this.setState({showRatingModal: false, selectedReservation: null})
   }
@@ -55,7 +57,16 @@ class ReservationRow extends Component {
       comment: this.state.feedbackComment,
       score: this.state.feedbackScore,
       anonymous: this.state.feedbackAnonymous
-    }, this.state.selectedReservation)
+    }, this.state.selectedReservation).then(() => {
+      this.handleNoEvaluate();
+
+      // Quick hack to hide the button of the stay we just reviewed, as there is no editing
+      this.setState({hasWrittenReview: true})
+
+      toast.success("Successfully left review!");
+    }).catch(() => {
+      toast.error("Failed to leave review!");
+    })
   }
 
   handleStarsFeedback(score) {
@@ -77,7 +88,7 @@ class ReservationRow extends Component {
             <td>{this.props.reservation.checkin}</td>
             <td>{this.props.reservation.checkout}</td>
             <td>
-            { moment().isAfter(moment(this.props.reservation.checkout)) && !this.props.reservation.rating &&
+            { moment().isAfter(moment(this.props.reservation.checkout)) && !this.props.reservation.rating && !this.state.hasWrittenReview &&
               <a className="btn btn-primary mt-1" type="button" href="#" onClick={(e) => this.handleEvaluation(e, this.props.reservation.id)}>Evaluate</a>
             }
             </td>
