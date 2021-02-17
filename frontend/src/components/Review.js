@@ -23,10 +23,21 @@ class Review extends Component {
                   <strong>Anonymous Guest</strong>
                 }
                 {
-                  !this.state.review.anonymous &&
+                  !this.state.review.anonymous && 
                   <strong>
-                    {this.state.review.reservation.user.firstname} 
-                    {this.state.review.reservation.user.lastname}
+                  {
+                    this.state.review.reservation.user &&
+                    <strong>
+                      {this.state.review.reservation.user.firstname} 
+                      {this.state.review.reservation.user.lastname}
+                    </strong>
+                  }
+                  {
+                    // This is a workaround for the circular dependency resolving
+                    // in the JSON-API library that scres up reviews by the same user
+                    !this.state.review.reservation.user &&
+                    <strong>Another user</strong>
+                  }
                   </strong>
                 }
                 </h5>
@@ -41,6 +52,7 @@ class Review extends Component {
                 <p>
                   {this.state.review.comment}
                 </p>
+                <hr />
               </div>
             </div>
           </div>
