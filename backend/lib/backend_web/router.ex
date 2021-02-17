@@ -28,7 +28,7 @@ defmodule BackendWeb.Router do
     scope "/v1" do
       @opt_is [only: [:index, :show]]
       @opt_cd [only: [:create, :delete]]
-      @opt_crd [except: [:index, :edit, :new, :update]]
+      @opt_crd [except: [:edit, :new, :update]]
 
       pipe_through(:api)
       pipe_through(:app_auth)
@@ -56,7 +56,7 @@ defmodule BackendWeb.Router do
       resources("/hotelrooms", HotelroomController, @opt_crd)
       resources("/offers", OfferController, @opt_crd)
       resources("/ratings", RatingController, @opt_crd)
-      resources("/reservations", ReservationController, except: [:edit, :new, :update])
+      resources("/reservations", ReservationController, @opt_crd)
     end
 
     scope "/complex" do
