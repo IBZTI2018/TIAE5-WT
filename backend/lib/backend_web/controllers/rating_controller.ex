@@ -1,8 +1,10 @@
 defmodule BackendWeb.RatingController do
   use BackendWeb, :controller
 
+  alias Backend.Repo
   alias Backend.Database
   alias Backend.Schema.Rating
+  alias Backend.Schema.Reservation
 
   alias BackendWeb.RatingView
 
@@ -25,7 +27,11 @@ defmodule BackendWeb.RatingController do
   end
 
   def create(conn, args) do
-    with {:ok, data} <- Database.generic_create(Rating, args) do
+    reservation_id = args["data"]["relationships"]["reservation"]["data"]["id"]
+    reservation = Database.generic_item(Reservation, reservation_id)
+
+    with :gt <- Date.compare(Date.utc_today(), reservation.checkout),
+         {:ok, data} <- Database.generic_create(Rating, args) do
       notify_hotel_owner(data)
 
       conn
@@ -34,15 +40,16 @@ defmodule BackendWeb.RatingController do
     end
   end
 
-  def update(conn, args) do
-    with {:ok, data} <- Database.generic_update(Rating, args["id"], args) do
-      render(conn, "show.json", %{data: data})
-    end
-  end
-
   def delete(conn, args) do
-    with {:ok, _} <- Database.generic_delete(Rating, args["id"]) do
+    rating = Database.generic_item(Rating, args["id"]) |> Repo.preload(:reservation)
+
+    with true <- conn.assigns.logged_in,
+         true <- conn.assigns.user.id == rating.reservation.user_id,
+         {:ok, _} <- Database.generic_delete(Rating, args["id"]) do
       send_resp(conn, 200, "")
+    else
+      false -> {:error, :forbidden}
+      error -> error
     end
   end
 
