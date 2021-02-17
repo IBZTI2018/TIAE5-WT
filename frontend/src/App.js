@@ -18,7 +18,6 @@ import UserPage from './pages/UserPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ReservationPage from './pages/ReservationPage';
-import RatingPage from './pages/RatingPage';
 import BookingPage from './pages/BookingPage';
 import ConfirmBookingPage from './pages/ConfirmBookingPage';
 import HotelroomsPage from './pages/HotelroomsPage';
@@ -49,7 +48,6 @@ class App extends Component {
               <Route path="/user" component={UserPage} />
 
               <Route path="/reservation" component={ReservationPage} />
-              <Route path="/rating" component={RatingPage} />
               <Route path="/confirmbooking" component={ConfirmBookingPage} />
             </Switch>
           </main>
