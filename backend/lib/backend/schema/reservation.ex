@@ -6,6 +6,7 @@ defmodule Backend.Schema.Reservation do
   alias Backend.Schema.Reservation
   alias Backend.Schema.Offer
   alias Backend.Schema.User
+  alias Backend.Schema.Rating
 
   schema "reservations" do
     field(:checkin, :date)
@@ -14,6 +15,7 @@ defmodule Backend.Schema.Reservation do
 
     belongs_to(:offer, Offer)
     belongs_to(:user, User)
+    has_one(:rating, Rating)
   end
 
   def changeset(%Reservation{} = reservation, attrs) do

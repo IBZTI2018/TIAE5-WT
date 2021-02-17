@@ -2,7 +2,8 @@ import types from "./types";
 import api from '../api';
 
 const RESERVATION_INCLUDES = [
-  'offer.hotelroom.hotel'
+  'offer.hotelroom.hotel',
+  'rating'
 ].join(',');
 
 export const fetchReservations = () => async (dispatch) => {

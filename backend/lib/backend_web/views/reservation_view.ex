@@ -3,6 +3,7 @@ defmodule BackendWeb.ReservationView do
 
   alias BackendWeb.OfferView
   alias BackendWeb.UserView
+  alias BackendWeb.RatingView
 
   def fields do
     [:checkin, :checkout, :paid]
@@ -11,7 +12,8 @@ defmodule BackendWeb.ReservationView do
   def relationships do
     [
       offer: {OfferView, :include},
-      user: {UserView, :include}
+      user: {UserView, :include},
+      rating: {RatingView, :include}
     ]
   end
 end

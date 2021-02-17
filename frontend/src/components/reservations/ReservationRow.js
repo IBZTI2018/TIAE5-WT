@@ -77,7 +77,7 @@ class ReservationRow extends Component {
             <td>{this.props.reservation.checkin}</td>
             <td>{this.props.reservation.checkout}</td>
             <td>
-            { moment().isAfter(moment(this.props.reservation.checkout)) &&
+            { moment().isAfter(moment(this.props.reservation.checkout)) && !this.props.reservation.rating &&
               <a className="btn btn-primary mt-1" type="button" href="#" onClick={(e) => this.handleEvaluation(e, this.props.reservation.id)}>Evaluate</a>
             }
             </td>
