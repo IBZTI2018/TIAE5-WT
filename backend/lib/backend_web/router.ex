@@ -65,7 +65,10 @@ defmodule BackendWeb.Router do
       post("/signup", AuthController, :sign_up)
       post("/signin", AuthController, :sign_in)
       post("/change_address", AuthController, :change_address)
+
       get("/search_hotels", SearchController, :search_hotels)
+
+      get("/stats/hotels/:id", StatsController, :get_hotel_stats)
     end
 
     scope "/internal" do
