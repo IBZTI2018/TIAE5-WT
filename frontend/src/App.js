@@ -21,6 +21,7 @@ import ReservationPage from './pages/ReservationPage';
 import BookingPage from './pages/BookingPage';
 import ConfirmBookingPage from './pages/ConfirmBookingPage';
 import HotelroomsPage from './pages/HotelroomsPage';
+import ThankYouPage from "./pages/ThankYouPage";
 
 class App extends Component {
   render() {
@@ -49,6 +50,8 @@ class App extends Component {
 
               <Route path="/reservation" component={ReservationPage} />
               <Route path="/confirmbooking" component={ConfirmBookingPage} />
+
+              <Route path="/thank-you" component={ThankYouPage} />
             </Switch>
           </main>
         </Router>

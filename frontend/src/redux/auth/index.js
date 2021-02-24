@@ -1,12 +1,14 @@
 import types from "./types";
 
 const LOCAL_STORAGE_TOKEN = "tiae5AuthToken";
+const LOCAL_STORAGE_ID = "tiae5UserID";
 const LOCAL_STORAGE_EMAIL = "tiae5UserMail";
 const LOCAL_STORAGE_FIRSTNAME = "tiae5UserFirstName";
 const LOCAL_STORAGE_LASTNAME = "tiae5UserLastName";
 const LOCAL_STORAGE_ISMANAGER = "tiae5UserIsManager";
 
 const initialUserState = {
+  id: null,
   firstname: null,
   lastname: null,
   email: null,
@@ -21,6 +23,7 @@ const initialState = {
 };
 
 const dumpStateOnLocalStorage = (payload) => {
+  window.localStorage.setItem(LOCAL_STORAGE_ID, payload.id);
   window.localStorage.setItem(LOCAL_STORAGE_TOKEN, payload.token);
   window.localStorage.setItem(LOCAL_STORAGE_EMAIL, payload.email);
   window.localStorage.setItem(LOCAL_STORAGE_FIRSTNAME, payload.firstname);
@@ -29,6 +32,7 @@ const dumpStateOnLocalStorage = (payload) => {
 };
 
 const clearStateOnLocalStorage = () => {
+  window.localStorage.removeItem(LOCAL_STORAGE_ID);
   window.localStorage.removeItem(LOCAL_STORAGE_TOKEN);
   window.localStorage.removeItem(LOCAL_STORAGE_EMAIL);
   window.localStorage.removeItem(LOCAL_STORAGE_FIRSTNAME);
@@ -37,6 +41,7 @@ const clearStateOnLocalStorage = () => {
 };
 
 const loadStateFromLocalStorage = () => {
+  const id = window.localStorage.getItem(LOCAL_STORAGE_ID);
   const token = window.localStorage.getItem(LOCAL_STORAGE_TOKEN);
   const email = window.localStorage.getItem(LOCAL_STORAGE_EMAIL);
   const firstname = window.localStorage.getItem(LOCAL_STORAGE_FIRSTNAME);
@@ -49,6 +54,7 @@ const loadStateFromLocalStorage = () => {
       isLoggedIn: true,
       authToken: token,
       user: {
+        id,
         email,
         firstname,
         lastname,
@@ -71,6 +77,7 @@ export default (state = initialState, { type, payload }) => {
         isLoggedIn: true,
         authToken: payload.token,
         user: {
+          id: payload.id,
           email: payload.email,
           firstname: payload.firstname,
           lastname: payload.lastname,

@@ -75,6 +75,7 @@ defmodule BackendWeb.AuthController do
           |> json(%{
             data: %{
               token: token,
+              id: user.id,
               email: user.email,
               firstname: user.firstname,
               lastname: user.lastname,

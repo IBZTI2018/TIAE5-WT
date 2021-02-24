@@ -3,6 +3,7 @@ import ReactStars from "react-rating-stars-component";
 import api from "../redux/api";
 import { connect } from "react-redux";
 import * as actions from "../redux/ratings/actions";
+import * as authSelectors from "../redux/auth/selectors";
 import * as toast from '../toast';
 
 class Review extends Component {
@@ -36,10 +37,10 @@ class Review extends Component {
           <div className="col-md-12">
             <div className="card">
               <div className="card-header">
-                {this.state.review.published && (
+                {this.state.review.published && this.props.userData.isManager && (
                   <span className="badge badge-success">Published</span>
                 )}
-                {!this.state.review.published && (
+                {!this.state.review.published && this.props.userData.isManager && (
                   <span className="badge badge-warning">Review pending</span>
                 )}
                 <label className="mr-2">&nbsp;</label>
@@ -77,7 +78,7 @@ class Review extends Component {
                   />
                 </h5>
                 <p className="card-text">{this.state.review.comment}</p>
-                {this.props.isManager && this.state.review.published == false && (
+                {this.props.userData.isManager && this.state.review.published == false && (
                   <a href="#" className="btn btn-success" onClick={this.handleClick}>
                     Publish comment
                   </a>
@@ -91,5 +92,7 @@ class Review extends Component {
   }
 }
 
-const mapSelectors = (store) => ({})
+const mapSelectors = (store) => ({
+  userData: authSelectors.getUserData(store)
+})
 export default connect(mapSelectors, { ...actions })(Review);

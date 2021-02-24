@@ -15,6 +15,7 @@ const handleAuthResponse = (dispatch, response) => {
   if (response.status === 200 && response.data && response.data.data) {
     dispatch({type: types.AUTHENTICATE_USER, payload: {
       token: response.data.data.token,
+      id: response.data.data.id,
       email: response.data.data.email,
       firstname: response.data.data.firstname,
       lastname: response.data.data.lastname,

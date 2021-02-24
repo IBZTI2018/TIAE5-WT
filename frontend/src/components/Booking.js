@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import StarRating from "./offer/StarRating";
-import { DateRangePicker } from 'react-dates';
-import moment from 'moment';
+import { DateRangePicker } from "react-dates";
+import moment from "moment";
+import api from "../redux/api";
+import { connect } from "react-redux";
+import * as authSelectors from "../redux/auth/selectors";
+import * as toast from "../toast";
 
 class Booking extends Component {
   constructor(props) {
@@ -10,9 +14,9 @@ class Booking extends Component {
 
     this.state = {
       startDate: moment(),
-      endDate: moment().add(1, 'd'),
-      focus: null
-    }
+      endDate: moment().add(1, "d"),
+      focus: null,
+    };
 
     if (!this.props.offer) {
       // TODO: load offer!
@@ -24,8 +28,8 @@ class Booking extends Component {
   }
 
   handleOnDatesChange = ({ startDate, endDate }) => {
-    this.setState({startDate, endDate});
-  }
+    this.setState({ startDate, endDate });
+  };
 
   handleOffer(event) {
     this.props.history.push("/offers");
@@ -35,12 +39,20 @@ class Booking extends Component {
 
   handleBooking(event) {
     event.preventDefault();
-
-    console.log(this.state)
-    // TODO: Create booking here!
+    let reservation = api.create("reservations");
+    reservation.set("checkin", this.state.startDate.format("YYYY-MM-DD"));
+    reservation.set("checkout", this.state.endDate.format("YYYY-MM-DD"));
+    reservation.set("paid", false);
+    reservation.set("offer_id", this.props.offer.id);
+    reservation.set("user_id", this.props.userData.id);
+    reservation.sync().then(() => {
+      toast.success("Reservation was made successfully");
+      this.props.history.push({ pathname: "/thank-you" });
+    });
   }
 
   render() {
+    const roomequipments = this.props.offer.hotelroom.roomequipments;
     return (
       <div className="card mb-6 p-6">
         <div className="row g-0">
@@ -61,9 +73,7 @@ class Booking extends Component {
                 {this.props.offer.hotelroom.hotel.hotelname}
                 <StarRating hotel={this.props.offer.hotelroom.hotel} />
               </h5>
-              <p>
-                {this.props.offer.hotelroom.hotel.description}
-              </p>
+              <p>{this.props.offer.hotelroom.hotel.description}</p>
               <hr />
               <p className="card-text small">
                 Location:{" "}
@@ -77,7 +87,10 @@ class Booking extends Component {
                 Offer valid until: <b>{this.props.offer.validityend}</b>
               </p>
               <p className="card-text small">
-                Price: <b><u>CHF {this.props.offer.price}</u></b>
+                Price:{" "}
+                <b>
+                  <u>CHF {this.props.offer.price}</u>
+                </b>
               </p>
               <hr />
               <table className="table">
@@ -90,7 +103,13 @@ class Booking extends Component {
                 <tbody>
                   <tr>
                     <td></td>
-                    <td></td>
+                    <td>
+                      {roomequipments.map((roomequipment) => (
+                        <span className="badge badge-info mr-2">
+                          {roomequipment.description}
+                        </span>
+                      ))}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -101,25 +120,23 @@ class Booking extends Component {
         <hr />
 
         <div className="row g-0">
-          <div className="col-md-2">
-            &nbsp;
-          </div>
+          <div className="col-md-2">&nbsp;</div>
           <div className="col-md-10">
             <h5>Book a stay now</h5>
-
-            Please chose the duration of your stay<br />
-            <DateRangePicker 
-                startDatePlaceholderText="From"
-                startDate={this.state.startDate}
-                startDateId="startDate"
-                onDatesChange={this.handleOnDatesChange}
-                endDatePlaceholderText="To"
-                endDate={this.state.endDate}
-                endDateId="endDate"
-                minDate = {moment()}
-                displayFormat="DD/MM/yyyy"
-                focusedInput={this.state.focus}
-                onFocusChange={focus => this.setState({ focus })}
+            Please chose the duration of your stay
+            <br />
+            <DateRangePicker
+              startDatePlaceholderText="From"
+              startDate={this.state.startDate}
+              startDateId="startDate"
+              onDatesChange={this.handleOnDatesChange}
+              endDatePlaceholderText="To"
+              endDate={this.state.endDate}
+              endDateId="endDate"
+              minDate={moment()}
+              displayFormat="DD/MM/yyyy"
+              focusedInput={this.state.focus}
+              onFocusChange={(focus) => this.setState({ focus })}
             />
           </div>
         </div>
@@ -138,4 +155,7 @@ class Booking extends Component {
   }
 }
 
-export default withRouter(Booking);
+const mapSelectors = (store) => ({
+  userData: authSelectors.getUserData(store),
+});
+export default connect(mapSelectors)(withRouter(Booking));

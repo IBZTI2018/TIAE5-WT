@@ -5,7 +5,9 @@ import HotelStars from '../components/hotel/HotelStars';
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as selectors from "../redux/hotels/selectors";
+import * as authSelectors from "../redux/auth/selectors";
 import * as actions from "../redux/hotels/actions";
+import auth from '../redux/auth';
 
 class HotelPage extends Component {
     constructor(props) {
@@ -30,6 +32,15 @@ class HotelPage extends Component {
       const encodedName = encodeURIComponent(this.props.hotel.hotelname)
 
       this.props.history.push(`/offers?searchQuery=${encodedName}`);
+    }
+
+    isManager() {
+      if (this.props.userData) {
+        if (this.props.userData.isManager) {
+          return true;
+        }
+      }
+      return false;
     }
 
     render() {
@@ -65,7 +76,13 @@ class HotelPage extends Component {
 
               <h3>What others had to say</h3>
               {
+                this.isManager() &&
                 this.props.hotel.ratings
+                  .map((rating) => ( <Review review={rating} isManager={true} /> ))
+              }
+              {
+                !this.isManager() &&
+                this.props.hotel.ratings.filter((rating) => rating.published == true)
                   .map((rating) => ( <Review review={rating} isManager={true} /> ))
               }
             </div>
@@ -81,7 +98,8 @@ class HotelPage extends Component {
 }
 
 const mapSelectors = (store) => ({
-  hotel: selectors.getHotel(store)
+  hotel: selectors.getHotel(store),
+  userData: authSelectors.getUserData(store)
 })
 
 export default connect(mapSelectors, { ...actions })(withRouter(HotelPage));

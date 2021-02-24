@@ -37,10 +37,7 @@ defmodule BackendWeb.ReservationController do
   end
 
   def create(conn, args) do
-    user_id = args["data"]["relationships"]["user"]["data"]["id"]
-
     with true <- conn.assigns.logged_in,
-         true <- "#{conn.assigns.user.id}" == "#{user_id}",
          {:ok, data} <- Database.generic_create(Reservation, args) do
       conn
       |> put_status(:created)

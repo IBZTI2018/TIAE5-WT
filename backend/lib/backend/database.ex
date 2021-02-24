@@ -172,6 +172,7 @@ defmodule Backend.Database do
     |> where([o], o.id in ^ids)
     |> preload(hotelroom: [hotel: [address: [street: [city: [:country]]]]])
     |> preload(hotelroom: [hotel: [:ratings]])
+    |> preload(hotelroom: [:roomequipments])
     |> preload(hotelroom: [hotel: [:hotelcategory]])
     |> Repo.all()
   end
