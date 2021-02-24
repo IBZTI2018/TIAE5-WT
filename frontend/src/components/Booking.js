@@ -27,6 +27,10 @@ class Booking extends Component {
     this.handleBooking = this.handleBooking.bind(this);
   }
 
+  isLoggedIn() {
+    return this.props.userData && this.props.userData.id;
+  }
+
   handleOnDatesChange = ({ startDate, endDate }) => {
     this.setState({ startDate, endDate });
   };
@@ -142,13 +146,26 @@ class Booking extends Component {
         </div>
 
         <div>
-          <button
-            className="btn btn-primary float-right mb-2 mr-2"
-            type="button"
-            onClick={this.handleBooking}
-          >
-            Book Now!
-          </button>
+          {this.isLoggedIn() && (
+            <button
+              className="btn btn-primary float-right mb-2 mr-2"
+              type="button"
+              onClick={this.handleBooking}
+            >
+              Book Now!
+            </button>
+          )}
+        </div>
+
+        <div>
+          {!this.isLoggedIn() && (
+            <button
+              className="btn btn-white float-right mb-2 mr-2 disabled"
+              type="button"
+            >
+              You need to be logged in order to book hotel rooms!
+            </button>
+          )}
         </div>
       </div>
     );
