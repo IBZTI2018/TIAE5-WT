@@ -11,7 +11,7 @@ class ThankYouPage extends Component {
         </p>
         <hr />
         <p>
-          Having trouble? <a href="contact@book-your-stay-today.com">Contact us</a>
+          Having trouble? <a href="mailto:contact@book-your-stay-today.com">Contact us</a>
         </p>
         <p class="lead">
           <a
