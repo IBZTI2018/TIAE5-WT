@@ -95,8 +95,8 @@ class HotelroomForm extends Component {
               type="number"
             />
           </div>
-          <div class="row">
-            <div class="col-md-6">
+          <div className="row">
+            <div className="col-md-6">
               <div className="form-group">
                 <label>Price range</label>
                 <select
@@ -114,7 +114,7 @@ class HotelroomForm extends Component {
                 </select>
               </div>
             </div>
-            <div class="col-md-6">
+            <div className="col-md-6">
               <div className="form-group">
                 <label>Room equipment</label>
                 <select

@@ -16,6 +16,6 @@ export default class HotelStars extends Component {
   }
 
   render() {
-    return (<span class="hotel-stars"> {this.state.stars} </span>);
+    return (<span className="hotel-stars"> {this.state.stars} </span>);
   }
 }

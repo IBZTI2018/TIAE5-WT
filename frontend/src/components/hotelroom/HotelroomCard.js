@@ -27,11 +27,11 @@ class HotelroomCard extends Component {
     return (
       <div className="mb-5">
         <div className="card">
-          <div class="card-header">
+          <div className="card-header">
             Room number: #{this.hotelroom.roomnumber}
             <a
               href="#"
-              class="btn btn-danger btn-sm ml-4"
+              className="btn btn-danger btn-sm ml-4"
               onClick={this.deleteHotelroom}
             >
               Delete Hotelroom

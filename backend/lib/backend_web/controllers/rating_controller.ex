@@ -56,7 +56,7 @@ defmodule BackendWeb.RatingController do
     rating = Database.generic_item(Rating, args["id"]) |> Repo.preload(:reservation)
 
     with true <- conn.assigns.logged_in,
-         true <- conn.assigns.user.id == rating.reservation.user_id,
+         true <- conn.assigns.user.id == rating.reservation.user_id or conn.assigns.user.is_manager,
          {:ok, _} <- Database.generic_delete(Rating, args["id"]) do
       send_resp(conn, 200, "")
     else

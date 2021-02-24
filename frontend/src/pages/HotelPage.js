@@ -49,7 +49,11 @@ class HotelPage extends Component {
                 </div>
                 <div className="col-md-8">
                   <h5 className="card-title">
-                    {this.props.hotel.hotelcategory.description}
+                    {
+                      this.props.hotel.hotelcategory && (
+                        <label>{this.props.hotel.hotelcategory.description}</label>
+                      )
+                    }
                     <HotelStars hotel={this.props.hotel} />
                   </h5>
                   <p className="card-text">{this.props.hotel.description}</p>
@@ -61,10 +65,8 @@ class HotelPage extends Component {
 
               <h3>What others had to say</h3>
               {
-                // TODO: Move filtering to backend!!
                 this.props.hotel.ratings
-                  .filter((rating) => rating.published)
-                  .map((rating) => ( <Review review={rating} /> ))
+                  .map((rating) => ( <Review review={rating} isManager={true} /> ))
               }
             </div>
           </div>

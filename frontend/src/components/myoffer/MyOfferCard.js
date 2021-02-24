@@ -30,7 +30,7 @@ class MyOfferCard extends Component {
             Offer # {this.props.offer.id}
             <a
               href="#"
-              class="btn btn-danger btn-sm ml-4"
+              className="btn btn-danger btn-sm ml-4"
               onClick={this.deleteOffer}
             >
               Delete Offer

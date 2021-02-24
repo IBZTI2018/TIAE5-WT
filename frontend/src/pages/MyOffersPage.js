@@ -38,7 +38,7 @@ class MyOffersPage extends Component {
             <div className="col-md-12">
               <a
                 href="/my_offers/create"
-                class="btn btn-warning btn-block"
+                className="btn btn-warning btn-block"
               >
                 Create offer
               </a>

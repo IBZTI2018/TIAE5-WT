@@ -8,7 +8,7 @@ const SINGLE_HOTEL_INCLUDES = [
 
 const MULTIPLE_HOTELS_INCLUDES = [
   "hotelrooms.offers",
-  "ratings"
+  "ratings.reservation.user"
 ].join(',')
 
 export const fetchHotels = () => async (dispatch) => {
