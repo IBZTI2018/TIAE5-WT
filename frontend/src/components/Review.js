@@ -14,7 +14,7 @@ class Review extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick(e) {
     this.state.review.published = true;
     this.setState({ review: this.state.review });
     let fakeRating = api.create("ratings");
@@ -25,6 +25,8 @@ class Review extends Component {
       const { id, reservation, ...rest } = this.state.review;
       this.props.createRating(rest, reservation.id);
     });
+    e.preventDefault();
+    return false;
   }
 
   render() {
