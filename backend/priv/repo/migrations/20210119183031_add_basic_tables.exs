@@ -108,6 +108,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
       add(:validitystart, :date, null: false)
       add(:validityend, :date, null: false)
       add(:price, :decimal, null: false)
+      add(:booked, :boolean, null: false, default: false)
       add(:hotelroom_id, references("hotelrooms", @simple_cascade), null: false)
     end
 

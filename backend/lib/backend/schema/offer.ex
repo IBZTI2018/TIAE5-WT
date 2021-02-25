@@ -10,13 +10,14 @@ defmodule Backend.Schema.Offer do
     field(:validitystart, :date)
     field(:validityend, :date)
     field(:price, :decimal)
+    field(:booked, :boolean, default: false)
 
     belongs_to(:hotelroom, Hotelroom)
   end
 
   def changeset(%Offer{} = offer, attrs) do
     offer
-    |> cast(attrs, [:validitystart, :validityend, :price, :hotelroom_id])
+    |> cast(attrs, [:validitystart, :validityend, :price, :booked, :hotelroom_id])
     |> validate_required([:validitystart, :validityend, :price, :hotelroom_id])
   end
 end
