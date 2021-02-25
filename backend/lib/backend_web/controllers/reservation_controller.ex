@@ -3,6 +3,7 @@ defmodule BackendWeb.ReservationController do
   require Ecto.Query
 
   alias Backend.Database
+  alias Backend.Schema.Offer
   alias Backend.Schema.Reservation
 
   alias BackendWeb.ReservationView
@@ -38,10 +39,11 @@ defmodule BackendWeb.ReservationController do
 
   def create(conn, args) do
     with true <- conn.assigns.logged_in,
-         {:ok, data} <- Database.generic_create(Reservation, args) do
+         {:ok, reservation} <- Database.generic_create(Reservation, args),
+         {:ok, _offer} <- Database.generic_update(Offer, reservation.offer_id, %{booked: true}) do
       conn
       |> put_status(:created)
-      |> render("show.json", %{data: data})
+      |> render("show.json", %{data: reservation})
     else
       false -> {:error, :forbidden}
       error -> error
