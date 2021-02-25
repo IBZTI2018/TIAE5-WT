@@ -43,6 +43,10 @@ defmodule BackendWeb.ReservationController do
     with true <- conn.assigns.logged_in,
          {:ok, reservation} <- Database.generic_create(Reservation, args),
          {:ok, _} <- Database.generic_update(Offer, reservation.offer_id, @book_offer_args) do
+      conn.assigns.user.email
+      |> Backend.Email.booking_confirmation_email()
+      |> Backend.Mailer.deliver_now()
+
       conn
       |> put_status(:created)
       |> render("show.json", %{data: reservation})

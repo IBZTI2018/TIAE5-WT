@@ -12,6 +12,21 @@ defmodule Backend.Email do
     )
   end
 
+  def booking_confirmation_email(target) do
+    new_email(
+      to: target,
+      from: "cbrxde@gmail.com",
+      subject: "Booking confirmation from BookYourStayToday",
+      html_body:
+        html_email(
+          "Thank your for booking a stay via BookYourStayToday. Attached, you find your booking confirmation, as well as additional information provided by your hotel.<br />(This is currently just a placeholder, there is no actual information attached)",
+          false
+        ),
+      text_body:
+        "Thank your for booking a stay via BookYourStayToday. Attached, you find your booking confirmation, as well as additional information provided by your hotel. (This is currently just a placeholder, there is no actual information attached)"
+    )
+  end
+
   def bad_rating_email(target, hotel_id) do
     new_email(
       to: target,
