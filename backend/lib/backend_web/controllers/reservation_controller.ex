@@ -16,6 +16,8 @@ defmodule BackendWeb.ReservationController do
 
   action_fallback(BackendWeb.FallbackController)
 
+  @book_offer_args %{"data" => %{"attributes" => %{"booked" => true}}}
+
   def index(conn, _args) do
     with true <- conn.assigns.logged_in do
       # Scope request to only include reservations for the current user
@@ -40,7 +42,7 @@ defmodule BackendWeb.ReservationController do
   def create(conn, args) do
     with true <- conn.assigns.logged_in,
          {:ok, reservation} <- Database.generic_create(Reservation, args),
-         {:ok, _offer} <- Database.generic_update(Offer, reservation.offer_id, %{booked: true}) do
+         {:ok, _} <- Database.generic_update(Offer, reservation.offer_id, @book_offer_args) do
       conn
       |> put_status(:created)
       |> render("show.json", %{data: reservation})
