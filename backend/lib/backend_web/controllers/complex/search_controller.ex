@@ -28,6 +28,8 @@ defmodule BackendWeb.SearchController do
       (o.validitystart <= '$2' AND o.validityend <= '$3' AND o.validityend >= '$2')
       AND
       (hr.persons = $4)
+      AND
+      (o.booked = 0)
     ;
   """
 
