@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Doughnut, Pie } from "react-chartjs-2";
+import { Doughnut, Pie, Line } from "react-chartjs-2";
 import { connect } from "react-redux";
 import * as hotelSelectors from "../redux/hotels/selectors";
 import * as hotelActions from "../redux/hotels/actions";
@@ -72,21 +72,9 @@ class HotelStatsPage extends Component {
       ],
       datasets: [
         {
+          label: "Reservations",
           data: parsedData,
-          backgroundColor: [
-            "deepskyblue",
-            "lightsteelblue",
-            "dodgerblue",
-            "cornflowerblue",
-            "steelblue",
-            "royalblue",
-            "blue",
-            "mediumblue",
-            "darkblue",
-            "navy",
-            "midnightblue",
-            "mediumslateblue"
-          ],
+          borderColor: "black"
         },
       ],
     };
@@ -142,7 +130,7 @@ class HotelStatsPage extends Component {
         <div class="col-md-12">
           <h3>Reservations by month</h3>
           <h4>Total of {this.getReservationsTotal()} reservations</h4>
-          <Pie
+          <Line
             data={this.getReservations()}
             options={this.state.donutOptions}
           />

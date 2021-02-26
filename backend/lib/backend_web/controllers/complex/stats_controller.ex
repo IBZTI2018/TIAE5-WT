@@ -34,7 +34,7 @@ defmodule BackendWeb.StatsController do
         # Number of reservations for hotel in total and in the last n-1, n-2, etc. month
         "reservations" => %{
           "total" => 78,
-          "months" => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+          "months" => [5, 2, 10, 4, 1, 6, 11, 8, 9, 3, 7, 12]
         },
         # Ratings for the hotel
         "ratings" => %{
