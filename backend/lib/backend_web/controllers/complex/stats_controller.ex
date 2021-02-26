@@ -29,12 +29,12 @@ defmodule BackendWeb.StatsController do
         "rooms" => %{
           "total" => total_rooms,
           "occupied" => 1,
-          "free" => 1
+          "free" => total_rooms - 1
         },
         # Number of reservations for hotel in total and in the last n-1, n-2, etc. month
         "reservations" => %{
-          "total" => 1,
-          "months" => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          "total" => 78,
+          "months" => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
         },
         # Ratings for the hotel
         "ratings" => %{

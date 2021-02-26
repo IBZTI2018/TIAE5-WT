@@ -1,5 +1,6 @@
 import types from "./types";
 import api from "../api";
+import complexApi from "../complexApi";
 
 const SINGLE_HOTEL_INCLUDES = [
   'ratings.reservation.user',
@@ -26,6 +27,16 @@ export const fetchHotel = (hotelId) => async (dispatch) => {
       const payload = resource.toJSONTree();
       dispatch({type: types.SET_CURRENT_HOTEL, payload})
       resolve(payload);
+    })
+  })
+}
+
+export const fetchHotelStats = (hotelId) => async (dispatch) => {
+  return new Promise((resolve, reject) => {
+    complexApi.get("stats/hotels", hotelId, {}, (err, resource) => {
+      if (err) return reject(err);
+      dispatch({type: types.SET_HOTEL_STATS, payload: resource._raw})
+      resolve(resource._raw);
     })
   })
 }

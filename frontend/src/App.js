@@ -21,6 +21,7 @@ import ReservationPage from './pages/ReservationPage';
 import BookingPage from './pages/BookingPage';
 import ConfirmBookingPage from './pages/ConfirmBookingPage';
 import HotelroomsPage from './pages/HotelroomsPage';
+import HotelStatsPage from './pages/HotelStatsPage';
 import ThankYouPage from "./pages/ThankYouPage";
 
 class App extends Component {
@@ -42,6 +43,7 @@ class App extends Component {
               <Route exact path="/hotels" component={HotelsPage} />
               <Route exact path="/hotels/:id" component={HotelPage} />
               <Route path="/hotels/:id/hotelrooms" component={HotelroomsPage} />
+              <Route path="/hotels/:id/stats" component={HotelStatsPage} />
               <Route path="/booking/:id" component={BookingPage} />
 
               <Route path="/login" component={LoginPage} />
