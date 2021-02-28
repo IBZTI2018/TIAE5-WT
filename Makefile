@@ -35,9 +35,9 @@ nuke:
 	docker-compose build --no-cache
 
 deploy:
-	ssh vpn.cybrox.eu sudo systemctl stop tiae
+	ssh vpn.cybrox.eu sudo systemctl stop tiae5
 	tar -czf app.tar.gz --exclude ".git" --exclude ".elixir_ls" ./*
 	scp ./app.tar.gz vpn.cybrox.eu:/opt/tiae/app.tar.gz
 	ssh vpn.cybrox.eu "cd /opt/tiae && tar -xzf app.tar.gz && rm app.tar.gz"
-	ssh vpn.cybrox.eu sudo systemctl start tiae
+	ssh vpn.cybrox.eu sudo systemctl start tiae5
 	rm app.tar.gz
