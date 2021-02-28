@@ -45,6 +45,6 @@ export const fetchHotelStats = (hotelId) => async (dispatch) => {
 }
 
 export const dropHotelPromo = (hotelId, promoContent) => async () => {
-  const path = `/api/complex/promo/hotel/${hotelId}`;
+  const path = `/api/complex/promo/hotels/${hotelId}`;
   return axios.post(path, {contents: promoContent}, {headers: {Authorization: `Bearer ${getAuthToken(store.getState())}`}})
 }

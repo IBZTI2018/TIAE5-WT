@@ -4,19 +4,18 @@ defmodule Backend.Schema.Media do
   import Ecto.Changeset
 
   alias Backend.Schema.Media
-  alias Backend.Schema.Offer
-  alias Backend.Schema.Reservation
+  alias Backend.Schema.Hotel
 
   schema "medias" do
-    field(:contents, :string)
+    field(:contents, :binary)
+    field(:sent, :boolean, default: false)
 
-    belongs_to(:offer, Offer)
-    belongs_to(:reservation, Reservation)
+    belongs_to(:hotel, Hotel)
   end
 
   def changeset(%Media{} = media, attrs) do
     media
-    |> cast(attrs, [:contents, :offer_id, :reservation_id])
-    |> validate_required([:contents])
+    |> cast(attrs, [:contents, :sent, :hotel_id])
+    |> validate_required([:contents, :sent, :hotel_id])
   end
 end

@@ -130,9 +130,9 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
     end
 
     create table("medias") do
-      add(:contents, :text, null: false)
-      add(:reservation_id, references("reservations", @safe_cascade), null: true)
-      add(:offer_id, references("offers", @safe_cascade), null: true)
+      add(:contents, :binary, null: false)
+      add(:sent, :boolean, null: false, default: false)
+      add(:hotel_id, references("hotels", @simple_cascade), null: false)
     end
   end
 end

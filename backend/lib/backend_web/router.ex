@@ -69,6 +69,7 @@ defmodule BackendWeb.Router do
       get("/search_hotels", SearchController, :search_hotels)
 
       get("/stats/hotels/:id", StatsController, :get_hotel_stats)
+      post("/promo/hotels/:id", PromoController, :create_hotel_promo)
     end
 
     scope "/internal" do
