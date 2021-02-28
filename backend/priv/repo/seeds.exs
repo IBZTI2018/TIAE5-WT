@@ -102,7 +102,7 @@ admin =
   Backend.Repo.insert!(%Backend.Schema.User{
     firstname: "IBZ",
     lastname: "Admin",
-    email: "admin@admin.ch",
+    email: "cbrxde+admin@gmail.com",
     password: Pbkdf2.hash_pwd_salt("password"),
     is_manager: true,
     title: Enum.at(titles, 1),
@@ -114,7 +114,7 @@ staff =
   Backend.Repo.insert!(%Backend.Schema.User{
     firstname: "IBZ",
     lastname: "Manager",
-    email: "manager@admin.ch",
+    email: "cbrxde+manager@gmail.com",
     password: Pbkdf2.hash_pwd_salt("password"),
     is_manager: true,
     title: Enum.at(titles, 1),
@@ -126,7 +126,7 @@ customer =
   Backend.Repo.insert!(%Backend.Schema.User{
     firstname: "IBZ",
     lastname: "Customer",
-    email: "customer@admin.ch",
+    email: "cbrxde+customer@gmail.com",
     password: Pbkdf2.hash_pwd_salt("password"),
     is_manager: false,
     title: Enum.at(titles, 2),
