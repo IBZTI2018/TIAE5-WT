@@ -81,7 +81,10 @@ class HotelPage extends Component {
                     <HotelStars hotel={this.props.hotel} />
                   </h5>
                   <p className="card-text">{this.props.hotel.description}</p>
-                  <a href="#" className="btn btn-primary" onClick={this.handleBooking}>Book here!</a>
+                  {
+                    !this.isManager() &&
+                    <a href="#" className="btn btn-primary" onClick={this.handleBooking}>Book here!</a>
+                  }
                 </div>
               </div>
 
