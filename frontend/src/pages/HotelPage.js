@@ -77,7 +77,13 @@ class HotelPage extends Component {
     handleUnassignHotelequipment = hotelequipment => event => {
       let fakeObj = api.create("hotel_hotelequipments");
       fakeObj._base.id = [this.props.hotel.id, hotelequipment.id].join(':');
-      fakeObj.delete(() => { 
+      fakeObj.delete((e) => {
+        // Please just don't ask what this library is doing internally...
+        if (e.status === undefined) {
+          toast.error('Failed to unassign hotel equipment!');
+          return;
+        }
+
         toast.success('The hotel equipment was successfully unassigned!');
         this.props.fetchHotel(this.props.hotel.id);
       });
