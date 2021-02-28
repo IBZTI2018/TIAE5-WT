@@ -1,6 +1,8 @@
 defmodule BackendWeb.JoinHotelHotelequipmentController do
   use BackendWeb, :controller
 
+  require Ecto.Query
+
   alias Backend.Database
   alias Backend.Schema.JoinHotelHotelequipment
 
@@ -24,7 +26,17 @@ defmodule BackendWeb.JoinHotelHotelequipmentController do
   end
 
   def delete(conn, args) do
-    join = Backend.Database.generic_item(Backend.Schema.JoinHotelHotelequipment, args["id"])
+    # We don't fetch the join table, so we don't knwo the actual ID of the entry.
+    # Since the MyXQL adapter does not support composite primary keys properly, we trick a bit here
+    # Instead of the actual id, we expect `hotel_id:hotelequipment_id`
+    [hotel_id, hotelequipment_id] = String.split("#{args["id"]}", ":", parts: 2)
+
+    [join] =
+      Backend.Database.generic_list(JoinHotelHotelequipment, %JSONAPI.Config{}, fn query ->
+        query
+        |> Ecto.Query.where(hotel_id: ^hotel_id)
+        |> Ecto.Query.where(hotelequipment_id: ^hotelequipment_id)
+      end)
 
     with :ok <- can_manage_hotel(conn, join.hotel_id),
          {:ok, _} <- Database.generic_delete(JoinHotelHotelequipment, args["id"]) do
