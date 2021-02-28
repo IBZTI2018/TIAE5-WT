@@ -21,7 +21,7 @@ defmodule Backend.Scheduled.Mailer do
         query |> Ecto.Query.where(sent: ^false)
       end)
 
-    _ = Logger.info("Found #{Enum.count(unsent)} unsent promo entries, sending...")
+    _ = Logger.info("Found #{Enum.count(unsent)} unsent promo entries")
 
     Enum.each(unsent, &send_promo_media/1)
   end
@@ -32,6 +32,9 @@ defmodule Backend.Scheduled.Mailer do
       |> Backend.Email.promo_email(promo)
       |> Backend.Mailer.deliver_now()
     end)
+
+    Database.generic_update(Media, promo.id, %{"data" => %{"attributes" => %{"sent" => true}}})
+    _ = Logger.info("Sent out promo #{promo.id} and marked as sent!")
   end
 
   defp get_mails_for_hotel(hotel_id) do

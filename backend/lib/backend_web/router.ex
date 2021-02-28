@@ -69,7 +69,7 @@ defmodule BackendWeb.Router do
       get("/search_hotels", SearchController, :search_hotels)
 
       get("/stats/hotels/:id", StatsController, :get_hotel_stats)
-      get("/promo/:id", PromoController, :get_hotel_promo)
+      get("/promo/~view/:id", PromoController, :get_hotel_promo)
       post("/promo/hotels/:id", PromoController, :create_hotel_promo)
     end
 

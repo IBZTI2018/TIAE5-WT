@@ -12,20 +12,22 @@ defmodule Backend.Email do
     )
   end
 
-  def promo_email(target, _promo) do
-    # TODO: Actually include promo PDF once we launch
-
+  def promo_email(target, promo) do
     new_email(
       to: target,
       from: "cbrxde@gmail.com",
       subject: "Promotional message from BookYourStayToday",
       html_body:
         html_email(
-          "A hotel that you have recently booked through BookYourStayToday has some new, awesome promo for you.<br />(This is currently just a placeholder, there is no actual information attached)",
+          "A hotel that you have recently booked through BookYourStayToday has some new, awesome promo for you.<br />(This is currently just a placeholder, there is no actual information attached, you can see the file <a href=\"https://tiae5.cybrox.eu/api/complex/promo/~view/#{
+            promo.id
+          }\">here</a>)",
           true
         ),
       text_body:
-        "A hotel that you have recently booked through BookYourStayToday has some new, awesome promo for you. (This is currently just a placeholder, there is no actual information attached)"
+        "A hotel that you have recently booked through BookYourStayToday has some new, awesome promo for you. (This is currently just a placeholder, there is no actual information attached, you can see the file at https://tiae5.cybrox.eu/api/complex/promo/~view/#{
+          promo.id
+        })"
     )
   end
 
