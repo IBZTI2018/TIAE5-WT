@@ -5,6 +5,7 @@ import HotelStars from '../components/hotel/HotelStars';
 import PromoDrop from '../components/hotel/PromoDrop';
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { Link } from 'react-router-dom';
 import * as selectors from "../redux/hotels/selectors";
 import * as authSelectors from "../redux/auth/selectors";
 import * as actions from "../redux/hotels/actions";
@@ -91,6 +92,17 @@ class HotelPage extends Component {
                 this.isManager() &&
                 <div className="managerArea">
                   <h3>Management Area</h3>
+
+                  <div className="card mb-3">
+                    <div className="card-header">
+                      Manage your Hotel
+                    </div>
+                    <div className="card-body">
+                      <Link to={'/hotels/' + this.props.hotel.id + '/stats'}  className="btn btn-success ml-2">Statistics</Link>
+                      <Link to={'/hotels/' + this.props.hotel.id + '/hotelrooms'} className="btn btn-dark ml-2">View Hotel rooms</Link>
+                      <Link to={'/hotels/' + this.props.hotel.id + '/hotelrooms/create'} className="btn btn-warning ml-2">Create Hotel room</Link>
+                    </div>
+                  </div>
 
                   <div className="card">
                     <div className="card-header">
