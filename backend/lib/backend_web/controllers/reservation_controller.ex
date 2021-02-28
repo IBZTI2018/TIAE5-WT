@@ -41,8 +41,9 @@ defmodule BackendWeb.ReservationController do
 
   def create(conn, args) do
     with true <- conn.assigns.logged_in,
-         {:ok, reservation} <- Database.generic_create(Reservation, args),
-         {:ok, _} <- Database.generic_update(Offer, reservation.offer_id, @book_offer_args) do
+         {:ok, offer} <- get_possible_offer(args["data"]),
+         {:ok, _} <- Database.generic_update(Offer, offer.id, @book_offer_args),
+         {:ok, reservation} <- Database.generic_create(Reservation, args) do
       conn.assigns.user.email
       |> Backend.Email.booking_confirmation_email()
       |> Backend.Mailer.deliver_now()
@@ -51,8 +52,23 @@ defmodule BackendWeb.ReservationController do
       |> put_status(:created)
       |> render("show.json", %{data: reservation})
     else
+      {:error, :not_found} -> {:error, :not_found}
+      {:error, :already_booked} -> {:error, :conflict}
       false -> {:error, :forbidden}
       error -> error
+    end
+  end
+
+  defp get_possible_offer(data) do
+    attrs = Map.get(data, "attributes", %{})
+
+    case Map.get(attrs, "offer_id") do
+      nil ->
+        {:error, :not_found}
+
+      offer_id ->
+        offer = Database.generic_item(Offer, offer_id)
+        if offer.booked, do: {:error, :already_booked}, else: {:ok, offer}
     end
   end
 

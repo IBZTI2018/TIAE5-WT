@@ -27,6 +27,12 @@ defmodule BackendWeb.FallbackController do
     |> json(%{errors: [%{title: "Forbidden"}]})
   end
 
+  def call(conn, {:error, :conflict}) do
+    conn
+    |> put_status(:conflict)
+    |> json(%{errors: [%{title: "Conflicting request"}]})
+  end
+
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     errors =
       Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
