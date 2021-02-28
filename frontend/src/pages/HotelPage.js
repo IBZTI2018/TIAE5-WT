@@ -8,6 +8,7 @@ import { withRouter } from "react-router";
 import * as selectors from "../redux/hotels/selectors";
 import * as authSelectors from "../redux/auth/selectors";
 import * as actions from "../redux/hotels/actions";
+import * as toast from '../toast';
 import auth from '../redux/auth';
 
 class HotelPage extends Component {
@@ -37,8 +38,13 @@ class HotelPage extends Component {
     }
 
     handlePromo(file, contents) {
-      console.log(contents)
-      console.log(file)
+      // TODO: Replace this with a more performant solutions at some point
+      const blob = btoa([].reduce.call(new Uint8Array(contents),function(p,c){return p+String.fromCharCode(c)},''))
+      
+      const { dropHotelPromo } = this.props;
+      dropHotelPromo(this.props.hotel.id, blob)
+        .then(() => toast.success("Successfully sent promo to customers."))
+        .catch(() => toast.error("Failed to send promo to customers, please try again in a few minutes."))
     }
 
     isManager() {

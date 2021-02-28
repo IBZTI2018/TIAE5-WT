@@ -1,6 +1,9 @@
 import types from "./types";
 import api from "../api";
 import complexApi from "../complexApi";
+import axios from 'axios';
+import store from '../store';
+import { getAuthToken } from '../auth/selectors';
 
 const SINGLE_HOTEL_INCLUDES = [
   'ratings.reservation.user',
@@ -39,4 +42,9 @@ export const fetchHotelStats = (hotelId) => async (dispatch) => {
       resolve(resource._raw);
     })
   })
+}
+
+export const dropHotelPromo = (hotelId, promoContent) => async () => {
+  const path = `/api/complex/promo/hotel/${hotelId}`;
+  return axios.post(path, {contents: promoContent}, {headers: {Authorization: `Bearer ${getAuthToken(store.getState())}`}})
 }
