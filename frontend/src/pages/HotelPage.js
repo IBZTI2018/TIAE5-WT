@@ -72,8 +72,10 @@ class HotelPage extends Component {
       toast.success("The hotel equipments were successfully assigned!");
       event.preventDefault();
 
-      // JsonAPI library bugs out
-      window.location.reload();
+      setTimeout(() => {
+        // JsonAPI library bugs out
+        window.location.reload();
+      }, 2000);
 
       return false;
     }
