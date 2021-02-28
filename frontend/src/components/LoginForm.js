@@ -28,9 +28,13 @@ class LoginForm extends Component {
     const { authenticateUser } = this.props;
     authenticateUser(this.state.usermail, this.state.password)
       .then(() => {
-        toast.success("Successfully logged in!");
-        this.props.history.push({ pathname: "/" });
-        setTimeout(() => this.props.openSidebar(), 0);
+        // toast.success("Successfully logged in!");
+        // this.props.history.push({ pathname: "/" });
+        // setTimeout(() => this.props.openSidebar(), 0);
+
+        // Force-reload for now since JSONAPI library cannot take a
+        // function to get the auth token so it is set on load
+        window.location.reload()
       })
       .catch((error) => {
         console.error(error);
