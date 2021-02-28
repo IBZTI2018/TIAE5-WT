@@ -93,7 +93,7 @@ class HotelPage extends Component {
                     <div className="card-body">
                       Upload your hotel promo brochures (as PDF with a maximum file size of 1MB) here, to automatically send them to all of your past hotel customers via E-Mail.
 
-                      <div class="decorated-dropzone">
+                      <div className="decorated-dropzone">
                         <PromoDrop hotel={this.props.hotel} handlePromo={this.handlePromo} />
                       </div>
                     </div>
