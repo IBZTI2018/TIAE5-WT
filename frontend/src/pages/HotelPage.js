@@ -85,7 +85,13 @@ class HotelPage extends Component {
         }
 
         toast.success('The hotel equipment was successfully unassigned!');
-        this.props.fetchHotel(this.props.hotel.id);
+
+        this.props.hotel.hotelequipments = this.props.hotel.hotelequipments.filter((e) => {
+          return e.id != hotelequipment.id;
+        });
+
+        // Force a reload without re-fetching data because of the JSON-API
+        this.setState({__forceReload: Math.random()})
       });
     }
 
@@ -113,7 +119,7 @@ class HotelPage extends Component {
     getReservationsTable() {
       let data = [];
       for (let hotelroom of this.props.hotel.hotelrooms) {
-        if (!hotelroom.offers || hotelroom.offers.length < 1) continue;
+        if (!hotelroom.offers || hotelroom.offers.length < 1) continue;
         for (let offer of hotelroom.offers) {
           if (!offer.reservations || offer.reservations.length < 1) continue;
           for (let reservation of offer.reservations) {
