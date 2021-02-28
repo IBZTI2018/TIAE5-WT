@@ -178,7 +178,7 @@ class HotelPage extends Component {
               <hr className="visible-divider" />
 
               {
-                this.isManager() &&
+                this.isManager() && this.props.hotel.can_manage &&
                 <div className="managerArea">
                   <h3>Management Area</h3>
 

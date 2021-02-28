@@ -9,7 +9,7 @@ defmodule BackendWeb.HotelView do
   alias BackendWeb.RatingView
 
   def fields do
-    [:hotelname, :image, :description, :rating]
+    [:hotelname, :image, :description, :rating, :can_manage]
   end
 
   def rating(data, _conn) do
@@ -23,6 +23,10 @@ defmodule BackendWeb.HotelView do
       |> Enum.map(& &1.score)
 
     Enum.sum(scores) / Enum.count(scores)
+  end
+
+  def can_manage(data, conn) do
+    "#{data.id}" in Enum.map(conn.assigns.managed_hotels, &"#{&1}")
   end
 
   def relationships do
