@@ -12,6 +12,23 @@ defmodule Backend.Email do
     )
   end
 
+  def promo_email(target, _promo) do
+    # TODO: Actually include promo PDF once we launch
+
+    new_email(
+      to: target,
+      from: "cbrxde@gmail.com",
+      subject: "Promotional message from BookYourStayToday",
+      html_body:
+        html_email(
+          "A hotel that you have recently booked through BookYourStayToday has some new, awesome promo for you.<br />(This is currently just a placeholder, there is no actual information attached)",
+          true
+        ),
+      text_body:
+        "A hotel that you have recently booked through BookYourStayToday has some new, awesome promo for you. (This is currently just a placeholder, there is no actual information attached)"
+    )
+  end
+
   def booking_confirmation_email(target) do
     new_email(
       to: target,

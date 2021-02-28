@@ -1,10 +1,42 @@
 defmodule Backend.Scheduled.Mailer do
   require Logger
+  require Ecto.Query
+
+  alias Backend.Database
+  alias Backend.Schema.Media
+
+  @mails_for_hotel """
+    SELECT DISTINCT u.email FROM reservations r
+      INNER JOIN offers o ON r.offer_id = o.id
+      INNER JOIN hotelrooms h ON o.hotelroom_id = h.id
+      INNER JOIN users u ON r.user_id = u.id
+        WHERE h.hotel_id = $1;
+  """
 
   def send_unsent_media do
-    # TODO: Actually send e-mails
-    # This would fetch all unsent emails from the database and
-    # use the bamboo_smtp adapter to send them via a mail server
-    Logger.info("DUMMY: sending n emails to users...")
+    _ = Logger.info("Scanning promo media table for unsent entries")
+
+    unsent =
+      Database.generic_list(Media, %JSONAPI.Config{}, fn query ->
+        query |> Ecto.Query.where(sent: ^false)
+      end)
+
+    _ = Logger.info("Found #{Enum.count(unsent)} unsent promo entries, sending...")
+
+    Enum.each(unsent, &send_promo_media/1)
+  end
+
+  defp send_promo_media(promo) do
+    Enum.each(get_mails_for_hotel(promo.hotel_id), fn recipient ->
+      recipient
+      |> Backend.Email.promo_email(promo)
+      |> Backend.Mailer.deliver_now()
+    end)
+  end
+
+  defp get_mails_for_hotel(hotel_id) do
+    full_query = String.replace(@mails_for_hotel, "$1", "#{hotel_id}")
+    {:ok, %MyXQL.Result{rows: r}} = Ecto.Adapters.SQL.query(Backend.Repo, full_query)
+    r |> List.flatten()
   end
 end

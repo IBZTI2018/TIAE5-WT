@@ -28,14 +28,14 @@ defmodule BackendWeb.StatsController do
   """
 
   @count_bookings_total """
-    SELECT COUNT(*)FROM reservations r
+    SELECT COUNT(*) FROM reservations r
       INNER JOIN offers o ON r.offer_id = o.id
       INNER JOIN hotelrooms h ON o.hotelroom_id = h.id
       WHERE h.hotel_id = $1;
   """
 
   @count_bookins_month """
-  SELECT COUNT(*)FROM reservations r
+  SELECT COUNT(*) FROM reservations r
     INNER JOIN offers o ON r.offer_id = o.id
     INNER JOIN hotelrooms h ON o.hotelroom_id = h.id
     WHERE h.hotel_id = $1
@@ -44,14 +44,12 @@ defmodule BackendWeb.StatsController do
   """
 
   @count_reviews """
-    SELECT COUNT(*)
-      FROM ratings
+    SELECT COUNT(*) FROM ratings
       WHERE hotel_id = $1
   """
 
   @count_reviews_bad """
-    SELECT COUNT(*)
-      FROM ratings
+    SELECT COUNT(*) FROM ratings
       WHERE hotel_id = 1
         AND score < 3
   """
