@@ -130,7 +130,7 @@ defmodule Backend.Repo.Migrations.AddBasicTables do
     end
 
     create table("medias") do
-      add(:contents, :binary, null: false)
+      add(:contents, :mediumblob, null: false)
       add(:sent, :boolean, null: false, default: false)
       add(:hotel_id, references("hotels", @simple_cascade), null: false)
     end
