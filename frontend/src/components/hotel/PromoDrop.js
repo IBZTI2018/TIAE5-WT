@@ -15,10 +15,9 @@ export default function PromoDrop(props) {
           return;
         }
 
-        const binaryStr = reader.result
-        if (props.handlePromo) props.handlePromo(file, binaryStr);
+        if (props.handlePromo) props.handlePromo(file, btoa(reader.result));
       }
-      reader.readAsArrayBuffer(file)
+      reader.readAsBinaryString(file)
     })
     
   }, [])

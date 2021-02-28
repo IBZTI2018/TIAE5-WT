@@ -38,11 +38,8 @@ class HotelPage extends Component {
     }
 
     handlePromo(file, contents) {
-      // TODO: Replace this with a more performant solutions at some point
-      const blob = btoa([].reduce.call(new Uint8Array(contents),function(p,c){return p+String.fromCharCode(c)},''))
-      
       const { dropHotelPromo } = this.props;
-      dropHotelPromo(this.props.hotel.id, blob)
+      dropHotelPromo(this.props.hotel.id, contents)
         .then(() => toast.success("Successfully sent promo to customers."))
         .catch(() => toast.error("Failed to send promo to customers, please try again in a few minutes."))
     }
