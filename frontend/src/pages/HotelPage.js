@@ -71,6 +71,10 @@ class HotelPage extends Component {
       this.props.fetchHotel(this.props.hotel.id);
       toast.success("The hotel equipments were successfully assigned!");
       event.preventDefault();
+
+      // JsonAPI library bugs out
+      window.location.reload();
+
       return false;
     }
 
