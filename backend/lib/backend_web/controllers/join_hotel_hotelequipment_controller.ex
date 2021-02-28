@@ -39,7 +39,7 @@ defmodule BackendWeb.JoinHotelHotelequipmentController do
       end)
 
     with :ok <- can_manage_hotel(conn, join.hotel_id),
-         {:ok, _} <- Database.generic_delete(JoinHotelHotelequipment, args["id"]) do
+         {:ok, _} <- Database.generic_delete(JoinHotelHotelequipment, join.id) do
       send_resp(conn, 200, "")
     end
   end
