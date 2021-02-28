@@ -9,6 +9,7 @@ import countries from "./countries";
 import hotelrooms from "./hotelrooms";
 import priceranges from "./priceranges";
 import roomequipments from "./roomequipments";
+import hotelequipments from "./hotelequipments";
 import reservations from "./reservations";
 import layout from "./layout";
 
@@ -22,6 +23,7 @@ const reducers = {
   hotelrooms,
   priceranges,
   roomequipments,
+  hotelequipments,
   reservations,
   layout
 }

@@ -8,28 +8,44 @@ import { withRouter } from "react-router";
 import { Link } from 'react-router-dom';
 import * as selectors from "../redux/hotels/selectors";
 import * as authSelectors from "../redux/auth/selectors";
+import * as hotelequipmentsSelectors from "../redux/hotelequipments/selectors";
 import * as actions from "../redux/hotels/actions";
+import * as hotelequipmentsActions from "../redux/hotelequipments/actions";
 import * as toast from '../toast';
 import auth from '../redux/auth';
+import api from "../redux/api";
 
 class HotelPage extends Component {
     constructor(props) {
       super(props);
 
       this.state = {
-        hasLoadedHotelData: false
+        hasLoadedHotelData: false,
+        hotelequipments: []
       }
 
       this.handleBooking = this.handleBooking.bind(this);
       this.handlePromo = this.handlePromo.bind(this);
+      this.handleAssignHotelEquipments = this.handleAssignHotelEquipments.bind(this);
+      this.handleUnassignHotelequipment = this.handleUnassignHotelequipment.bind(this);
     }
   
     componentDidMount() {
       const hotelId = this.props.match.params.id;
-      const { fetchHotel } = this.props;
+      const { fetchHotel, fetchHotelequipments } = this.props;
 
-      fetchHotel(hotelId).then(() => this.setState({hasLoadedHotelData: true}))
+      fetchHotel(hotelId).then(() => this.setState({hasLoadedHotelData: true}));
+      fetchHotelequipments();
     }
+
+    handleMultipleChange = (event) => {
+      this.setState({
+        hotelequipments: Array.from(
+          event.target.selectedOptions,
+          (item) => item.value
+        ),
+      });
+    };
   
     handleBooking(event) {
       event.preventDefault();
@@ -45,6 +61,40 @@ class HotelPage extends Component {
         .catch(() => toast.error("Failed to send promo to customers, please try again in a few minutes."))
     }
 
+    handleAssignHotelEquipments(event) {
+      for (let hotelequipment of this.state.hotelequipments) {
+        let fakeObj = api.create("hotel_hotelequipments");
+        fakeObj.set("hotel_id", this.props.hotel.id);
+        fakeObj.set("hotelequipment_id", hotelequipment);
+        fakeObj.sync();
+      }
+      this.props.fetchHotel(this.props.hotel.id);
+      toast.success("The hotel equipments where successfully assigned!");
+      event.preventDefault();
+      return false;
+    }
+
+    handleUnassignHotelequipment = hotelequipment => event => {
+      let fakeObj = api.create("hotel_hotelequipments");
+      fakeObj._base.id = hotelequipment.id;
+      fakeObj.delete(() => { 
+        toast.success('The hotel equipment was successfully unassigned!');
+        this.props.fetchHotel(this.props.hotel.id);
+      });
+    }
+
+    getTotalRevenue() {
+      let totalRevenue = 0;
+      for (let hotelroom of this.props.hotel.hotelrooms) {
+        for (let offer of hotelroom.offers) {
+          if (offer.booked) {
+            totalRevenue += parseFloat(offer.price);
+          }
+        }
+      }
+      return totalRevenue;
+    }
+
     isManager() {
       if (this.props.userData) {
         if (this.props.userData.isManager) {
@@ -52,6 +102,29 @@ class HotelPage extends Component {
         }
       }
       return false;
+    }
+
+    getReservationsTable() {
+      let data = [];
+      for (let hotelroom of this.props.hotel.hotelrooms) {
+        if (!hotelroom.offers || hotelroom.offers.length < 1) continue;
+        for (let offer of hotelroom.offers) {
+          if (!offer.reservations || offer.reservations.length < 1) continue;
+          for (let reservation of offer.reservations) {
+            data.push(
+              {
+                id: reservation.id,
+                customerName: [reservation.user.firstname, reservation.user.lastname].join(" "),
+                customerEmail: reservation.user.email,
+                roomNumber: hotelroom.roomnumber + " (" + hotelroom.roomname + ")",
+                duration: [reservation.checkin, reservation.checkout].join(" - "),
+                paid: offer.price + " CHF"
+              }
+            )
+          }
+        }
+      }
+      return data;
     }
 
     render() {
@@ -101,6 +174,89 @@ class HotelPage extends Component {
                       <Link to={'/hotels/' + this.props.hotel.id + '/stats'}  className="btn btn-success ml-2">Statistics</Link>
                       <Link to={'/hotels/' + this.props.hotel.id + '/hotelrooms'} className="btn btn-dark ml-2">View Hotel rooms</Link>
                       <Link to={'/hotels/' + this.props.hotel.id + '/hotelrooms/create'} className="btn btn-warning ml-2">Create Hotel room</Link>
+                      <hr className="visible-divider" />
+                      <div className="row">
+                        <div className="col-md-6">
+                          <h3>Assigned hotel equipments</h3>
+                          {!this.props.hotel.hotelequipments && (
+                            <p>
+                              Currently this hotel has no hotel equipments assigned.<br />
+                              Please assign some on your right.
+                            </p>
+                          )}
+                          {this.props.hotel.hotelequipments &&
+                            this.props.hotel.hotelequipments.map((hotelequipment) => (
+                              <span className="badge badge-dark mr-2">
+                                {hotelequipment.description}
+                                <button type="button" className="close" onClick={this.handleUnassignHotelequipment(hotelequipment)}>
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </span>
+                            ))
+                          }
+                        </div>
+                        <div className="col-md-6">
+                          <h3>Assign hotel equipments</h3>
+                          <select
+                            value={this.state.hotelequipments}
+                            onChange={this.handleMultipleChange}
+                            name="hotelequipments"
+                            className="form-control"
+                            placeholder="Hotel equipment"
+                            size="10"
+                            multiple
+                          >
+                            {this.props.all_hotelequipments.map((hotelequipment) => (
+                              <option value={hotelequipment.id}>
+                                {hotelequipment.description}
+                              </option>
+                            ))}
+                          </select>
+                          <a href="#" className="btn btn-primary mt-3" onClick={this.handleAssignHotelEquipments}>Assign hotel equipments</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="card mb-3">
+                    <div className="card-header">
+                      Total revenue
+                    </div>
+                    <div className="card-body">
+                      <h3>{this.getTotalRevenue()} CHF</h3>
+                    </div>
+                  </div>
+
+                  <div className="card mb-3">
+                    <div className="card-header">
+                      Reservations list
+                    </div>
+                    <div className="card-body">
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Customer E-Mail</th>
+                            <th scope="col">Room Number</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Paid</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                          {this.getReservationsTable().map(row => (
+                            <tr>
+                              <th scope="row">{row.id}</th>
+                              <td>{row.customerName}</td>
+                              <td>{row.customerEmail}</td>
+                              <td>{row.roomNumber}</td>
+                              <td>{row.duration}</td>
+                              <td>{row.paid}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
 
@@ -146,7 +302,8 @@ class HotelPage extends Component {
 
 const mapSelectors = (store) => ({
   hotel: selectors.getHotel(store),
-  userData: authSelectors.getUserData(store)
+  userData: authSelectors.getUserData(store),
+  all_hotelequipments: hotelequipmentsSelectors.getHotelequipments(store)
 })
 
-export default connect(mapSelectors, { ...actions })(withRouter(HotelPage));
+export default connect(mapSelectors, { ...actions, ...hotelequipmentsActions })(withRouter(HotelPage));

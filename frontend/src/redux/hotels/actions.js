@@ -9,7 +9,8 @@ import Resource from '../../redux/resource';
 const SINGLE_HOTEL_INCLUDES = [
   'ratings.reservation.user',
   //'hotelrooms.offers.reservations',
-  'hotelcategory'
+  'hotelcategory',
+  'hotelequipments'
 ].join(',')
 
 const MULTIPLE_HOTELS_INCLUDES = [

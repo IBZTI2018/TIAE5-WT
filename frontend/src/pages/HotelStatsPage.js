@@ -118,7 +118,7 @@ class HotelStatsPage extends Component {
   render() {
     return (
       <div>
-        <div class="col-md-12">
+        <div className="col-md-12">
           <h3>Ratings of customers</h3>
           <h4>Total of {this.getRatingsTotal()} ratings</h4>
           <Doughnut
@@ -126,7 +126,7 @@ class HotelStatsPage extends Component {
             options={this.state.donutOptions}
           />
         </div>
-        <div class="col-md-12">
+        <div className="col-md-12">
           <h3>Reservations by month</h3>
           <h4>Total of {this.getReservationsTotal()} reservations</h4>
           <Line
@@ -134,7 +134,7 @@ class HotelStatsPage extends Component {
             options={this.state.donutOptions}
           />
         </div>
-        <div class="col-md-12">
+        <div className="col-md-12">
           <h3>Rooms</h3>
           <h4>Total of {this.getRoomsTotal()} rooms</h4>
           <Pie

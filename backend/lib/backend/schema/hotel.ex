@@ -23,7 +23,7 @@ defmodule Backend.Schema.Hotel do
     has_many(:ratings, Rating)
 
     many_to_many(:staff, User, join_through: "hotel_staffusers")
-    many_to_many(:hotelequipment, Hotelequipment, join_through: "hotel_hotelequipments")
+    many_to_many(:hotelequipments, Hotelequipment, join_through: "hotel_hotelequipments")
   end
 
   def changeset(%Hotel{} = hotel, attrs) do

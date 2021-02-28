@@ -30,7 +30,7 @@ defmodule BackendWeb.HotelView do
       address: {AddressView, :include},
       staff: {UserView, :include},
       hotelcategory: {HotelcategoryView, :include},
-      hotelequipment: {HotelequipmentView, :include},
+      hotelequipments: {HotelequipmentView, :include},
       hotelrooms: {HotelroomView, :include},
       ratings: {RatingView, :include}
     ]

@@ -1,0 +1,3 @@
+export default {
+    FETCH_HOTELEQUIPMENTS: "FETCH_HOTELEQUIPMENTS",
+};

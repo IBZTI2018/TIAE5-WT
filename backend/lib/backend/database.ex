@@ -174,6 +174,7 @@ defmodule Backend.Database do
     |> preload(hotelroom: [hotel: [:ratings]])
     |> preload(hotelroom: [:roomequipments])
     |> preload(hotelroom: [hotel: [:hotelcategory]])
+    |> preload(hotelroom: [hotel: [:hotelequipments]])
     |> Repo.all()
   end
 end

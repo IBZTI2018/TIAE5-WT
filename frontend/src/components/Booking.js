@@ -56,7 +56,7 @@ class Booking extends Component {
   }
 
   render() {
-    const roomequipments = this.props.offer.hotelroom.roomequipments;
+    console.log(this.props.offer)
     return (
       <div className="card mb-6 p-6">
         <div className="row g-0">
@@ -106,13 +106,19 @@ class Booking extends Component {
                 </thead>
                 <tbody>
                   <tr>
-                    <td></td>
                     <td>
-                      {roomequipments.map((roomequipment) => (
-                        <span className="badge badge-info mr-2">
-                          {roomequipment.description}
-                        </span>
-                      ))}
+                        {this.props.offer.hotelroom.hotel.hotelequipments.map((hotelequipment) => (
+                            <span className="badge badge-dark mr-2">
+                            {hotelequipment.description}
+                            </span>
+                        ))}
+                    </td>
+                    <td>
+                        {this.props.offer.hotelroom.roomequipments.map((roomequipment) => (
+                            <span className="badge badge-info mr-2">
+                            {roomequipment.description}
+                            </span>
+                        ))}
                     </td>
                   </tr>
                 </tbody>
