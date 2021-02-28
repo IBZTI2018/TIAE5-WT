@@ -69,7 +69,7 @@ class HotelPage extends Component {
         fakeObj.sync();
       }
       this.props.fetchHotel(this.props.hotel.id);
-      toast.success("The hotel equipments where successfully assigned!");
+      toast.success("The hotel equipments were successfully assigned!");
       event.preventDefault();
       return false;
     }
