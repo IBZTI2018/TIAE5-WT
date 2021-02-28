@@ -24,8 +24,12 @@ Resource.prototype._construct = function(rawResource, client) {
 
   if (!this._base.id) return this;
 
-  //var fromCache = client._resourceCache.get(this);
-  //if (fromCache) return fromCache;
+  // Disable caching because otherwise it will load the resources from the library cache
+  // where they have already been resolved only one level deep with circular.
+  // var fromCache = client._resourceCache.get(this);
+  // if (fromCache) return fromCache;
+  
+  // Do NOT disable this however, it will break the cache loading in the library
   client._resourceCache.set(this);
   
   return this;
