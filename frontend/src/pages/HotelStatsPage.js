@@ -116,7 +116,6 @@ class HotelStatsPage extends Component {
   }
 
   render() {
-    console.log(this.props.stats);
     return (
       <div>
         <div class="col-md-12">
