@@ -253,13 +253,20 @@ Resource.prototype.toJSONTree = function(seen) {
       theirResource[i] = this[i].map(function(j) { // eslint-disable-line
         return (new Resource(j._raw, j._client)).toJSONTree(seen);
       });
+    
     // These are our own Resources, do NOT convert them again
     } else if (this[i] instanceof Resource) {
       theirResource[i] = this[i].toJSONTree(seen);
+    
+    // We need to catch these first otherwise the next comparison will fail
+    } else if (this[i] === undefined || this[i] === null) {
+      theirResource[i] = theirs.relationships[i].data || null;
+    
     // Catch instances of Resource originally defined in JSONAPI library
     // and forcefully convert them to our overwritten Resource type
     } else if (this[i]._raw !== undefined && this[i]._client !== undefined) {
       theirResource[i] = (new Resource(this[i]._raw, this[i]._client)).toJSONTree(seen);
+    
     } else {
       theirResource[i] = theirs.relationships[i].data || null;
     }
