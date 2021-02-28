@@ -9,6 +9,17 @@ defmodule BackendWeb.PromoController do
   action_fallback(BackendWeb.FallbackController)
 
   @doc """
+
+  """
+  def get_hotel_promo(conn, args) do
+    promo = Database.generic_item(Media, args["id"], %JSONAPI.Config{})
+
+    conn
+    |> put_resp_content_type("application/pdf")
+    |> send_resp(200, promo.contents)
+  end
+
+  @doc """
   Endpoint for changing an address at /api/complex/promo/hotels/:id
 
   Expects the following JSON payload
