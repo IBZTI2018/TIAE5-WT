@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Loader from '../components/Loader';
 import Review from '../components/Review';
 import HotelStars from '../components/hotel/HotelStars';
+import PromoDrop from '../components/hotel/PromoDrop';
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as selectors from "../redux/hotels/selectors";
@@ -18,6 +19,7 @@ class HotelPage extends Component {
       }
 
       this.handleBooking = this.handleBooking.bind(this);
+      this.handlePromo = this.handlePromo.bind(this);
     }
   
     componentDidMount() {
@@ -32,6 +34,11 @@ class HotelPage extends Component {
       const encodedName = encodeURIComponent(this.props.hotel.hotelname)
 
       this.props.history.push(`/offers?searchQuery=${encodedName}`);
+    }
+
+    handlePromo(file, contents) {
+      console.log(contents)
+      console.log(file)
     }
 
     isManager() {
@@ -72,7 +79,29 @@ class HotelPage extends Component {
                 </div>
               </div>
 
-              <hr />
+              <hr className="visible-divider" />
+
+              {
+                this.isManager() &&
+                <div className="managerArea">
+                  <h3>Management Area</h3>
+
+                  <div className="card">
+                    <div className="card-header">
+                      Send some promo to your guests!
+                    </div>
+                    <div className="card-body">
+                      Upload your hotel promo brochures (as PDF with a maximum file size of 1MB) here, to automatically send them to all of your past hotel customers via E-Mail.
+
+                      <div class="decorated-dropzone">
+                        <PromoDrop hotel={this.props.hotel} handlePromo={this.handlePromo} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr className="visible-divider" />
+                </div>
+              }
 
               <h3>What others had to say</h3>
               {

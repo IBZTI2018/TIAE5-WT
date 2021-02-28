@@ -3,3 +3,27 @@
   color: #ffd700;
 }
 
+.visible-divider {
+  margin: 100px 0;
+}
+
+.decorated-dropzone {
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: #DDD;
+  text-align: center;
+
+  &:hover {
+    background-color: #EEE;
+    cursor: pointer;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
