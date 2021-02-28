@@ -7,6 +7,7 @@ import { getAuthToken } from '../auth/selectors';
 
 const SINGLE_HOTEL_INCLUDES = [
   'ratings.reservation.user',
+  'hotelrooms.offers.reservations',
   'hotelcategory'
 ].join(',')
 

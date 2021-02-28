@@ -5,6 +5,7 @@ defmodule Backend.Schema.Offer do
 
   alias Backend.Schema.Offer
   alias Backend.Schema.Hotelroom
+  alias Backend.Schema.Reservation
 
   schema "offers" do
     field(:validitystart, :date)
@@ -13,6 +14,8 @@ defmodule Backend.Schema.Offer do
     field(:booked, :boolean, default: false)
 
     belongs_to(:hotelroom, Hotelroom)
+
+    has_many(:reservations, Reservation)
   end
 
   def changeset(%Offer{} = offer, attrs) do
