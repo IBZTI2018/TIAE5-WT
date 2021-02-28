@@ -4,10 +4,11 @@ import complexApi from "../complexApi";
 import axios from 'axios';
 import store from '../store';
 import { getAuthToken } from '../auth/selectors';
+import Resource from '../../redux/resource';
 
 const SINGLE_HOTEL_INCLUDES = [
   'ratings.reservation.user',
-  'hotelrooms.offers.reservations',
+  //'hotelrooms.offers.reservations',
   'hotelcategory'
 ].join(',')
 
@@ -28,7 +29,10 @@ export const fetchHotel = (hotelId) => async (dispatch) => {
   return new Promise((resolve, reject) => {
     api.get("hotels", hotelId, {include: SINGLE_HOTEL_INCLUDES}, (err, resource) => {
       if (err) return reject(err);
-      const payload = resource.toJSONTree();
+
+      const customResource = new Resource(resource._raw, resource._client);
+      const payload = customResource.toJSONTree();
+
       dispatch({type: types.SET_CURRENT_HOTEL, payload})
       resolve(payload);
     })
