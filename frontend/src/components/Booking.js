@@ -55,8 +55,12 @@ class Booking extends Component {
     });
   }
 
+  calculateTotalPrice() {
+    let diffDays = this.state.endDate.diff(this.state.startDate, "days");
+    return diffDays * this.props.offer.price;
+  }
+
   render() {
-    console.log(this.props.offer)
     return (
       <div className="card mb-6 p-6">
         <div className="row g-0">
@@ -93,7 +97,7 @@ class Booking extends Component {
               <p className="card-text small">
                 Price:{" "}
                 <b>
-                  <u>CHF {this.props.offer.price}</u>
+                  <u>CHF {this.props.offer.price} per night</u>
                 </b>
               </p>
               <hr />
@@ -158,7 +162,7 @@ class Booking extends Component {
               type="button"
               onClick={this.handleBooking}
             >
-              Book Now!
+              Book now for {this.calculateTotalPrice()} CHF!
             </button>
           )}
         </div>

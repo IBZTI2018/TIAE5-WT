@@ -91,7 +91,7 @@ class Offer extends Component {
                 </small>
               </p>
               <a onClick={this.handleBooking} className="btn btn-primary">
-                <b>CHF {this.props.offer.price}</b>
+                <b>CHF {this.props.offer.price} per night</b>
               </a>
               <span className="pl-3">Rating: <StarRating hotel={this.props.offer.hotelroom.hotel} /></span>
             </div>
