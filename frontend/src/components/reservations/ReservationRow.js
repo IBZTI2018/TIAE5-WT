@@ -75,7 +75,6 @@ class ReservationRow extends Component {
   }
 
   render() {
-    console.log(this.props.reservation);
     return (
       <>
         <tr>
