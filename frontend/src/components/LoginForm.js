@@ -34,7 +34,7 @@ class LoginForm extends Component {
 
         // Force-reload for now since JSONAPI library cannot take a
         // function to get the auth token so it is set on load
-        window.location.reload()
+        window.location.replace('/')
       })
       .catch((error) => {
         console.error(error);
