@@ -102,6 +102,9 @@ class Booking extends Component {
                 }
               </p>
               <p className="card-text small">
+                Room: {this.props.offer.hotelroom.roomname}
+              </p>
+              <p className="card-text small">
                 Offer valid until: <b>{this.props.offer.validityend}</b>
               </p>
               <p className="card-text small">

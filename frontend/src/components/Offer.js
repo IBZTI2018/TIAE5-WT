@@ -68,6 +68,8 @@ class Offer extends Component {
                     this.props.offer.hotelroom.hotel.address.street.city.country
                       .countryname
                   }
+                  &nbsp; &bull; &nbsp;
+                  Room: {this.props.offer.hotelroom.roomname}
                 </p>
               </p>
               <p className="card-text">
