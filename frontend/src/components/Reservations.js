@@ -15,6 +15,7 @@ class Reservations extends Component {
                                 <th scope="vol">Roomname</th>
                                 <th scope="col">Arrival date</th>
                                 <th scope="col">Departure date</th>
+                                <th scope="col">Price</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>

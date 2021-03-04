@@ -75,6 +75,7 @@ class ReservationRow extends Component {
   }
 
   render() {
+    console.log(this.props.reservation);
     return (
       <>
         <tr>
@@ -87,6 +88,7 @@ class ReservationRow extends Component {
             <td>{this.props.reservation.offer.hotelroom.roomname}</td>
             <td>{this.props.reservation.checkin}</td>
             <td>{this.props.reservation.checkout}</td>
+            <td>{this.props.reservation.offer.price} CHF</td>
             <td>
             { moment().isAfter(moment(this.props.reservation.checkout)) && !this.props.reservation.rating && !this.state.hasWrittenReview &&
               <a className="btn btn-primary mt-1" type="button" href="#" onClick={(e) => this.handleEvaluation(e, this.props.reservation.id)}>Evaluate</a>

@@ -15,8 +15,8 @@ class HotelroomForm extends Component {
     this.state = {
       hotel_id: props.hotelId,
       roomname: "",
-      roomnumber: 0,
-      persons: 0,
+      roomnumber: undefined,
+      persons: undefined,
       pricerange_id: 0,
       roomequipments: [],
     };
