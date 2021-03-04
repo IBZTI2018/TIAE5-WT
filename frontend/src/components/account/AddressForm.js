@@ -17,7 +17,7 @@ class AddressForm extends Component {
                 housenumber: address.housenumber,
                 postcode: address.street.city.postcode,
                 cityname: address.street.city.cityname,
-                country_id: address.street.city.country.id
+                country_id: address.street.city.country.id || 1 //[CIRCULAR]
             }
         } else {
             this.state = {
@@ -25,7 +25,7 @@ class AddressForm extends Component {
                 housenumber: '',
                 postcode: '',
                 cityname: '',
-                country: ''
+                country_id: this.props.countries[0].id
             }
         }
 
@@ -47,7 +47,7 @@ class AddressForm extends Component {
         event.preventDefault();
 
         const { updateUserAddress } = this.props;        
-        updateUserAddress({ ...this.state, address_type: this.props. addressKey })
+        updateUserAddress({ ...this.state, address_type: this.props.addressKey })
             .then(() => {
                 toast.success('Successfully updated address!')
             })
