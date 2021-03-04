@@ -51,6 +51,12 @@ class Booking extends Component {
     reservation.set("paid", false);
     reservation.set("offer_id", this.props.offer.id);
     reservation.set("user_id", this.props.userData.id);
+
+    if (this.calculateTotalPrice() == 0) {
+      toast.error("Please select a valid timespan for booking your stay!")
+      return;
+    }
+
     reservation.sync().then(() => {
       toast.success("Reservation was made successfully");
       this.props.history.push({ pathname: "/thank-you" });
@@ -165,6 +171,7 @@ class Booking extends Component {
               className="btn btn-primary float-right mb-2 mr-2"
               type="button"
               onClick={this.handleBooking}
+              disabled={this.calculateTotalPrice() == 0}
             >
               Book now for {this.calculateTotalPrice()} CHF!
             </button>
