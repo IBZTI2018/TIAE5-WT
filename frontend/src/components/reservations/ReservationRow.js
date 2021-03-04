@@ -74,6 +74,11 @@ class ReservationRow extends Component {
     return false;
   }
 
+  calculateTotalPrice() {
+    let diffDays = moment(this.props.reservation.checkout).diff(moment(this.props.reservation.checkin), "days");
+    return diffDays * this.props.reservation.offer.price;
+  }
+
   render() {
     return (
       <>
@@ -87,7 +92,7 @@ class ReservationRow extends Component {
             <td>{this.props.reservation.offer.hotelroom.roomname}</td>
             <td>{this.props.reservation.checkin}</td>
             <td>{this.props.reservation.checkout}</td>
-            <td>{this.props.reservation.offer.price} CHF</td>
+            <td>{this.calculateTotalPrice()} CHF</td>
             <td>
             { moment().isAfter(moment(this.props.reservation.checkout)) && !this.props.reservation.rating && !this.state.hasWrittenReview &&
               <a className="btn btn-primary mt-1" type="button" href="#" onClick={(e) => this.handleEvaluation(e, this.props.reservation.id)}>Evaluate</a>
