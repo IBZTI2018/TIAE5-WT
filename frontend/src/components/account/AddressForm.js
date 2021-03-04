@@ -25,7 +25,7 @@ class AddressForm extends Component {
                 housenumber: '',
                 postcode: '',
                 cityname: '',
-                country_id: this.props.countries[0].id
+                country_id: (this.props.countries[0] || {id: 1}).id
             }
         }
 
