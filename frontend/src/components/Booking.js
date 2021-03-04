@@ -44,8 +44,8 @@ class Booking extends Component {
   handleBooking(event) {
     event.preventDefault();
     let reservation = api.create("reservations");
-    reservation.set("checkin", this.state.startDate.format("YYYY-MM-DD"));
-    reservation.set("checkout", this.state.endDate.format("YYYY-MM-DD"));
+    if (this.state.startDate) reservation.set("checkin", this.state.startDate.format("YYYY-MM-DD"));
+    if (this.state.endDate) reservation.set("checkout", this.state.endDate.format("YYYY-MM-DD"));
     reservation.set("paid", false);
     reservation.set("offer_id", this.props.offer.id);
     reservation.set("user_id", this.props.userData.id);
