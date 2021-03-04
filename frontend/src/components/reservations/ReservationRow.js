@@ -89,7 +89,7 @@ class ReservationRow extends Component {
                 {this.props.reservation.offer.hotelroom.hotel.hotelname}
               </a>
             </td>
-            <td>{this.props.reservation.offer.hotelroom.roomname}</td>
+            <td>{this.props.reservation.offer.hotelroom.roomname} ({this.props.reservation.offer.hotelroom.roomnumber})</td>
             <td>{this.props.reservation.checkin}</td>
             <td>{this.props.reservation.checkout}</td>
             <td>{this.calculateTotalPrice()} CHF</td>
