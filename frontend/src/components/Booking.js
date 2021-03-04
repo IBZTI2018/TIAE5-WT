@@ -44,8 +44,10 @@ class Booking extends Component {
   handleBooking(event) {
     event.preventDefault();
     let reservation = api.create("reservations");
-    if (this.state.startDate) reservation.set("checkin", this.state.startDate.format("YYYY-MM-DD"));
-    if (this.state.endDate) reservation.set("checkout", this.state.endDate.format("YYYY-MM-DD"));
+    const startDate = this.state.startDate ? this.state.startDate : moment()
+    const endDate = this.state.endDate ? this.state.endDate : moment()
+    reservation.set("checkin", startDate.format("YYYY-MM-DD"));
+    reservation.set("checkout", endDate.format("YYYY-MM-DD"));
     reservation.set("paid", false);
     reservation.set("offer_id", this.props.offer.id);
     reservation.set("user_id", this.props.userData.id);
@@ -56,7 +58,9 @@ class Booking extends Component {
   }
 
   calculateTotalPrice() {
-    let diffDays = this.state.endDate.diff(this.state.startDate, "days");
+    const startDate = this.state.startDate ? this.state.startDate : moment()
+    const endDate = this.state.endDate ? this.state.endDate : moment()
+    let diffDays = endDate.diff(startDate, "days");
     return diffDays * this.props.offer.price;
   }
 
