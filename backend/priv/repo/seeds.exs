@@ -308,7 +308,7 @@ for i <- 1..10 do
         if maybe.() do
           {now, Date.add(now, Enum.random(1..20))}
         else
-          {now, Date.add(now, Enum.random(1..20) * -1)}
+          {Date.add(now, Enum.random(1..20) * -1), now}
         end
 
       reservation =
