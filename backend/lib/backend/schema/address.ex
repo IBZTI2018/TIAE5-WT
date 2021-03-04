@@ -17,5 +17,6 @@ defmodule Backend.Schema.Address do
     address
     |> cast(attrs, [:housenumber, :active, :street_id])
     |> validate_required([:housenumber, :active, :street_id])
+    |> validate_number(:housenumber, greater_than_or_equal_to: 0)
   end
 end

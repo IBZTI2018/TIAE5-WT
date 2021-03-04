@@ -21,5 +21,6 @@ defmodule Backend.Schema.Rating do
     rating
     |> cast(attrs, [:score, :comment, :anonymous, :published, :reservation_id, :hotel_id])
     |> validate_required([:score, :anonymous, :published, :reservation_id, :hotel_id])
+    |> validate_number(:score, greater_than_or_equal_to: 0)
   end
 end

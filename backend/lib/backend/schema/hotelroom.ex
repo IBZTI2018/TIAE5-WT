@@ -25,5 +25,7 @@ defmodule Backend.Schema.Hotelroom do
     hotelroom
     |> cast(attrs, [:roomname, :roomnumber, :persons, :hotel_id, :pricerange_id])
     |> validate_required([:roomnumber, :persons, :hotel_id, :pricerange_id])
+    |> validate_number(:roomnumber, greater_than_or_equal_to: 0)
+    |> validate_number(:persons, greater_than_or_equal_to: 0)
   end
 end

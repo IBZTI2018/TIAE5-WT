@@ -15,5 +15,6 @@ defmodule Backend.Schema.Hotelcategory do
     |> cast(attrs, [:description, :stars])
     |> validate_required([:description, :stars])
     |> validate_length(:description, min: 3, max: 255)
+    |> validate_number(:stars, greater_than_or_equal_to: 0)
   end
 end

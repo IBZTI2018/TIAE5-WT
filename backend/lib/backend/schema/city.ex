@@ -18,5 +18,6 @@ defmodule Backend.Schema.City do
     |> cast(attrs, [:postcode, :cityname, :country_id])
     |> validate_required([:postcode, :cityname, :country_id])
     |> validate_length(:cityname, min: 3, max: 255)
+    |> validate_number(:postcode, greater_than_or_equal_to: 0)
   end
 end

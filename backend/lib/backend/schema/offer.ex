@@ -22,5 +22,6 @@ defmodule Backend.Schema.Offer do
     offer
     |> cast(attrs, [:validitystart, :validityend, :price, :booked, :hotelroom_id])
     |> validate_required([:validitystart, :validityend, :price, :hotelroom_id])
+    |> validate_number(:price, greater_than_or_equal_to: 0)
   end
 end
