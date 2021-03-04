@@ -12,13 +12,23 @@ class MyOfferForm extends Component {
       hotel_id: undefined,
       hotelroom_id: undefined,
       price: 0,
-      validitystart: null,
-      validityend: null,
+      validitystart: moment(),
+      validityend: moment().add(5, "days"),
       focus: undefined,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOnDatesChange = this.handleOnDatesChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.state.hotel_id === undefined && this.props.hotels.length > 0) {
+      this.setState({ hotel_id: this.props.hotels[0].id });
+    }
+
+    if (this.state.hotelroom_id === undefined && this.getHotelrooms().length > 0) {
+      this.setState({ hotelroom_id: this.getHotelrooms()[0].id });
+    }
   }
 
   handleChange(event) {
@@ -51,6 +61,7 @@ class MyOfferForm extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <form className="form" onSubmit={this.handleSubmit}>
