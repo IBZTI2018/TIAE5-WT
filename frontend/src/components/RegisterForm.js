@@ -65,7 +65,10 @@ class RegisterForm extends Component {
         createNewUser(payload)
             .then(() => {
                 toast.success("Successfully registered, enjoy your holidays!");
-                this.props.history.push({pathname: "/"});
+                
+                // Force-reload for now since JSONAPI library cannot take a
+                // function to get the auth token so it is set on load
+                window.location.replace('/')
             })
             .catch((error) => {
               console.error(error);
