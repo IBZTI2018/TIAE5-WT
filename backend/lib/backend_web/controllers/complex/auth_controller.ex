@@ -113,6 +113,7 @@ defmodule BackendWeb.AuthController do
     else
       false -> {:error, :unauthorized}
       :error -> {:error, :bad_request}
+      {:error, :bad_request} -> {:error, :bad_request}
     end
   end
 end
