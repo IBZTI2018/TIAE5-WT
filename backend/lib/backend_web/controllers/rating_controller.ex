@@ -42,7 +42,7 @@ defmodule BackendWeb.RatingController do
     new_data = Map.put(args["data"], "attributes", new_attrs)
     new_args = Map.put(args, "data", new_data)
 
-    with :gt <- Date.compare(Date.utc_today(), reservation.checkout),
+    with true <- Date.compare(Date.utc_today(), reservation.checkout) in [:eq, :gt],
          {:ok, data} <- Database.generic_create(Rating, new_args) do
       notify_hotel_owner(data)
 
@@ -56,7 +56,8 @@ defmodule BackendWeb.RatingController do
     rating = Database.generic_item(Rating, args["id"]) |> Repo.preload(:reservation)
 
     with true <- conn.assigns.logged_in,
-         true <- conn.assigns.user.id == rating.reservation.user_id or conn.assigns.user.is_manager,
+         true <-
+           conn.assigns.user.id == rating.reservation.user_id or conn.assigns.user.is_manager,
          {:ok, _} <- Database.generic_delete(Rating, args["id"]) do
       send_resp(conn, 200, "")
     else
